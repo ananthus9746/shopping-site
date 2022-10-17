@@ -5,9 +5,11 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('admin/admin',{admin:true})
 });
-
 router.get('/product-management', function(req, res, next) {
   res.render('admin/product-management',{admin:true})
+});
+router.get('/category-management', function(req, res, next) {
+  res.render('admin/category-management',{admin:true})
 });
 
 module.exports = router;
