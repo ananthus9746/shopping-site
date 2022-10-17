@@ -1,8 +1,68 @@
-<div id="layoutSidenav_content">
-  <form>
-    <div class="row">
-      <div class="col col-xs-12 col-md-8">
-        <input type="text" class="form-control" placeholder="Category">
-      </div>
-  </form>
-</div>
+
+            <div id="layoutSidenav_content">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Category Management
+                            </div>
+                            <div class="card-body">
+                              <form action="">
+                                  <input type="text" class="category" placeholder="enter category">
+                                  <input type="submit"class="btn btn-success mb-4 mt-2" name="" id="" value="Add Category">
+                              </form>
+                              <form action="">
+                                  <input type="text" class="category" placeholder="enter sub-category">
+                                  <input type="submit"class="btn btn-success mb-4 mt-2" name="" id="" value="Add Sub-Category">
+                              </form>
+                            </div>
+                            <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Catagaries and sub-catagaries
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Catagory</th>
+                                            <th>Sub-catagory</th>
+                                            <th>Total Products</th>
+                                            <th>Update Catagory</th>
+                                            <th>Remove Catagory</th> 
+                                        </tr>
+                                    </thead>
+                                    {{!-- <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Office</th>
+                                            <th>Age</th>
+                                            <th>Start date</th>
+                                            <th>Salary</th>
+                                        </tr>
+                                    </tfoot> --}}
+                                    <tbody>
+                                        <tr>
+                                            <td style="font-size: 1.2rem;">Men</td>
+                                            <td style="font-size: 1.2rem;">Shirt</td>
+                                            <td style="font-size: 1.2rem;">50pc</td>
+                                            <td><button type="button" class="btn btn-primary mb-4 mt-2">Update Catagory</button></td>
+                                            <td><button type="button" class="btn btn-danger mb-4 mt-2">Remove Catagory</button></td>
+                                        </tr>
+                                         <tr>
+                                            <td style="font-size: 1.2rem;">Women</td>
+                                            <td style="font-size: 1.2rem;">Saree</td>
+                                            <td style="font-size: 1.2rem;">25pc</td>
+                                            <td><button type="button" class="btn btn-primary mb-4 mt-2">Update Catagory</button></td>
+                                            <td><button type="button" class="btn btn-danger mb-4 mt-2">Remove Catagory</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>  
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+

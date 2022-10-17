@@ -1,8 +1,8 @@
-/* body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-  color: #00B7FF;
-} */
+.category{
+  height: 40px;
+  font-size: 15px;
+  border: solid 1px black;
+  padding-left: 10px;
+  border-radius: 10px;
+}
