@@ -6,13 +6,21 @@
                                 Category Management
                             </div>
                             <div class="card-body">
-                              <form action="">
-                                  <input type="text" class="category" placeholder="enter category">
-                                  <input type="submit"class="btn btn-success mb-4 mt-2" name="" id="" value="Add Category">
+
+                              <form action="/admin/category-management" role="form"  method="POST" enctype="multipart/form-data">
+                                  <input type="text" class="category"  name="name" placeholder="enter category" class="form-control">
+                                  {{!-- <button type="submit" class="btn btn-success mb-4 mt-2" >Add-Category</button>  --}}
+                                  <input class="btn btn-success mb-4 mt-2" type="submit">
                               </form>
-                              <form action="">
-                                  <input type="text" class="category" placeholder="enter sub-category">
-                                  <input type="submit"class="btn btn-success mb-4 mt-2" name="" id="" value="Add Sub-Category">
+                              <form action="/admin/add-sub-catagory" role="form"  method="POST" enctype="multipart/form-data">
+                                    <select class="category-selector" >
+                                        <option>Select Catagory</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                  <input type="text" class="category"    name="name" placeholder="enter sub-category"class="form-control">
+                                  <button type="submit"class="btn btn-success mb-4 mt-2" value="Add Subcategory">Add-SubCategory</button> 
                               </form>
                             </div>
                             <div class="card mb-4">

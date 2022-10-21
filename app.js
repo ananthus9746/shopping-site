@@ -3,6 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const bodyParser=require('body-parser')
+const dotenv = require('dotenv')
+// var db=require('./config/connection')
+const mongoose=require('mongoose')
+//enviorment variable/constants
+dotenv.config()
 
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
@@ -24,6 +30,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Database connection//config//
+//mongodb+srv://ananthu:<password>@cluster0.doqvtqs.mongodb.net/?retryWrites=true&w=majority
+mongoose.connect(
+  `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@cluster0.doqvtqs.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`,
+  {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}
+).then(()=>{
+  console.log("Database connected")
+})
+
+// db.connect((err)=>{
+//   if(err){
+//   console.log(err)
+//   }
+//   console.log('db connnected')
+// })
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
 

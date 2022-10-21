@@ -1,6 +1,4 @@
-
-
-            
+    
             <div id="layoutSidenav_content">
                         <div class="card mb-4">
                             <div class="card-header">
@@ -9,7 +7,8 @@
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
-                                     <button type="button" class="btn btn-success mb-4 mt-2">Add Product</button>
+                                     {{!-- <button>Add Product</button> --}}
+                                    <a type="button" class="btn btn-success mb-4 mt-2" href="/admin/add-product">Add product</a>
                                     <thead>
                                         <tr>
                                             <th>Name</th>
@@ -32,7 +31,6 @@
                                             <td><button type="button" class="btn btn-primary mb-4 mt-2">Update Product</button></td>
                                             <td><button type="button" class="btn btn-danger mb-4 mt-2">Remove Product</button></td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                             </div>

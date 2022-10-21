@@ -4,6 +4,7 @@
 	<title>Home</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
 							{{!--USER --}}
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="/user/images/icons/favicon.png"/>
@@ -44,7 +45,7 @@
 <body>
 	{{#if admin}}
 	{{>admin-header}}
-	{{else}}z
+	{{else}}
 	{{>user-header}}
 	{{/if}}
 
@@ -55,7 +56,6 @@
 	{{else}}
 	{{>user-footer}}
 	{{/if}}
-
 
 <!--===============================================================================================-->	
 	<script src="/user/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -166,6 +166,7 @@
         <script src="/admin/assets/demo/chart-area-demo.js"></script>
         <script src="/admin/assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="/admin/js/datatables-simple-demo.js"></script>									
+        <script src="/admin/js/datatables-simple-demo.js"></script>
+											
 </body>
 </html>
