@@ -5,33 +5,47 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const bodyParser=require('body-parser')
 const dotenv = require('dotenv')
-// var db=require('./config/connection')
+const hbs = require('express-handlebars');
 const mongoose=require('mongoose')
+
+// 
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+const Handlebars = require('handlebars')
+// 
+
 //enviorment variable/constants
 dotenv.config()
 
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
-const hbs = require('express-handlebars');
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.engine('hbs', hbs.engine({
+app.engine('hbs', hbs.engine({ handlebars: allowInsecurePrototypeAccess(Handlebars),
   extname: 'hbs',
   defaultLayout: 'layout',
   layoutsDir: __dirname + '/views/layout/',
   partialsDir: __dirname + '/views/partials'
+  
 })) 
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+
+
+
+
 //Database connection//config//
-//mongodb+srv://ananthu:<password>@cluster0.doqvtqs.mongodb.net/?retryWrites=true&w=majority
 mongoose.connect(
   `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@cluster0.doqvtqs.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`,
   {
@@ -42,12 +56,6 @@ mongoose.connect(
   console.log("Database connected")
 })
 
-// db.connect((err)=>{
-//   if(err){
-//   console.log(err)
-//   }
-//   console.log('db connnected')
-// })
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
 

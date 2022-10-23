@@ -1,0 +1,29 @@
+router.post('/category-management',upload.none(),catagory,()=>{
+  console.log('hello redirected')
+  res.render('admin/category-management',{admin:true})
+});
+
+const { catagory } = require("../controller/catagory");
+
+
+
+const Catagory = require("../models/catagory");
+
+exports.catagory = (req, res, next) => {
+  const catagory = new Catagory({
+    name: req.body.name,
+  });
+
+  catagory
+    .save()
+    .then((catagory) => {
+      console.log(catagory);
+    })
+
+    .catch((err) => {
+      console.log("err");
+    });
+
+    // res.redirect('/admin/category-management')
+    next()
+};

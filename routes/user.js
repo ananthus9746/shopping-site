@@ -16,17 +16,6 @@ router.get('/', function(req, res, next) {
     discription:"This is a good product ",
     image:"https://cdn.thewirecutter.com/wp-content/media/2021/08/budget-android-phone-2048px-nord-front.jpg"
   }]
-
-  MongoClient.connect('mongodb://localhost:27017',function(err,client){
-    if(err){
-      console.log(err,"There is a erorr")
-    }
-    else{
-      console.log('data base connected')
-    }
-    client.db('newdb').collection('product').insertMany(product)
-  })
-
   
   res.render('user/index', {product,admin:false});
 });

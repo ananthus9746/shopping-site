@@ -1,8 +1,8 @@
 
 const mongoose=require('mongoose');
+//PRODUCT SCHEMA
 
-//CATAGORY SCHEMA
-const catagorySchema=new mongoose.Schema({
+const productSchema=new mongoose.Schema({
     name:{
         type : String,
         require : true,
