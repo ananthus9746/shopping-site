@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-//PRODUCT SCHEMA
 
+//PRODUCT SCHEMA
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -28,9 +28,10 @@ const productSchema = new mongoose.Schema({
     type: Number,
   },
   catagory: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Catagory",
-    //required: true,
+    
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "Catagory",
+    required: true,
   },
   isfeatured: {
     type: Boolean,

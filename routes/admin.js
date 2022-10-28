@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 const multer = require("multer");
 const Catagory = require("../models/catagory");
-const {catagory,getcatagory,deletecatagory} = require("../controller/catagory");
+const {catagory,getcatagory,deletecatagory,catagorylist} = require("../controller/catagory");
 const {product}=require('../controller/product');
 const shortid = require("shortid");
 const path =require('path')
@@ -33,11 +33,9 @@ router.get('/view-category-management',upload.none(),getcatagory)//getting added
 
 router.get('/delete-catagory/:id',upload.none(),deletecatagory)//deleting selected catagory
 
-router.get("/add-product", function (req, res) {
-  res.render("admin/add-product", { admin: true });
-});
+router.get("/add-product",catagorylist)
 
-router.post("/add-product",upload.array('image'),product)
+router.post("/add-product",upload.array('image'),product)//adding product
 
 
 

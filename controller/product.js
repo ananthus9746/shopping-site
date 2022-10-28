@@ -1,9 +1,10 @@
 const Product = require("../models/product");
 var express = require("express");
-var router = express.Router();
 
 //Adding product
 exports.product = (req, res, next) => {
+  console.log("heroollloo",req.body)
+
   const {
     name,
     price,
@@ -34,13 +35,14 @@ exports.product = (req, res, next) => {
     image
   });
   product.save().then((product)=>{
-    console.log(product);
+    console.log(product)
   }).catch((err)=>{
     console.log(err+"Product database Insertion Error")
   })
-
-
   console.log(req.body);
+
+  
   console.log(req.files);
-  res.render("admin/add-product", { admin: true });
+  
+  res.redirect("/admin/add-product");
 };

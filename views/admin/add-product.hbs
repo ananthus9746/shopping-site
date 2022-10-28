@@ -1,5 +1,4 @@
     <div id="layoutSidenav_content">
-         
     <div class="add-product-container">
         <form action="/admin/add-product"class="form-horizontal" method="post" enctype="multipart/form-data">
                 <fieldset>
@@ -58,10 +57,10 @@
                 <div class="form-group">
                 <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
                 <div class="col-md-4 col-md-6 ">
-                   <select class="category-selector">
-                    <option selected>Select Catagory</option>
+                <select class="category-selector "name="catagory" >
+                    <option selected hidden>Select Catagory</option>
                     {{#each catagory}}
-                    <option value="{{_id}}">{{name}}</option>
+                    <option value="{{this._id}}">{{name}}</option>
                     {{!-- work in both this.name and name both are same --}}
                     {{/each}}
                 </select>
