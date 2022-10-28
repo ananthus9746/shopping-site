@@ -39,12 +39,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-
-
-
-
 //Database connection//config//
 mongoose.connect(
   `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@cluster0.doqvtqs.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`,

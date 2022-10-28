@@ -15,7 +15,8 @@
                 <select class="category-selector">
                     <option selected>Select Catagory</option>
                     {{#each catagory}}
-                    <option value="{{_id}}">{{this.name}}</option>
+                    <option value="{{_id}}">{{name}}</option>
+                    {{!-- work in both this.name and name both are same --}}
                     {{/each}}
 
                 </select>
@@ -39,31 +40,16 @@
                             <th>Remove Catagory</th>
                         </tr>
                     </thead>
-                    {{!-- <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </tfoot> --}}
                     <tbody>
+                         {{#each catagory}}
                         <tr>
-                            <td style="font-size: 1.2rem;">Men</td>
-                            <td style="font-size: 1.2rem;">Shirt</td>
-                            <td style="font-size: 1.2rem;">50pc</td>
-                            <td><button type="button" class="btn btn-primary mb-4 mt-2">Update Catagory</button></td>
-                            <td><button type="button" class="btn btn-danger mb-4 mt-2">Remove Catagory</button></td>
+                            <td style="font-size: 1.2rem;">{{name}}</td>
+                            <td style="font-size: 1.2rem;">***</td>
+                            <td style="font-size: 1.2rem;">***</td>
+                            <td><a href="/admin/edit-catagory/{{this._id}}" class="btn btn-primary ">Edit catagory</a></td>
+                            <td><a href="/admin/delete-catagory/{{this._id}}" class="btn btn-danger "onclick="return confirm('Are you want to delete {{this.Name}}?')">Delete catagory</a></td>
                         </tr>
-                        <tr>
-                            <td style="font-size: 1.2rem;">Women</td>
-                            <td style="font-size: 1.2rem;">Saree</td>
-                            <td style="font-size: 1.2rem;">25pc</td>
-                            <td><button type="button" class="btn btn-primary mb-4 mt-2">Update Catagory</button></td>
-                            <td><button type="button" class="btn btn-danger mb-4 mt-2">Remove Catagory</button></td>
-                        </tr>
+                        {{/each}}   
                     </tbody>
                 </table>
             </div>
