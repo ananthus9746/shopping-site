@@ -13,24 +13,37 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Price</th>
-                                            <th>Quantity</th>
+                                            <th>Mrp</th>
+                                            <th>Brand</th>
                                             <th>Discription</th>
+                                            <th>Quantity</th>
+                                            <th>Stock Alart</th>
+                                            <th>Catagory</th>
                                             <th>Image</th>
-                                            <th>Update</th>
-                                            <th>Remove</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
+                                        {{#each getproduct}}
                                         <tr>
-                                            <td>Jeans</td>
-                                            <td>400</td>
-                                            <td>25</td>
-                                            <td>The fabric of jeans is very strong and easilyed fit is classy and is perfect if you want to avoid a tight fit. This type of denim usually rides higher on the waist and keeps you comfortable throughout the day. If you are in love with 90's f</td>
-                                            <td ><img style="width:4rem; height:5rem" src="https://rukminim1.flixcart.com/image/832/832/l19m93k0/shopsy-jean/a/u/o/28-new-cross-jeans-white-luxury-original-imagcvhhdhprw4fq.jpeg?q=70" alt=""></td>
+                                            <td>{{name}}</td>
+                                            <td>{{price}}</td>
+                                            <td>{{mrp}}</td>
+                                            <td>{{discription}}</td>
+                                            <td>{{brand}}</td>
+                                            <td>{{quantity}}</td>
+                                            <td>{{stockAlart}}</td>
+                                            <td>{{catagory.name}}</td>
+                                            
+                                            <td>{{#each image}}
+
+                                                <img style="width:4rem; height:5rem" src="/upload/{{img}}" alt=""> 
+                                                {{/each}}
+                                            </td>
                                             <td><button type="button" class="btn btn-primary mb-4 mt-2">Update Product</button></td>
-                                            <td><button type="button" class="btn btn-danger mb-4 mt-2">Remove Product</button></td>
+                                             <td><a href="/admin/delete-product/{{this._id}}" class="btn btn-danger "onclick="return confirm('Are you want to delete {{name}}?')">Delete Product</a></td>
                                         </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
                             </div>

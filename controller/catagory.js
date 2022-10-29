@@ -18,7 +18,7 @@ exports.catagory = (req, res, next) => {
   next()
 };
 
-//Getting added catagory
+//Getting catagory
 exports.getcatagory = async (req, res) => {
   const catagoryList = await Catagory.find();
   if (!catagoryList) {
