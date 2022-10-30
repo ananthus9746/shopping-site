@@ -1,6 +1,14 @@
 const Product = require("../models/product");
 var express = require("express");
 var fs = require("fs");
+const Catagory = require("../models/catagory");
+const { route } = require("../routes/admin");
+
+// fs.unlink('sample.txt', function (err) {
+//   if (err) throw err;
+//   // if no error, file has been deleted successfully
+//   console.log('File deleted!');
+// });
 
 //Adding product
 exports.product = (req, res, next) => {
@@ -46,7 +54,7 @@ exports.product = (req, res, next) => {
     });
   console.log("Inserted photo with data ", req.body);
   console.log(req.files);
-  res.redirect("/admin/add-product");
+  res.render("/admin/add-product");
 };
 
 //Getting product
@@ -77,8 +85,43 @@ exports.deleteproduct = async (req, res) => {
     });
   res.redirect("/admin/product-management");
 };
-// fs.unlink('sample.txt', function (err) {
-//   if (err) throw err;
-//   // if no error, file has been deleted successfully
-//   console.log('File deleted!');
-// });
+
+//edit product
+exports.editproduct = async (req, res) => {
+  console.log("from edit product..", req.body);
+  console.log("from edit product pro id..", req.body.params);
+
+  const catagoryList = await Catagory.find();
+  if (!catagoryList) {
+    console.log("No catagory list found");
+  } else {
+    var catagory = catagoryList;
+    console.log(catagoryList);
+  }
+  var catagory = catagoryList;
+
+
+  res.render("admin/edit-product", { admin: true, catagory, });
+
+  console.log("from edit product..22", req.body);
+  console.log("from edit product pro id..222", req.body.params);
+};
+
+exports.updateproduct = async (req, res) => {
+  let protid = req.params.id;
+  let product = await Product.findByIdAndUpdate(protid, {
+    name: req.body.name,
+    price: req.body.price,
+    mrp: req.body.mrp,
+    discription: req.body.discription,
+    brand: req.body.brand,
+    quantity: req.body.quantity,
+    stockAlart: req.body.stockAlart,
+    catagory: req.body.catagory,
+    isfeatured: req.body.isfeatured,
+    upsert: true,
+  });
+
+  console.log("from update product...", req.body);
+  console.log("images...", req.files);
+};

@@ -8,7 +8,7 @@ const {
   deletecatagory,
   catagorylist,
 } = require("../controller/catagory");
-const { product,getproduct,deleteproduct} = require("../controller/product");
+const { product, getproduct, deleteproduct,editproduct,updateproduct} = require("../controller/product");
 const shortid = require("shortid");
 const path = require("path");
 
@@ -26,7 +26,8 @@ const upload = multer({ storage });
 router.get("/", function (req, res, next) {
   res.render("admin/admin", { admin: true });
 });
-router.get("/product-management",getproduct)
+                          //CATAGORY//
+router.get("/product-management", getproduct);//viewing product page
 
 router.post("/add-catagory", upload.none(), catagory); //adding catagory
 
@@ -34,39 +35,16 @@ router.get("/view-category-management", upload.none(), getcatagory); //getting a
 
 router.get("/delete-catagory/:id", upload.none(), deletecatagory); //deleting selected catagory
 
-router.get("/add-product", catagorylist);
+                          //PRODUCT//
+router.get("/add-product", catagorylist);//passing catagory to add product//IMPORTANT catagory need change
 
 router.post("/add-product", upload.array("image"), product); //adding product
 
-router.get("/delete-product/:id", upload.none(),deleteproduct)
+router.get("/delete-product/:id", upload.none(), deleteproduct);//deleting product
 
+router.get("/edit-product/:id", upload.array("image"),editproduct);//deleting product
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+router.post("/edit-product/", upload.array("image"),updateproduct);//Updating product
 
 
 

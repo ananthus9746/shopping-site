@@ -36,13 +36,12 @@
                                             <td>{{catagory.name}}</td>
                                             
                                             <td>{{#each image}}
-
                                                 <img style="width:4rem; height:5rem" src="/upload/{{img}}" alt=""> 
                                                 {{/each}}
                                             </td>
-                                            <td><button type="button" class="btn btn-primary mb-4 mt-2">Update Product</button></td>
+                                             <td><a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Update Product</a></td>
                                              <td><a href="/admin/delete-product/{{this._id}}" class="btn btn-danger "onclick="return confirm('Are you want to delete {{name}}?')">Delete Product</a></td>
-                                        </tr>
+                                            </tr>
                                         {{/each}}
                                     </tbody>
                                 </table>
