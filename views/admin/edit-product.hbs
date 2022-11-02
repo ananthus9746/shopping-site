@@ -1,114 +1,122 @@
-    <div id="layoutSidenav_content">
+<div id="layoutSidenav_content">
     <div class="add-product-container">
-        <form action="/admin/edit-product"class="form-horizontal" method="post" enctype="multipart/form-data">
-                <fieldset>
+
+        <form action="/admin/edit-product/{{productd._id}}" class="form-horizontal" method="post" enctype="multipart/form-data">
+            <fieldset>
                 <!-- Form Name -->
-                <legend class="add-product">EDIT PRODUCT</legend >
+                <legend class="add-product">EDIT PRODUCT </legend>
                 <!-- name -->
                 <div class="form-group">
-                <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>  
-                <div class="col-md-4 col-md-6 ">
-                <input id="product_name" name="name"  class="form-control input-md" required="" type="text">
-                </div>
+                    <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <input id="product_name" name="name" value="{{productd.name}}" class="form-control input-md"
+                            type="text">
+                    </div>
                 </div>
                 {{!-- price --}}
-                 <div class="form-group">
-                <label class="col-md-4 control-label" for="product_name">PRICE</label>  
-                <div class="col-md-4 col-md-6 ">
-                <input id="product_name" name="price"  class="form-control input-md" required="" type="text">
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="product_name">PRICE</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <input id="product_name" name="price" value="{{productd.price}}" class="form-control input-md"
+                            type="text">
+                    </div>
                 </div>
-                </div>
-                  {{!-- Mrp --}}
-                 <div class="form-group">
-                <label class="col-md-4 control-label" for="product_name">MRP</label>  
-                <div class="col-md-4 col-md-6 ">
-                <input id="product_name" name="mrp" class="form-control input-md" required="" type="text">
-                </div>
+                {{!-- Mrp --}}
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="product_name">MRP</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <input id="product_name" name="mrp" value="{{productd.mrp}}" class="form-control input-md"
+                            type="text">
+                    </div>
                 </div>
                 <!-- Discription -->
                 <div class="form-group">
-                <label class="col-md-4 control-label" for="product_description">PRODUCT DESCRIPTION</label>
-                <div class="col-md-4 col-md-6 ">                     
-                    <textarea class="form-control" id="product_description" name="discription"></textarea>
+                    <label class="col-md-4 control-label" for="product_description">PRODUCT DESCRIPTION</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <textarea class="form-control" value="{{productd.discription}}" id="product_description"
+                            name="discription"></textarea>
+                    </div>
                 </div>
-                </div>
-                 {{!-- brand --}}
-                 <div class="form-group">
-                <label class="col-md-4 control-label" for="product_name">BRAND</label>  
-                <div class="col-md-4 col-md-6 ">
-                <input id="product_name" name="brand" class="form-control input-md" required="" type="text">
-                </div>
+                {{!-- brand --}}
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="product_name">BRAND</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <input id="product_name" name="brand" value="{{productd.brand}}" class="form-control input-md"
+                            type="text">
+                    </div>
                 </div>
                 <!--Quantity-->
                 <div class="form-group">
-                <label class="col-md-4 control-label" for="available_quantity">QUANTITY</label>  
-                <div class="col-md-4 col-md-6 ">
-                <input id="available_quantity" name="quantity" class="form-control input-md" required="true" type="number">
+                    <label class="col-md-4 control-label" for="available_quantity">QUANTITY</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <input id="available_quantity" name="quantity" value="{{productd.quantity}}"
+                            class="form-control input-md" type="number">
+                    </div>
                 </div>
-                </div>
-                 <!--Stock in alart-->
+                <!--Stock in alart-->
                 <div class="form-group">
-                <label class="col-md-4 control-label" for="available_quantity">Srock Alart</label>  
-                <div class="col-md-4 col-md-6 ">
-                <input id="available_quantity" name="stockAlart"  class="form-control input-md" required="true" type="number">
-                </div>
+                    <label class="col-md-4 control-label" for="available_quantity">Srock Alart</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <input id="available_quantity" name="stockAlart" value="{{productd.stockAlart}}"
+                            class="form-control input-md" type="number">
+                    </div>
                 </div>
                 <!-- Ctagory -->
                 <div class="form-group">
-                <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
-                <div class="col-md-4 col-md-6 ">
-                <select class="category-selector "name="catagory" >
-                    <option selected hidden>Select Catagory</option>
-                    {{#each catagory}}
-                    <option value="{{this._id}}">{{name}}</option>
-                    {{!-- work in both this.name and name both are same --}}
-                    {{/each}}
-                </select>
+                    <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <select class="category-selector " name="catagory">
+                            <option selected hidden>Select Catagory</option>
+                            {{#each catagory}}
+                            <option value="{{this._id}}">{{name}}</option>
+                            {{!-- work in both this.name and name both are same --}}
+                            {{/each}}
+                        </select>
+                    </div>
                 </div>
-                </div>
-                <!--Main Image --> 
+                <!--Main Image -->
                 <div class="form-group">
-                <label class="col-md-4 col-md-6 control-label" for="filebutton">main-image</label>
-                <div class="col-md-4 col-md-6 ">
-                    <input id="filebutton" name="image" class="input-file" type="file">
+                    <label class="col-md-4 col-md-6 control-label" for="filebutton">main-image</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <input id="filebutton" name="image" class="input-file" type="file">
+                    </div>
                 </div>
-                </div>
-                <!-- Subimage 2--> 
+                <!-- Subimage 2-->
                 <div class="form-group">
-                <label class="col-md-4 col-md-6 control-label" for="filebutton">sub-image 1</label>
-                <div class="col-md-4 col-md-6 ">
-                    <input id="filebutton" name="image" class="input-file" type="file">
+                    <label class="col-md-4 col-md-6 control-label" for="filebutton">sub-image 1</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <input id="filebutton" name="image" class="input-file" type="file">
+                    </div>
                 </div>
-                </div>
-                <!-- Subimage 2 --> 
+                <!-- Subimage 2 -->
                 <div class="form-group">
-                <label class="col-md-4 col-md-6 control-label" for="filebutton">sub-images 2</label>
-                <div class="col-md-4 col-md-6 ">
-                    <input id="filebutton" name="image" class="input-file" type="file">
+                    <label class="col-md-4 col-md-6 control-label" for="filebutton">sub-images 2</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <input id="filebutton" name="image" class="input-file" type="file">
+                    </div>
                 </div>
-                </div>
-                <!-- Subimage 3--> 
+                <!-- Subimage 3-->
                 <div class="form-group">
-                <label class="col-md-4 col-md-6 control-label" for="filebutton">sub-images 3</label>
-                <div class="col-md-4 col-md-6 ">
-                    <input id="filebutton" name="image" class="input-file" type="file">
+                    <label class="col-md-4 col-md-6 control-label" for="filebutton">sub-images 3</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <input id="filebutton" name="image" class="input-file" type="file">
+                    </div>
                 </div>
-                </div>
-                <!-- Subimage 4--> 
+                <!-- Subimage 4-->
                 <div class="form-group">
-                <label class="col-md-4 col-md-6 control-label" for="filebutton">sub-images 4</label>
-                <div class="col-md-4 col-md-6 ">
-                    <input id="filebutton" name="image" class="input-file" type="file">
-                </div>
+                    <label class="col-md-4 col-md-6 control-label" for="filebutton">sub-images 4</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <input id="filebutton" name="image" class="input-file" type="file">
+                    </div>
                 </div>
                 <!-- Submit button -->
                 <div class="form-group">
-                <div class="col-md-4 col-md-6">
-                <input class="btn btn-success mb-4 mt-2" type="submit" value="Add-product">
-                </div>
+                    <div class="col-md-4 col-md-6">
+                        <input class="btn btn-success mb-4 mt-2" type="submit" value="Add-product">
+                    </div>
                 </div>
             </fieldset>
-         </form>
-        </div>
+        </form>
     </div>
- </div>   
+</div>
+</div>

@@ -54,7 +54,7 @@ exports.product = (req, res, next) => {
     });
   console.log("Inserted photo with data ", req.body);
   console.log(req.files);
-  res.render("/admin/add-product");
+  res.render("admin/add-product", { admin: true});
 };
 
 //Getting product
@@ -88,8 +88,8 @@ exports.deleteproduct = async (req, res) => {
 
 //edit product
 exports.editproduct = async (req, res) => {
-  console.log("from edit product..", req.body);
-  console.log("from edit product pro id..", req.body.params);
+  let productid = req.params.id;
+  console.log("iddd", productid);
 
   const catagoryList = await Catagory.find();
   if (!catagoryList) {
@@ -98,30 +98,51 @@ exports.editproduct = async (req, res) => {
     var catagory = catagoryList;
     console.log(catagoryList);
   }
-  var catagory = catagoryList;
 
+  console.log("proid...", productid);
+  const productd = await Product.findById(productid);
 
-  res.render("admin/edit-product", { admin: true, catagory, });
-
-  console.log("from edit product..22", req.body);
-  console.log("from edit product pro id..222", req.body.params);
+  if (!productd) {
+    console.log("No product found");
+  } else {
+    let getproduct = productd;
+    res.render("admin/edit-product", { admin: true, catagory, productd });
+    // console.log("product from productd list...", productd);
+  }
 };
 
 exports.updateproduct = async (req, res) => {
   let protid = req.params.id;
-  let product = await Product.findByIdAndUpdate(protid, {
-    name: req.body.name,
-    price: req.body.price,
-    mrp: req.body.mrp,
-    discription: req.body.discription,
-    brand: req.body.brand,
-    quantity: req.body.quantity,
-    stockAlart: req.body.stockAlart,
-    catagory: req.body.catagory,
-    isfeatured: req.body.isfeatured,
-    upsert: true,
-  });
+  console.log("proid from update..", protid);
+  console.log("update...", req.body);
+  const {
+    name,
+    price,
+    mrp,
+    discription,
+    brand,
+    quantity,
+    stockAlart,
+    catagory,
+    isfeatured,
+  } = req.body;
 
-  console.log("from update product...", req.body);
-  console.log("images...", req.files);
+  let product = await Product.findByIdAndUpdate(protid, {
+    name,
+    price,
+    mrp,
+    discription,
+    brand,
+    quantity,
+    stockAlart,
+    catagory,
+    isfeatured,
+  })
+  if (!product) {
+    console.log("No product found");
+  } else {
+    
+    res.render("admin/edit-product", { admin: true, catagory, product });
+  }
+ 
 };

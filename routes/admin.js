@@ -7,8 +7,16 @@ const {
   getcatagory,
   deletecatagory,
   catagorylist,
+  editcatagory,
+  updatetcatagory,
 } = require("../controller/catagory");
-const { product, getproduct, deleteproduct,editproduct,updateproduct} = require("../controller/product");
+const {
+  product,
+  getproduct,
+  deleteproduct,
+  updateproduct,
+  editproduct,
+} = require("../controller/product");
 const shortid = require("shortid");
 const path = require("path");
 
@@ -26,8 +34,9 @@ const upload = multer({ storage });
 router.get("/", function (req, res, next) {
   res.render("admin/admin", { admin: true });
 });
-                          //CATAGORY//
-router.get("/product-management", getproduct);//viewing product page
+
+//CATAGORY//
+router.get("/product-management", getproduct); //viewing product page
 
 router.post("/add-catagory", upload.none(), catagory); //adding catagory
 
@@ -35,27 +44,19 @@ router.get("/view-category-management", upload.none(), getcatagory); //getting a
 
 router.get("/delete-catagory/:id", upload.none(), deletecatagory); //deleting selected catagory
 
-                          //PRODUCT//
-router.get("/add-product", catagorylist);//passing catagory to add product//IMPORTANT catagory need change
+router.get("/edit-catagory/:id", upload.none(), editcatagory); //edit catagory
+
+router.post("/edit-catagory/:id", upload.none(), updatetcatagory); //edit catagory
+
+//PRODUCT//
+router.get("/add-product", catagorylist); //passing catagory to add product//IMPORTANT catagory need change
 
 router.post("/add-product", upload.array("image"), product); //adding product
 
-router.get("/delete-product/:id", upload.none(), deleteproduct);//deleting product
+router.get("/delete-product/:id", upload.none(), deleteproduct); //deleting product
 
-router.get("/edit-product/:id", upload.array("image"),editproduct);//deleting product
+router.get("/edit-product/:id", upload.none(), editproduct); //deleting product
 
-router.post("/edit-product/", upload.array("image"),updateproduct);//Updating product
-
-
-
-
-
-
-
-
-// router.post("/add-sub-catagory", function (req, res) {
-//   console.log(req.body);
-//   // res.render('admin/category-management',{admin:true})
-// });
+router.post("/edit-product/:id", upload.array("image"), updateproduct); //Updating product
 
 module.exports = router;

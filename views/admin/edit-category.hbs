@@ -1,0 +1,25 @@
+<div id="layoutSidenav_content">
+    <div class="add-product-container">
+        <form action="/admin/edit-catagory/{{catagory._id}}" class="form-horizontal" method="post" enctype="multipart/form-data">
+           
+            <fieldset>
+                <legend class="add-product">EDIT CATEGORY </legend>
+               
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>
+                    <div class="col-md-4 col-md-6 ">
+                        <input id="product_name" name="name" value="{{catagory.name}}" class="form-control input-md"  type="text">
+                    </div>
+                </div>
+               
+            </fieldset>
+            {{!-- Submit button --}}
+             <div class="form-group">
+                    <div class="col-md-4 col-md-6">
+                        <input class="btn btn-success mb-4 mt-2" type="submit" value="Update catagory">
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+</div>

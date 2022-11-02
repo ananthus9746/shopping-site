@@ -59,3 +59,35 @@ exports.deletecatagory = async (req, res) => {
       return res.satatus(400).json({ err });
     });
 };
+
+//edit catagory
+exports.editcatagory = async (req, res) => {
+    var cat=req.params.id
+    console.log("cat id...",cat)
+  const catagoryfinded = await Catagory.findById(cat);
+  if (!catagoryfinded) {
+    console.log("No catagory list found");
+  } else {
+    var catagory = catagoryfinded;
+    res.render("admin/edit-category", { admin: true, catagory });
+    console.log(catagory);
+  }
+};
+
+//updating catagory
+
+exports.updatetcatagory = async (req, res) => {
+
+  var catid=req.params.id;
+  console.log("cat,upr-item..",req.body)
+  console.log("catid for upadate..",catid);
+
+  const cata = await Catagory.findByIdAndUpdate(catid,{name:req.body.name});
+  if (!cata) {
+    console.log("No catagory list found");
+  } else {
+    var catagory = cata;
+    res.redirect("/admin/view-category-management");
+    console.log("updated catagory..",catagory);
+  }
+};

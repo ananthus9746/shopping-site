@@ -30,7 +30,8 @@ app.engine('hbs', hbs.engine({ handlebars: allowInsecurePrototypeAccess(Handleba
   layoutsDir: __dirname + '/views/layout/',
   partialsDir: __dirname + '/views/partials'
   
-})) 
+}))
+ 
 
 
 app.use(logger('dev'));
@@ -49,7 +50,10 @@ mongoose.connect(
 ).then(()=>{
   console.log("Database connected")
 })
-
+app.use(function(req, res, next) { 
+  res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+   next();
+ });
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
 
