@@ -66,8 +66,8 @@
                     <label class="col-md-4 control-label" for="product_categorie">PRODUCT CATEGORY</label>
                     <div class="col-md-4 col-md-6 ">
                         <select class="category-selector " name="catagory">
-                            <option selected hidden>Select Catagory</option>
-                            {{#each catagory}}
+                            <option selected hidden>{{catagory.name}}</option>
+                            {{#each catagoryList}}
                             <option value="{{this._id}}">{{name}}</option>
                             {{!-- work in both this.name and name both are same --}}
                             {{/each}}

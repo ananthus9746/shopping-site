@@ -54,7 +54,7 @@ exports.product = (req, res, next) => {
     });
   console.log("Inserted photo with data ", req.body);
   console.log(req.files);
-  res.render("admin/add-product", { admin: true});
+  res.render("admin/add-product", { admin: true });
 };
 
 //Getting product
@@ -91,24 +91,43 @@ exports.editproduct = async (req, res) => {
   let productid = req.params.id;
   console.log("iddd", productid);
 
+  console.log("proid...", productid);
+  const productd = await Product.findById(productid);
+
+  console.log("catagory id 11...",productd.catagory.toString());
+  let catid=productd.catagory.toString();
+  console.log("catagory id converted to string..",catid);
+
+  //single catagory
+  const onecatagory = await Catagory.findById(catid);
+  if (!onecatagory) {
+    console.log("No catagory list found");
+  } else {
+    var catagory = onecatagory;
+    console.log("finded catagory..",catagory);
+  }
+
+  //all catagory
   const catagoryList = await Catagory.find();
   if (!catagoryList) {
     console.log("No catagory list found");
   } else {
-    var catagory = catagoryList;
-    console.log(catagoryList);
+    // var catagory = catagoryList;
+    console.log("finded catagory..",catagoryList);
   }
 
-  console.log("proid...", productid);
-  const productd = await Product.findById(productid);
 
+
+  
   if (!productd) {
     console.log("No product found");
   } else {
-    let getproduct = productd;
-    res.render("admin/edit-product", { admin: true, catagory, productd });
-    // console.log("product from productd list...", productd);
+    res.render("admin/edit-product", { admin: true, catagory,catagoryList, productd });
+    console.log("product from productd edit product..", productd);
+
   }
+
+  
 };
 
 exports.updateproduct = async (req, res) => {
@@ -137,12 +156,10 @@ exports.updateproduct = async (req, res) => {
     stockAlart,
     catagory,
     isfeatured,
-  })
+  });
   if (!product) {
     console.log("No product found");
   } else {
-    
     res.render("admin/edit-product", { admin: true, catagory, product });
   }
- 
 };

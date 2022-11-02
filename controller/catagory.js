@@ -15,7 +15,7 @@ exports.catagory = (req, res, next) => {
       console.log("err");
     });
   res.redirect("/admin/view-category-management");
-  next()
+  next();
 };
 
 //Getting catagory
@@ -45,7 +45,8 @@ exports.catagorylist = async (req, res) => {
 //Deleting catagory
 exports.deletecatagory = async (req, res) => {
   let catagoryid = req.params.id;
-  console.log(catagoryid);
+  console.log("delete catagory..",catagoryid);
+
   Catagory.findByIdAndRemove(catagoryid)
     .then((catagory) => {
       if (catagory) {
@@ -62,8 +63,9 @@ exports.deletecatagory = async (req, res) => {
 
 //edit catagory
 exports.editcatagory = async (req, res) => {
-    var cat=req.params.id
-    console.log("cat id...",cat)
+  var cat = req.params.id;
+  console.log("cat id...", cat);
+
   const catagoryfinded = await Catagory.findById(cat);
   if (!catagoryfinded) {
     console.log("No catagory list found");
@@ -77,17 +79,16 @@ exports.editcatagory = async (req, res) => {
 //updating catagory
 
 exports.updatetcatagory = async (req, res) => {
+  var catid = req.params.id;
+  console.log("cat,upr-item..", req.body);
+  console.log("catid for upadate..", catid);
 
-  var catid=req.params.id;
-  console.log("cat,upr-item..",req.body)
-  console.log("catid for upadate..",catid);
-
-  const cata = await Catagory.findByIdAndUpdate(catid,{name:req.body.name});
+  const cata = await Catagory.findByIdAndUpdate(catid, { name: req.body.name });
   if (!cata) {
     console.log("No catagory list found");
   } else {
     var catagory = cata;
     res.redirect("/admin/view-category-management");
-    console.log("updated catagory..",catagory);
+    console.log("updated catagory..", catagory);
   }
 };
