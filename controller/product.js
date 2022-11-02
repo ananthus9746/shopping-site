@@ -160,6 +160,8 @@ exports.updateproduct = async (req, res) => {
   if (!product) {
     console.log("No product found");
   } else {
-    res.render("admin/edit-product", { admin: true, catagory, product });
+    // res.render("admin/edit-product", { admin: true, catagory, product });
+    res.redirect("/admin/product-management");
+
   }
 };
