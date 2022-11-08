@@ -94,9 +94,9 @@ exports.editproduct = async (req, res) => {
   console.log("proid...", productid);
   const productd = await Product.findById(productid);
 
-  console.log("catagory id 11...",productd.catagory.toString());
-  let catid=productd.catagory.toString();
-  console.log("catagory id converted to string..",catid);
+  console.log("catagory id 11...", productd.catagory.toString());
+  let catid = productd.catagory.toString();
+  console.log("catagory id converted to string..", catid);
 
   //single catagory
   const onecatagory = await Catagory.findById(catid);
@@ -104,7 +104,7 @@ exports.editproduct = async (req, res) => {
     console.log("No catagory list found");
   } else {
     var catagory = onecatagory;
-    console.log("finded catagory..",catagory);
+    console.log("finded catagory..", catagory);
   }
 
   //all catagory
@@ -113,21 +113,20 @@ exports.editproduct = async (req, res) => {
     console.log("No catagory list found");
   } else {
     // var catagory = catagoryList;
-    console.log("finded catagory..",catagoryList);
+    console.log("finded catagory..", catagoryList);
   }
 
-
-
-  
   if (!productd) {
     console.log("No product found");
   } else {
-    res.render("admin/edit-product", { admin: true, catagory,catagoryList, productd });
+    res.render("admin/edit-product", {
+      admin: true,
+      catagory,
+      catagoryList,
+      productd,
+    });
     console.log("product from productd edit product..", productd);
-
   }
-
-  
 };
 
 exports.updateproduct = async (req, res) => {
@@ -162,6 +161,5 @@ exports.updateproduct = async (req, res) => {
   } else {
     // res.render("admin/edit-product", { admin: true, catagory, product });
     res.redirect("/admin/product-management");
-
   }
 };

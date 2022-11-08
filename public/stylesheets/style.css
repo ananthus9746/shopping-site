@@ -1,4 +1,11 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box ;
+}
+/* ADDMIN AND ADMIN PRODUCT */
 .category{
   height: 40px;
   font-size: 15px;
@@ -18,8 +25,94 @@
 /* add product page */
 .add-product{
   padding: 15px;
- 
+  display: flex;
+ justify-content: center;
 }
-/* .add-product-container{
- 
-} */
+/* ================================= */
+/* Nav bar desktop
+.navbar{
+display: flex;
+background-color: rgb(255, 255, 255);
+justify-content: space-between;
+align-items: center;
+height: 10rem;
+}
+.menu-list{
+  margin-top: 16px;
+  margin-left: 2em;
+  display: inline-flex;
+}
+.menu-list li a{
+  color: rgb(0, 0, 0);
+  margin-left: 20px; 
+ text-decoration: none;
+  font-size: 1.15rem;
+  font-weight: bolder;
+}
+.menu-list li {
+ list-style: none;
+}
+.logo{
+  width: 10em;
+}
+.account-and-cart{
+  display: flex;
+}
+.account{
+  text-decoration: none;
+  list-style: none;
+  margin-right: 3rem;
+  font-weight: bolder;
+  color: black;
+  font-size: 1.15rem;
+}
+.cancel-btn{
+  margin-right: 3rem;
+}
+.menu-btn{
+  margin-right: 5.6em;
+}
+.fa-bag-shopping{
+  height: 22px;
+}
+.fa-magnifying-glass{
+  height: 22px;
+}
+/*Nav Tablate view */
+@media (max-width:950px) {
+  .menu-list{
+    display: none;
+
+  }
+  .logo{
+    margin-left: 25em;
+  }
+}
+/*Nav bar mobile */
+/* 
+@media (max-width:880px){
+  .menu-list{
+    display: none;
+  }
+  .logo{
+    margin-right: 200px;
+  }
+  .logo-image{
+    margin-right: 20px;
+
+  }
+  .account{
+    display: none;
+  }
+  .cancel-btn{
+    display: none;
+  }
+  .menu-btn{
+    margin-right: 2em;
+  }
+  .fa-bag-shopping{
+    height: 22px;
+  }
+}  */
+
+
