@@ -1,40 +1,168 @@
 .home-3-products{
     width: 100%;
     height: 700px;
-    background-color: rgb(99, 253, 68);
     display: flex;
 }
 .same-size{
     width: 33.33%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-top: 30px; /*This 30px margin for header scroller white space*/
+
 }
 .one{
-    background-color: rgb(105, 220, 224);
+    background-color: rgb(155, 153, 153);
     background-image: url("/images/micheile-dot-com-a9BY65__Cas-unsplash\ \(1\).jpg"), url("paper.gif");
     background-repeat: no-repeat, repeat;
     background-size: cover;
+    background-blend-mode: multiply;
+}
+.heading-3{
+    font-size: 4rem;
+    color: white;
+    line-height: 1em;
+}
+.heading-paragraph{
+    font-size: .8rem;
+    color: white;
+}
+.shop-now{
+    color: white;
+}
+.shop-now:hover {
+    color:#ffffff; 
+    cursor:pointer;  
 }
 .two{
-background-color: aquamarine;
+background-color: rgb(155, 153, 153);
 background-image: url("/images/micheile-dot-com-BTMxNIwVBvU-unsplash\ \(1\).jpg"), url("paper.gif");
 background-repeat: no-repeat, repeat;
 background-size: cover;
+background-blend-mode: multiply;
+
 }
 .three{
-    background-color: rgb(142, 223, 196);
+    background-color: rgb(155, 153, 153);
     background-image: url("/images/micheile-dot-com-wwTvwS9vKZs-unsplash\ \(1\).jpg"), url("paper.gif");
     background-repeat: no-repeat, repeat;
     background-size: cover;
+    background-blend-mode: multiply;
 }
 
-
+/* Why bamboo Headding */
+.why-bambo-heading-container{
+        padding-top: 50px;
+        text-align: center;
+        margin: auto;
+        width: 60%;
+        padding: 10px;   
+}
+.why-baboo-heading{
+    margin-top: 50px;
+    text-align: center;
+}
+.why-baboo-heading-pargraph{
+    font-size: smaller;
+    margin-bottom: 50px;
+}
 .why-container{
+    display: flex;
     width: 100%;
     height: 500px;
     background-color: rgb(191, 236, 221);
 }
-.best-seller-container{
-    width: 100%;
+.right-image{
+background-image: url("/images/bamboo.jpeg"), url("paper.gif");
+background-repeat: no-repeat, repeat;
+background-size: cover;
+height: 500px;
+width: 60%;
+background-color: black;
+}
+.left-paragraph{
     height: 500px;
-    background-color: rgb(136, 255, 235);
+    width: 40%;
+    background-color: rgb(247, 247, 247);
+    padding: 5rem 2rem;
+}
+.shop-now-left{
+    color: rgb(43, 43, 43);
+    font-size: .8em;
+}
+.shop-now-left:hover {
+    color:#000000; 
+    cursor:pointer;  
+}
+/* BEST SELLERS */
+.product-cover{
+    padding: 30px;
+}
+.best-seller{
+    padding: 50px;
+    text-align: center;
+}
+.product-grid{
+    display: grid;
+    grid-gap: 35px;
+    grid-template-columns:repeat(4,1fr) ;
+}
+.product-col{
+background-color: gray;
+height: 400px;
+} 
+/* PERSONAL CARE */
+.personal-care-heading{
+    margin: 50px;
+    text-align: center;
+}
+.personal-care-cover{
+    padding: 40px;
+}
+.personal-care-container-grid{
+    display: grid;
+    grid-gap: 35px;
+    grid-template-columns:repeat(2,1fr) ;
+ 
+}
+.peronal-care-col{
+    background-color: rgb(197, 197, 197);
+    height: 500px;
+}
+.gifts{
+    text-align: center;
+    height: 200px;
+    background-color: rgb(187, 187, 187);
+}
+
+
+
+
+
+
+
+
+@media (max-width: 750px) {
+    /* PRODUCT */
+    .product-grid{
+        display: block;
+        display: grid;
+        grid-gap: 10px;
+        padding: 16px;
+        grid-template-columns:repeat(2,1fr) ;
+    }
+    /* PERSONAL CARE */
+    .personal-care-container-grid{
+        display: grid;
+        grid-gap: 35px;
+        grid-template-columns:repeat(1,1fr) ;
+    }
+}
+.footerff{
+    width: 100%;
+    height: 150px;
+    background-color: #000000;
 }
