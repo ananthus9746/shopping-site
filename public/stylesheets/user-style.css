@@ -5,23 +5,43 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+.navbar-fixed-top {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+/*     z-index: 1; */
+background: rgb(0, 0, 0);
+}
+
+html,body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x :hidden; 
+}
 hr{
   display: none;
 }
 .account-list{
   display: none;
 }
+/* .body nav {
+  position: sticky;
+  top: 0;
+} */
 .navbar{
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   width: 100%;
-  z-index: 2;
+  z-index: 100000;
   padding: 25px 0;
   transition: all 0.3s ease;
 }
 .navbar{
+  
   background: #ffffff;
   padding: 10px 0;
   box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.1);
