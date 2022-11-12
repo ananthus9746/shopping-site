@@ -52,43 +52,53 @@ background-blend-mode: multiply;
     background-size: cover;
     background-blend-mode: multiply;
 }
-
-/* Why bamboo Headding */
+/* why bamboo heding */
 .why-bambo-heading-container{
-        padding-top: 50px;
-        text-align: center;
-        margin: auto;
-        width: 60%;
-        padding: 10px;   
+    padding-top: 50px;
+    text-align: center;
+    margin: auto;
+    width: 60%;
+    padding: 10px;   
 }
 .why-baboo-heading{
-    margin-top: 50px;
-    text-align: center;
+margin-top: 50px;
+text-align: center;
 }
 .why-baboo-heading-pargraph{
-    font-size: smaller;
-    margin-bottom: 50px;
+font-size: smaller;
+margin-bottom: 50px;
 }
-.why-container{
+
+/* WHY BAMBOO IMAGE WITH PARA */
+
+.why-bambo-flex{
     display: flex;
+    height: 500px;
+}
+.right-image-div{
+    width: 60%;
+    /* background-color: greenyellow; */
+}
+.image-div{
+    height: 100%;
     width: 100%;
-    height: 500px;
-    background-color: rgb(191, 236, 221);
 }
-.right-image{
-background-image: url("/images/bamboo.jpeg"), url("paper.gif");
-background-repeat: no-repeat, repeat;
-background-size: cover;
-height: 500px;
-width: 60%;
-background-color: black;
+.image-div img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
-.left-paragraph{
-    height: 500px;
+/* ////////////////// */
+.left-paragraph-div{
     width: 40%;
-    background-color: rgb(247, 247, 247);
-    padding: 5rem 2rem;
+    /* background-color: rgb(255, 0, 85);  */
 }
+.pragraph-div{
+  margin-top: 100px;
+  padding: 20px;  
+  /* background-color: green; */
+}
+/* //////////////// */
 .shop-now-left{
     color: rgb(43, 43, 43);
     font-size: .8em;
@@ -96,8 +106,8 @@ background-color: black;
 .shop-now-left:hover {
     color:#000000; 
     cursor:pointer;  
-}
-/* BEST SELLERS */
+} 
+/*PRODUCTS /best seller */
 .product-cover{
     padding: 30px;
 }
@@ -126,26 +136,135 @@ height: 400px;
     display: grid;
     grid-gap: 35px;
     grid-template-columns:repeat(2,1fr) ;
- 
 }
 .peronal-care-col{
     background-color: rgb(197, 197, 197);
     height: 500px;
 }
-.gifts{
+/* COPRATE-GIFTS */
+.corporate-gifts-cover{
     text-align: center;
+}
+.corporate-gifts-scroller{
     height: 200px;
     background-color: rgb(187, 187, 187);
+    margin-bottom: 50px;
+}
+/* BLOG */
+.blog-container-cover{
+    padding: 50px;
+    text-align: center;
+}
+.blog-container-grid{
+    display: grid;
+    grid-gap: 25px;
+    grid-template-columns:repeat(3,1fr) ;
+}
+.blog-col{
+    background-color: rgb(197, 197, 197);
+    height: 500px;
+}
+/* HAPPY-CUSTMER */
+.achievement-grid{
+    display: grid;
+    grid-template-columns: minmax(auto,1000px);
+    justify-content: center;
+    text-align: center;
+}
+.achievement-cover{
+    padding:30px;
+}
+.happy-customer-grid{
+    display: grid;
+    grid-gap: 35px;
+    grid-template-columns:repeat(4,1fr) ;
+}
+.happy-col{
+    background-color: rgb(214, 214, 214);
+    height: 150px;
 }
 
+/* FOOTER */
+.footer-cover{
+    background-color:#1f2934;
+    padding: 40px;
+}
+.footer-flex{
+    display: flex;
+    gap: 30px;
+    color: #ffffff;
+    }
+    .quick-link li a{
+    color: white;
+    text-decoration: none;
+    }
+    .quick-link li{
+        list-style: none;
+    }
+    .Q-B-N-heading{
+        margin-bottom: 20px;
+        font-size: 25px;
+    }
+    .quick-link{
+    width:25% ;
+    }
+    .about-us{
+    width: 37.5%;
+    }
+    .made-with-love{
+        margin-top: 50px;
+    }
+    .social-media{
+        margin-top: 50px;
+    }
+    .news-letter{
+     width: 37.5%;
+    }
+    .copyright-cover-flex{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 70px;
+        color: #ffffff;
+    }
 
-
-
-
-
-
-
+/* Mobile-view */
 @media (max-width: 750px) {
+    /* WHY BAMBOO */
+    .why-container-cover{
+        padding: 15px;
+        background-color: rgb(196, 196, 196);
+    }
+    .why-bambo-flex{
+        display: flex;
+       flex-direction: column;
+
+    }
+    .right-image-div{
+        width: 100%;
+        height: 50%;
+        /* background-color: greenyellow; */
+    }
+    .image-div{
+        height: 100%;
+        width: 100%;
+    }
+    .image-div img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+    }
+    /* /////////// */
+    .left-paragraph-div{
+        width: 100%;
+        /* background-color: rgb(255, 0, 85);  */
+    }
+    .pragraph-div{
+      margin-top: 0px;
+      text-align: center;
+      padding: 20px;  
+      /* background-color: green; */
+    }
+   
     /* PRODUCT */
     .product-grid{
         display: block;
@@ -160,9 +279,62 @@ height: 400px;
         grid-gap: 35px;
         grid-template-columns:repeat(1,1fr) ;
     }
+    /* BLOG */
+    .blog-container-cover{
+        padding: 20px;
+        text-align: center;
+    }
+    .blog-container-grid{
+        display: grid;
+        grid-gap: 17px;
+        grid-template-columns:repeat(1,1fr) ;
+    }
+    .blog-col{
+        background-color: rgb(197, 197, 197);
+        height: 450px;
+    }
+    /* ACHIEVEMENT */
+    .happy-customer-grid{
+        display: block;
+        display: grid;
+        grid-gap: 10px;
+        padding: 16px;
+        grid-template-columns:repeat(2,1fr) 
+    }
+    /* FOOTER */
+    .footer-flex{
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        padding: 0px;
+    }
+    .quick-link{
+        width:85% ;
+        }
+        .about-us{
+        width :90%;
+        }
+        .news-letter{
+         width: 85%;
+        }
+    .copyright-cover-flex{
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 70px;
+        color: #ffffff;
+    }
+    .copyright{
+        order: 2;
+        margin-top: 20px;
+
+    }
+    .card{
+        order: 1;
+    }
 }
-.footerff{
-    width: 100%;
-    height: 150px;
-    background-color: #000000;
-}
+
+

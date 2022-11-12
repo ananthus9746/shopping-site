@@ -26,17 +26,16 @@ hr{
 .account-list{
   display: none;
 }
-/* .body nav {
-  position: sticky;
-  top: 0;
-} */
+
 .navbar{
+  top: 0;
+  background: rgb(0, 0, 0);
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   width: 100%;
-  /* z-index: 100000; */
+  z-index: 100000;
   padding: 25px 0;
   transition: all 0.3s ease;
 }
@@ -44,6 +43,7 @@ hr{
   height: 90px;
   background: #ffffff;
   padding: 10px 0;
+  border-bottom: solid .3px rgb(241, 241, 241);
 }
 
 .navbar .menu-list{
@@ -148,3 +148,5 @@ hr{
     display: none;
   }
 }
+
+

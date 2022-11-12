@@ -1,0 +1,88 @@
+.acount-container-cover{
+  
+    margin: auto;
+    width: 100%;
+    padding-top:90px;
+  
+}
+.accout-div{
+    margin-top: 20px;
+}
+.accout-items-div{
+
+   height: 500px;
+   width: 70%;
+   max-width: 500px;
+   margin: auto;
+   padding-left:50px;   
+}
+.account-login{
+    text-align: center;
+    padding: 20px;
+}
+.input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+    border: solid 1px rgb(228, 228, 228);
+    padding-left: 10px;
+    outline: none;
+
+}
+.forget-password{
+color: black;
+font-size: .8rem;
+}
+.button-flex{
+display: flex;
+justify-content: space-between;
+width: 40%;
+}
+
+.login{
+    width: 80px;
+    max-width: 400px;
+    height: 40px;
+    margin-top: 20px;
+    color: white;
+    background-color: black;
+    border:none;
+    cursor: pointer;
+}
+.signup{
+    width: 80px;
+    max-width: 400px;
+    height: 40px;
+    margin-top: 20px;
+    border: solid 2.8px black;
+    background-color: white;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+@media (max-width: 750px) {
+    .button-flex{
+        flex-direction: column;
+        width: 100%;
+    }
+    .login{
+        width: 100%;
+        max-width: 400px;
+        height: 40px;
+        margin-top: 20px;
+    }
+    .signup{
+        width: 100%;
+        max-width: 400px;
+        height: 40px;
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+}
