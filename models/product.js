@@ -27,12 +27,14 @@ const productSchema = new mongoose.Schema({
   stockAlart: {
     type: Number,
   },
+
   catagory: {
     
   type: mongoose.Schema.Types.ObjectId,
   ref: "Catagory",
     required: true,
   },
+
   isfeatured: {
     type: Boolean,
     default: false,
@@ -43,9 +45,17 @@ const productSchema = new mongoose.Schema({
       img: { type: String },
     },
   ],
+  review:[
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:"User",
+      review:String,
+    }
+  ],
   dateCreated: {
     type: Date,
     default: Date.now,
   },
-});
+  
+},{timestamps:true});
 module.exports = mongoose.model("Product", productSchema);

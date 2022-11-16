@@ -108,40 +108,52 @@ margin-bottom: 50px;
     cursor:pointer;  
 } 
 /*PRODUCTS /best seller */
+
+
+
 .product-cover{
     padding: 30px;
+    /* background-color: rgb(218, 32, 193); */
 }
 .best-seller{
     padding: 50px;
     text-align: center;
 }
-.product-grid{
-   
+    .product-grid{
+   /* background-color: rgb(255, 200, 200); */
     display: grid;
     grid-gap: 25px;
     grid-template-columns:repeat(4,1fr) ;
 }
+.a-tag-for-pro-div{
+    text-decoration: none;
+    color: #000000;
+}
 .product-col{
-background-color: gray;
+/* background-color: rgb(51, 51, 51); */
 aspect-ratio: 2/3.3;
-
+cursor: pointer;
 }
 
-/* .pro-image-div{
-    background-color: aqua;
-    height: 85%;
-    
+.pro-image-div{
+    height:88%;
+    /* background-color: #ffacac; */
 }
 .pro-image-div img{
-  
-    width:100%;
     height:100%;
-    object-fit:cover;
+    width: 100%;
+    object-fit:cover; 
+    display: block;
 }
- 
 .pro-deatail-container{
-    background-color: rgb(255, 204, 204);
-} */
+    display: flex;
+    /* background-color: aquamarine; */
+    font-size: .9rem;
+    width: 100%;
+    height: 10%;
+    
+}
+
 
 
 
@@ -257,6 +269,26 @@ aspect-ratio: 2/3.3;
     }
 
 /* Mobile-view */
+@media (max-width: 930px) {
+.pro-deatail-container{
+    display: flex;
+    flex-direction: column;
+    /* background-color: rgb(255, 127, 255); */
+    font-size: .9rem;
+    gap: 5px;
+   
+}
+.pro-image-div{
+    height:80%;
+    /* background-color: #ffacac; */
+}
+
+.pro-rating{
+    /* padding-top: 5px; */
+}
+.pro-price-div{
+/* background-color: green; */
+}
 @media (max-width: 750px) {
     /* WHY BAMBOO */
     .why-container-cover{
@@ -305,13 +337,12 @@ aspect-ratio: 2/3.3;
         grid-gap: 15px;
         padding: 6px;
         grid-template-columns:repeat(2,1fr) ;
-    }.product-col{
-        background-color: gray;
+    }
+    .product-col{
+        /* background-color: rgb(245, 247, 151); */
         aspect-ratio: 2.5/4.8;
-        }
-
-
-
+        
+     }
 
     /* PERSONAL CARE */
     .personal-care-container-grid{

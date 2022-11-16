@@ -11,9 +11,11 @@ const { route } = require("../routes/admin");
 // });
 
 //Adding product
+
+
 exports.product = (req, res, next) => {
   console.log("heroollloo", req.body);
-
+  console.log("for-main image..", req.files);
   const {
     name,
     price,
@@ -24,6 +26,7 @@ exports.product = (req, res, next) => {
     stockAlart,
     catagory,
     isfeatured,
+
   } = req.body;
   let image = [];
   if (req.files.length > 0) {
@@ -56,6 +59,11 @@ exports.product = (req, res, next) => {
   console.log(req.files);
   res.render("admin/add-product", { admin: true });
 };
+
+
+
+
+
 
 //Getting product
 exports.getproduct = async (req, res) => {

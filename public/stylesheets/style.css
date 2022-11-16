@@ -30,5 +30,8 @@
 }
 /* ================================= */
 
-
+/* ERROR MESSAGE MARGIN TOP */
+.eroor-messge-margin-top{
+  margin-top: 150px;
+}
 

@@ -23,8 +23,8 @@
     </div>
 
     <div class="why-bambo-heading-container">
-        <h1 class="why-baboo-heading">Why bambo</h1>
-        <p class="why-baboo-heading-pargraph">Why Bamboo?
+        <h1 class="why-baboo-heading"></h1>
+        <p class="why-baboo-heading-pargraph">{{products.[0].image}}Why Bamboo?
             Bamboo, a plant which holds utmost importance in every culture serves as a perfect replacement for age-old
             materials that harm the mother earth. Use of Bamboo-made
             products create a win-win situation for both: the nature & the mankind, and this is exactly what we strive
@@ -61,31 +61,52 @@
     <div class="product-cover">
         <h2 class="best-seller">Best sellers</h2>
         <div class="product-grid">
-            <div class="product-col">1
+
+            {{#each products}}
+            <a class="a-tag-for-pro-div" href="/view-single-product/{{_id}}">
+                <div class="product-col">
+                    <div class="pro-image-div">
+                        <img src="/upload/{{image.[0].img}}" alt="">
+                    </div>
+                    <div class="pro-deatail-container">
+                        <div class="p-d">
+                            <div class="pro-name">
+                                <p>{{name}}</p>
+                                <div class="pro-rating">
+                                    <p>***(21)</p>
+                                </div>
+                            </div>
+                            <div class="pro-price-div">
+                                <p>Rs.{{price}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {{/each}}
+
+
+            <div class="product-col">
                 <div class="pro-image-div">
-                    {{!-- <img src="" alt=""> --}}
+                    <img src="/images/micheile-dot-com-a9BY65__Cas-unsplash (1).jpg" alt="">
                 </div>
                 <div class="pro-deatail-container">
                     <div class="pro-name">
-                        {{!-- <p>Bamboo interdetal Brushes(6 pack)</p> --}}
+                        <p>Bamboo interdetal Brushes(6 pack)</p>
+                        <div class="pro-rating">
+                            {{!-- <p>***(21)</p> --}}
+                        </div>
                     </div>
-                    <div class="pro-name-div">
-                        {{!-- <p>Rs.150</p> --}}
-                    </div>
-                    <div class="pro-rating">
-                        {{!-- <p>***(21)</p> --}}
+                    <div class="pro-price-div">
+                        <p>Rs.150</p>
                     </div>
                 </div>
             </div>
-            <div class="product-col">2</div>
-            <div class="product-col">3</div>
-            <div class="product-col">4</div>
-            <div class="product-col">5</div>
-            <div class="product-col">6</div>
-            <div class="product-col">7</div>
-            <div class="product-col">8</div>
+
         </div>
     </div>
+
+
     <div class="personal-care-cover">
         <h2 class="personal-care-heading">Personal care</h2>
         <div class="personal-care-container-grid">

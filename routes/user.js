@@ -1,27 +1,42 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const MongoClient=require('mongodb').MongoClient
+const MongoClient = require("mongodb").MongoClient;
+const { homePage,viewSingleProduct } = require("../controller/user/user-helper");
 
-router.get('/', function(req, res, next) {  
-  res.render('user/index', {admin:false});
+router.get("/", homePage)
+
+router.get("/view-single-product/:id",viewSingleProduct)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.get("/login", (req, res) => {
+  res.render("user/login");
 });
 
-router.get('/login',(req,res)=>{
-  res.render('user/login')
-})
+router.post("/login", (req, res) => {
+  console.log(req.body);
+});
 
-router.post('/login',(req,res)=>{
-  console.log(req.body)
-})
+router.get("/sign-up", (req, res) => {
+  res.render("user/sign-up");
+});
 
-router.get('/sign-up',(req,res)=>{
-  res.render('user/sign-up')
-})
-
-router.post('/sign-up',(req,res)=>{
-  console.log(req.body)
-})
-
-
+router.post("/sign-up", (req, res) => {
+  console.log(req.body);
+});
 
 module.exports = router;
