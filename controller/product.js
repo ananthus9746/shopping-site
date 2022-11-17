@@ -1,7 +1,6 @@
 const Product = require("../models/product");
 var express = require("express");
 var fs = require("fs");
-const Catagory = require("../models/catagory");
 const { route } = require("../routes/admin");
 
 // fs.unlink('sample.txt', function (err) {
