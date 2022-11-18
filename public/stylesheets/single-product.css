@@ -8,7 +8,7 @@
     /* background-color: green; */
 }
 .right-side-pro-image{
-    background-color: rgb(241, 184, 184);
+    /* background-color: rgb(241, 184, 184); */
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@
 }
 
 .right-imag-and-btns-cover{
-    background-color: rgb(168, 255, 248);
+    /* background-color: rgb(168, 255, 248); */
     width: 80%;
     max-width: 450px;
     height: 100%;
@@ -29,7 +29,7 @@
 
 
 
-/* =================== */
+/*PRO MAIN IMAGE*/
 .img-and-thump-img{
     border: 1px solid rgb(202, 202, 202);
     width: 80%;
@@ -41,7 +41,7 @@
     
 }
 .main-img{
-   border: solid rgb(0, 0, 0);
+    border: 1px solid rgb(202, 202, 202);
     /* height: 300px; */
     display: flex;
     align-items: center;
@@ -58,25 +58,29 @@
     object-fit:cover;
     
 }
-.img-thumps{
-    border: 1px solid rgb(202, 202, 202);
-    height: 20%;
-   
+
+
+/*PRO THUMP IMAGE */
+
+.img-thumps-cover{
+    /* background-color: red; */
+    /* height: 100px; */
 }
-.img-thumps ul li{
-list-style: none;
-}
-.imga-thumps-flex{
+.imga-thumps-ul-flex{
     display: flex;
-    justify-content: center;
-    justify-content: space-around;
-    margin-top: 10px;
-    width: 100%;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 5px;
+    align-items: center;
+    margin-top: 13px;
+
 }
-.li-thump-img{
+.li-thump-div{
+   width: 20%; 
+}
+.thump-li img{
     width: 100%;
-    height: 100px;
+    height: 100%;
+    display: block;
 }
 
 
@@ -87,24 +91,34 @@ list-style: none;
 
 
 
-/* ===================================== */
-/* product selection */
+
+
+
+
+
+
+
+
+
+
+
+
+/* PRODUCT SELECTION */
 .btn {
     border: none;
     outline: none;
-    padding: 11px 1px;
+    /* padding: 11px 1px;
     width: 60px;
-    height: 100px;
+    height: 100px; */
     cursor: pointer;
     font-size: 18px;
     object-fit:cover;
+    list-style: none;
     }
 /* Style the active class, and buttons on mouse-over */
 .active, .btn:hover {
-    border: solid navy 1px;
+    border: solid rgb(92, 92, 92) 1px;
     }
-
-/* ============================================= */
 
 /*================= LEFT ========================*/
 
@@ -213,10 +227,104 @@ color: rgb(255, 255, 255);
         /* background-color: green; */
     }
     .right-side-pro-image{
-        background-color: brown;
+        /* background-color: brown; */
         width: 100%;
         aspect-ratio: 5.5/5;
     }
+
+
+.right-imag-and-btns-cover{
+    /* background-color: rgb(168, 255, 248); */
+    width: 80%;
+    max-width: 450px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* ===========PRO THUMP SAMALL IMAGE MOBILE VIEW===================== */
+
+/*PRO MAIN IMAGE*/
+.img-and-thump-img{
+    border: 1px solid rgb(202, 202, 202);
+    width: 80%;
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    
+}
+.main-img{
+    border: 1px solid rgb(202, 202, 202);
+    /* height: 300px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.main-img{
+    display: block;
+}
+.main-image-big{
+   
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    
+}
+
+/*PRO THUMP IMAGE */
+
+.img-thumps-cover{
+    /* background-color: red; */
+    /* height: 100px; */
+}
+.imga-thumps-ul-flex{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    align-items: center;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+.li-thump-div{
+   width: 20%; 
+}
+.thump-li img{
+    width: 100%;
+    height: 100%;
+}
+
+/* =========================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     .left-side-details{
         /* background-color: blue; */
         width: 100%;

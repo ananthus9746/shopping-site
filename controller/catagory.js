@@ -31,16 +31,16 @@ exports.getcatagory = async (req, res) => {
 };
 
 //catagorylist for Add product
-exports.catagorylist = async (req, res) => {
-  const catagoryList = await Catagory.find();
-  if (!catagoryList) {
-    console.log("No catagory list found");
-  } else {
-    var catagory = catagoryList;
-    res.render("admin/add-product", { admin: true, catagory });
-    console.log(catagoryList);
-  }
-};
+// exports.catagorylist = async (req, res) => {
+//   const catagoryList = await Catagory.find();
+//   if (!catagoryList) {
+//     console.log("No catagory list found");
+//   } else {
+//     var catagory = catagoryList;
+//     res.render("admin/add-product", { admin: true, catagory });
+//     console.log(catagoryList);
+//   }
+// };
 
 //Deleting catagory
 exports.deletecatagory = async (req, res) => {

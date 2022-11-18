@@ -8,17 +8,37 @@
             <div class="right-imag-and-btns-cover">
                 <div class="img-and-thump-img">
                     <div class="main-img">
-                        <img class="main-image-big big_img" src="/images/micheile-dot-com-a9BY65__Cas-unsplash (1).jpg" class="big_img">
+                        <img class="main-image-big big_img" src="/upload/{{singleProduct.image.[0].img}}" class="big_img">
                     </div>
-                    <div class="img-thumps" id="myDIV">
-                        <ul class="imga-thumps-flex">
-                            <li class="btn  active"><img class="li-thump-img small_img"  src="/images/micheile-dot-com-a9BY65__Cas-unsplash (1).jpg"></li>
-                            <li class="btn"><img class="li-thump-img small_img"  src="/images/Need_394x.webp" ></li>
-                            <li class="btn"><img class="li-thump-img small_img"  src="/images/classic_394x.webp" ></li>
-                            <li class="btn"><img class="li-thump-img small_img"  src="/images/micheile-dot-com-BTMxNIwVBvU-unsplash (1).jpg"></li>
-                            <li class="btn"><img class="li-thump-img small_img"  src="/images/bamboo.jpeg" ></li>
+
+                    <div class="img-thumps-cover" id="myDIV">
+
+                        <ul class="imga-thumps-ul-flex">
+
+                            <div class="li-thump-div">
+                            <li class="btn  active thump-li"><img class="li-thump-img small_img"  src="/upload/{{singleProduct.image.[0].img}}"></li>
+                            </div>
+
+                            <div class="li-thump-div">
+                            <li class="btn thump-li"><img class="li-thump-img small_img"  src="/upload/{{singleProduct.image.[1].img}}" ></li>
+                            </div>
+
+                            <div class="li-thump-div">
+                            <li class="btn thump-li"><img class="li-thump-img small_img"  src="/upload/{{singleProduct.image.[2].img}}" ></li>
+                            </div>
+
+                            <div class="li-thump-div">
+                            <li class="btn thump-li"><img class="li-thump-img small_img"  src="/upload/{{singleProduct.image.[3].img}}"></li>
+                            </div>
+
+                            <div class="li-thump-div">
+                            <li class="btn thump-li"><img class="li-thump-img small_img"  src="/upload/{{singleProduct.image.[4].img}}" ></li>
+                            </div>
+                            
                         </ul>
+
                     </div>
+
                 </div>
             </div>
         </div>
@@ -26,8 +46,8 @@
 
         <div class="left-side-details">
             <div class="pro-details-name-price-other">
-                <h1>Bamboo brush-100% ecofriendly</h1>
-                <h3 class="pro-price">RS.299.00</h3>
+                <h1>{{singleProduct.name}}</h1>
+                <h3 class="pro-price">RS.{{singleProduct.price}}</h3>
                 <p class="pro-tax">tax included</p>
                 <p class="pro-review">(6 total reviews)</p>
             </div>
@@ -39,12 +59,14 @@
                 <button class="buy-now-button" >BUY NOW</button>
             </div>
 
-            While switching to a natural toothbrush may seem like a small change, the stats above show that we could all
-            make a big difference if we each committed to doing things a better way.
-            Benefits Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur suscipit architecto magni veritatis eaque necessitatibus placeat illum explicabo quos. Recusandae repellat quidem asperiores sed suscipit consectetur libero. Perspiciatis, praesentium neque impedit amet ut veritatis voluptatibus harum iste laboriosam illum vel incidunt cum laborum, cumque, debitis atque omnis eveniet rerum. Facere labore quod ea corrupti porro. Deserunt, dolorum nobis. Ea quaerat totam voluptates quam iste ab ad est, inventore pariatur laborum sapiente illo fugit facilis enim dicta tempora minus repudiandae consequuntur deleniti nobis. Nesciunt numquam quaerat asperiores laborum, sint exercitationem vero aliquam, ab ipsa laboriosam eius, atque nisi consequatur quasi sit!
+            <p class="pro-discription">
+                {{singleProduct.discription}}
+            </p>
+
             <div class="share-icons-links-container-flex">
                 icons
             </div>
+
         </div>
     </div>
 

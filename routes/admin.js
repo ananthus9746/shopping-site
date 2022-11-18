@@ -6,11 +6,12 @@ const {
   catagory,
   getcatagory,
   deletecatagory,
-  catagorylist,
+  
   editcatagory,
   updatetcatagory,
 } = require("../controller/catagory");
 const {
+  catagorylist,
   product,
   getproduct,
   deleteproduct,

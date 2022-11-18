@@ -35,7 +35,7 @@ exports.homePage = async (req, res) => {
     else{
       console.log("FINDED PRODUCT...",singleProduct)
 
-      res.render("user/singleProduct")
+      res.render("user/singleProduct",{singleProduct})
     }
 
 

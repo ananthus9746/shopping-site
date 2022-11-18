@@ -2,6 +2,8 @@ const Product = require("../models/product");
 var express = require("express");
 var fs = require("fs");
 const { route } = require("../routes/admin");
+const Catagory = require("../models/catagory");
+
 
 // fs.unlink('sample.txt', function (err) {
 //   if (err) throw err;
@@ -9,9 +11,22 @@ const { route } = require("../routes/admin");
 //   console.log('File deleted!');
 // });
 
+
+
+
+//GETTING PRODUCT ADDING PAGE catagorylist for Add product
+exports.catagorylist = async (req, res) => {
+  const catagoryList = await Catagory.find();
+  if (!catagoryList) {
+    console.log("No catagory list found");
+  } else {
+    var catagory = catagoryList;
+    res.render("admin/add-product", { admin: true, catagory });
+    console.log(catagoryList);
+  }
+};
+
 //Adding product
-
-
 exports.product = (req, res, next) => {
   console.log("heroollloo", req.body);
   console.log("for-main image..", req.files);
@@ -30,7 +45,7 @@ exports.product = (req, res, next) => {
   let image = [];
   if (req.files.length > 0) {
     image = req.files.map((file) => {
-      //file means map function take two argument 1st data 2nd index //
+      //file means map function take two argument 1st data 2nd index here used 1st //
       return { img: file.filename };
     });
   }
@@ -56,7 +71,8 @@ exports.product = (req, res, next) => {
     });
   console.log("Inserted photo with data ", req.body);
   console.log(req.files);
-  res.render("admin/add-product", { admin: true });
+  
+  res.redirect("/admin/add-product",);
 };
 
 
