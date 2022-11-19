@@ -1,0 +1,43 @@
+/* FOOTER */
+.footer-cover{
+    background-color:#1f2934;
+    padding: 40px;
+}
+.footer-flex{
+    display: flex;
+    gap: 30px;
+    color: #ffffff;
+    }
+    .quick-link li a{
+    color: white;
+    text-decoration: none;
+    }
+    .quick-link li{
+        list-style: none;
+    }
+    .Q-B-N-heading{
+        margin-bottom: 20px;
+        font-size: 25px;
+    }
+    .quick-link{
+    width:25% ;
+    }
+    .about-us{
+    width: 37.5%;
+    }
+    .made-with-love{
+        margin-top: 50px;
+    }
+    .social-media{
+        margin-top: 50px;
+    }
+    .news-letter{
+     width: 37.5%;
+    }
+    .copyright-cover-flex{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 70px;
+        color: #ffffff;
+    }
+
