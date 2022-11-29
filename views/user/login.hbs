@@ -1,7 +1,10 @@
-<div class="acount-container-cover">
+<div class="login-signup-container-cover">
     <div class="accout-div">
-        <h2 class="account-login">Login</h2>
-        <div class="accout-items-div">
+        <h2 class="login-signup-login">Login</h2>
+        <div class="login-signup-items-div">
+            {{#if loginErr}}
+            <p class="login-err">{{loginErr}}</p>
+            {{/if}}
             <form action="/login" method="post" enctype="application/x-www-form-urlencoded" >
                 <label for="">EMAIL</label><br>
                 <input class="input" type="text" name="email" id=""><br>
@@ -12,6 +15,7 @@
                     <input class="login" type="submit" name="" id="" value="LOGIN"><br>
                 </div>
             </form>
+             <a href="/login-with-phone-number"><button  class="signup signphone">LOGIN WITH PHONE NUMBER</button></a>
              <a href="/sign-up"><button  class="signup">SIGN UP</button></a>
         </div>
     </div>

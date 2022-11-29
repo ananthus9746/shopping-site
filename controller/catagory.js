@@ -6,8 +6,7 @@ exports.catagory = (req, res, next) => {
   const catagory = new Catagory({
     name: req.body.name,
   });
-  catagory
-    .save()
+  catagory.save()
     .then((catagory) => {
       console.log(catagory);
     })
@@ -45,7 +44,7 @@ exports.getcatagory = async (req, res) => {
 //Deleting catagory
 exports.deletecatagory = async (req, res) => {
   let catagoryid = req.params.id;
-  console.log("delete catagory..",catagoryid);
+  console.log("delete catagory..", catagoryid);
 
   Catagory.findByIdAndRemove(catagoryid)
     .then((catagory) => {

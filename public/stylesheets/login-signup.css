@@ -1,0 +1,128 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#otpForm{
+    display: none;
+}
+
+.login-signup-container-cover{
+  
+    margin: auto;
+    width: 100%;
+    padding-top:90px;
+  
+}
+.login-signup-div{
+    margin-top: 20px;
+}
+.login-signup-items-div{
+ 
+   width: 70%;
+   max-width: 500px;
+   margin: auto;
+   padding-bottom: 50px;
+    
+}
+.login-err{
+    color: red;
+    text-align: center;
+}
+.login-signup-login{
+    text-align: center;
+    padding: 20px;
+}
+.input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+    border: solid 1px rgb(228, 228, 228);
+    padding-left: 10px;
+    outline: none;
+
+}
+.forget-password{
+color: black;
+font-size: .8rem;
+}
+.button-flex{
+display: flex;
+justify-content: space-between;
+width: 40%;
+}
+
+.login{
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    
+    color: white;
+    background-color: black;
+    border:none;
+    cursor: pointer;
+}
+.signup{
+    left: 100px;
+    width: 100%;
+   
+    height: 40px;
+    margin-top: 20px;
+    border: solid 2.8px black;
+    background-color: white;
+    cursor: pointer;
+}
+.login-white{
+    left: 100px;
+    width: 80px;
+    max-width: 400px;
+    height: 40px;
+    margin-top: 20px;
+    border: solid 2.8px black;
+    background-color: white;
+    cursor: pointer;
+    color: black;
+}
+.sign-up-black{
+    width: 80px;
+    max-width: 400px;
+    height: 40px;
+    margin-top: 20px;
+    color: white;
+    background-color: black;
+    border:none;
+    cursor: pointer;
+}
+
+@media (max-width: 750px) {
+    .button-flex{
+        flex-direction: column;
+        width: 100%;
+    }
+    .login{
+        width: 100%;
+        max-width: 400px;
+        height: 40px;
+        margin-top: 20px;
+    }
+    .signup{
+       
+        width: 100%;
+        max-width: 400px;
+        height: 40px;
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+    .signphone{
+        margin-bottom: 20px;
+    }
+}

@@ -16,7 +16,7 @@
 }
 .one{
     background-color: rgb(155, 153, 153);
-    background-image: url("/images/micheile-dot-com-a9BY65__Cas-unsplash\ \(1\).jpg"), url("paper.gif");
+    background-image: url("/images/micheile-dot-com-a9BY65__Cas-unsplash\ \(1\).jpg");
     background-repeat: no-repeat, repeat;
     background-size: cover;
     background-blend-mode: multiply;
@@ -39,7 +39,7 @@
 }
 .two{
 background-color: rgb(155, 153, 153);
-background-image: url("/images/micheile-dot-com-BTMxNIwVBvU-unsplash\ \(1\).jpg"), url("paper.gif");
+background-image: url("/images/micheile-dot-com-BTMxNIwVBvU-unsplash\ \(1\).jpg");
 background-repeat: no-repeat, repeat;
 background-size: cover;
 background-blend-mode: multiply;
@@ -47,7 +47,7 @@ background-blend-mode: multiply;
 }
 .three{
     background-color: rgb(155, 153, 153);
-    background-image: url("/images/micheile-dot-com-wwTvwS9vKZs-unsplash\ \(1\).jpg"), url("paper.gif");
+    background-image: url("/images/micheile-dot-com-wwTvwS9vKZs-unsplash\ \(1\).jpg");
     background-repeat: no-repeat, repeat;
     background-size: cover;
     background-blend-mode: multiply;

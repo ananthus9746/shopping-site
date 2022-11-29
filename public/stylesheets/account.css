@@ -1,105 +1,13 @@
-.acount-container-cover{
-  
-    margin: auto;
-    width: 100%;
-    padding-top:90px;
-  
+.account-cover{
+    margin-top: 100px;
 }
-.accout-div{
-    margin-top: 20px;
-}
-.accout-items-div{
-
-   height: 500px;
-   width: 70%;
-   max-width: 500px;
-   margin: auto;
-    
-}
-.account-login{
+.account-heading{
     text-align: center;
-    padding: 20px;
 }
-.input{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 100%;
-    max-width: 400px;
-    height: 40px;
-    border: solid 1px rgb(228, 228, 228);
-    padding-left: 10px;
-    outline: none;
-
+.account-text-container{
+    margin: 20px;
+    line-height: 50px;
 }
-.forget-password{
-color: black;
-font-size: .8rem;
-}
-.button-flex{
-display: flex;
-justify-content: space-between;
-width: 40%;
-}
-
-.login{
-    width: 80px;
-    max-width: 400px;
-    height: 40px;
-    margin-top: 20px;
-    color: white;
-    background-color: black;
-    border:none;
-    cursor: pointer;
-}
-.signup{
-    left: 100px;
-    width: 80px;
-    max-width: 400px;
-    height: 40px;
-    margin-top: 20px;
-    border: solid 2.8px black;
-    background-color: white;
-    cursor: pointer;
-}
-.login-white{
-    left: 100px;
-    width: 80px;
-    max-width: 400px;
-    height: 40px;
-    margin-top: 20px;
-    border: solid 2.8px black;
-    background-color: white;
-    cursor: pointer;
+.logout-button{
     color: black;
-}
-.sign-up-black{
-    width: 80px;
-    max-width: 400px;
-    height: 40px;
-    margin-top: 20px;
-    color: white;
-    background-color: black;
-    border:none;
-    cursor: pointer;
-}
-
-@media (max-width: 750px) {
-    .button-flex{
-        flex-direction: column;
-        width: 100%;
-    }
-    .login{
-        width: 100%;
-        max-width: 400px;
-        height: 40px;
-        margin-top: 20px;
-    }
-    .signup{
-       
-        width: 100%;
-        max-width: 400px;
-        height: 40px;
-        margin-left: 0px;
-        margin-top: 0px;
-    }
 }

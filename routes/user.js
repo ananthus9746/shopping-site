@@ -1,39 +1,54 @@
 var express = require("express");
 var router = express.Router();
 const MongoClient = require("mongodb").MongoClient;
-const { homePage,viewSingleProduct,viewCollection } = require("../controller/user/user-helper");
+const {
+  homePage,
+  viewSingleProduct,
+  viewCollection,
+  GetsignUp,
+  signUp,
+  Getlogin,
+  Postlogin,
+  account,
+  loginWithPhoneNumber,
+  logout,
+} = require("../controller/user/user-helper");
+const { cart } = require("../controller/user/cart-helper");
 
+//LOGIN AND SIGN UP
 
+const verifyLogin =(req,res,next)=>{
+  if(req.session.loggedIn){
+    next()
+  }
+  else{
+    res.redirect('/login')
+  }
+  }
 
+router.get("/", homePage);
 
+router.get("/view-single-product/:id", viewSingleProduct);
 
+router.get("/view-collection", viewCollection);
 
-router.get("/", homePage)
+router.get("/sign-up", GetsignUp);
 
-router.get("/view-single-product/:id",viewSingleProduct)
+router.post("/sign-up", signUp);
 
+router.get("/login", Getlogin);
 
-router.get("/view-collection",viewCollection)
+router.post("/login", Postlogin);
 
+router.get("/account",verifyLogin, account);
 
+router.get("/logout", logout);
 
+router.get("/login-with-phone-number",loginWithPhoneNumber)
+//==============================//
 
-router.get("/login", (req, res) => {
-  res.render("user/login");
-});
+// CART
 
-router.post("/login", (req, res) => {
-  console.log(req.body);
-});
-
-router.get("/sign-up", (req, res) => {
-  res.render("user/sign-up");
-});
-
-router.post("/sign-up", (req, res) => {
-  console.log(req.body);
-});
-
-
+router.get("/cart",verifyLogin,cart)
 
 module.exports = router;

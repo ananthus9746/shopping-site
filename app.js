@@ -7,6 +7,9 @@ const bodyParser=require('body-parser')
 const dotenv = require('dotenv')
 const hbs = require('express-handlebars');
 const mongoose=require('mongoose')
+var session=require('express-session')
+
+
 
 // 
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
@@ -32,6 +35,9 @@ app.engine('hbs', hbs.engine({ handlebars: allowInsecurePrototypeAccess(Handleba
   
 }))
  
+//SESSION
+app.use(session({secret:"key",cookie:{maxAge:1200000}}))
+
 
 
 app.use(logger('dev'));

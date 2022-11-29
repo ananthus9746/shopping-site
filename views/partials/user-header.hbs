@@ -1,62 +1,72 @@
 <header class="navbar-fixed-top cbp-af-header">
   <nav class="navbar">
 
-        <div class="icon menu-btn ">
-        <i class="fas fa-bars"></i>
-        </div>
+    <div class="icon menu-btn ">
+      <i class="fas fa-bars"></i>
+    </div>
 
-      <ul class="menu-list">
-        <div class="icon cancel-btn ">
-          <i class="fas fa-times"></i>
-        </div>
-
-         <a class="account-list hide-account"href="/login">ACCOUNT</a>
-        <div class="account-list">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div> 
-        
-        <li><a class="" href="#">SHOP</a></li>
-        
-        <li><a href="#">OUR STORY</a></li>
-       
-        <li><a href="#">FAQ</a></li>
-       
-        <li><a href="#">SUPPORT</a></li>
-      
-      </ul>
-
-      <div class="logo-ecofriend">
-        <a href="/"><img class="logo-image" src="/images/Group 2 (1).svg" alt=""></a>
+    <ul class="menu-list">
+      <div class="icon cancel-btn ">
+        <i class="fas fa-times"></i>
+      </div>
+      {{#if user}}
+      <a class="account-list hide-account" href="/account">{{user.firstName}}</a>
+      {{else}}
+      <a class="account-list hide-account" href="/login">Account</a>
+      {{/if}}
+      <div class="account-list">
+        <i class="fa-solid fa-magnifying-glass"></i>
       </div>
 
-      <div class="account-and-cart">
-        <a class="account a-s-c a-s"href="/login">ACCOUNT</a>
+      <li><a class="" href="#">SHOP</a></li>
 
-        <div class=" search-btn a-s-c a-s">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
+      <li><a href="#">OUR STORY</a></li>
 
+      <li><a href="#">FAQ</a></li>
+
+      <li><a href="#">SUPPORT</a></li>
+
+    </ul>
+
+    <div class="logo-ecofriend">
+      <a href="/"><img class="logo-image" src="/images/Group 2 (1).svg" alt=""></a>
+    </div>
+
+    <div class="account-and-cart">
+      
+      {{#if user}}
+      <a class="account a-s-c a-s" href="/account">{{user.firstName}}</a>
+      {{else}}
+      <a class="account a-s-c a-s" href="/login">ACCOUNT</a>
+      {{/if}}
+      <div class=" search-btn a-s-c a-s">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+
+      <a href="/cart">
         <div class="cart-btn a-s-c ">
           <i class="fa-solid fa-bag-shopping"></i>
         </div>
-      </div>
+      </a>
+
+    </div>
 
   </nav>
 </header>
-  <script>
-    const body = document.querySelector("body");
-    const navbar = document.querySelector(".navbar");
-    const menuBtn = document.querySelector(".menu-btn");
-    const cancelBtn = document.querySelector(".cancel-btn");
-    menuBtn.onclick = ()=>{
-      navbar.classList.add("show");
-      menuBtn.classList.add("hide");
-      body.classList.add("disabled");
-    }
-    cancelBtn.onclick = ()=>{
-      body.classList.remove("disabled");
-      navbar.classList.remove("show");
-      menuBtn.classList.remove("hide");
-    }
-  
-  </script>
+<script>
+  const body = document.querySelector("body");
+  const navbar = document.querySelector(".navbar");
+  const menuBtn = document.querySelector(".menu-btn");
+  const cancelBtn = document.querySelector(".cancel-btn");
+  menuBtn.onclick = () => {
+    navbar.classList.add("show");
+    menuBtn.classList.add("hide");
+    body.classList.add("disabled");
+  }
+  cancelBtn.onclick = () => {
+    body.classList.remove("disabled");
+    navbar.classList.remove("show");
+    menuBtn.classList.remove("hide");
+  }
+
+</script>

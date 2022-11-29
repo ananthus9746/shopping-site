@@ -1,16 +1,18 @@
-<div class="acount-container-cover">
-    <div class="accout-div">
-        <h2 class="account-login">Create Account</h2>
-        <div class="accout-items-div">
-            <form action="/sign-up" method="post" enctype="application/x-www-form-urlencoded">
+<div class="login-signup-container-cover">
+    <div class="login-signup-div">
+        <h2 class="login-signup-login">Create Account</h2>
+        <div class="login-signup-items-div">
+            <form  autocomplete="off" action="/sign-up" method="post" enctype="application/x-www-form-urlencoded">
                 <label for="" name="fname" >FIRST NAME</label><br>
                 <input class="input" type="text" name="fname" id=""><br>
                 <label for="">LAST NAME</label><br>
                 <input class="input"  name="lname" type="text" name="lname" id=""><br>
                 <label for="" name="email">EMAIL</label><br>
-                <input class="input" type="text" name="email" id=""><br>
-                <label for="" name="password">PASSWORD</label><br>
-                <input class="input" type="password" name="password" id=""><br>
+                <input class="input"  name="email" type="text" name="lname" id=""><br>
+                <label  autocomplete="off" for="" name="email">MOBILE NUMBER</label><br>
+                <input class="input" type="number" name="phone" id=""><br>
+                <label for="" name="password">NEW PASSWORD</label><br>
+                <input  autocomplete="off" class="input" type="password" name="password" id=""><br>
                 <div class="button-flex">
                     <input class="signup sign-up-black" type="submit" name="" id="" value="SIGN UP">
                 </div>

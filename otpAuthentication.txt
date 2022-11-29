@@ -1,0 +1,67 @@
+// // Import the functions you need from the SDKs you need
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAcFcoVGkBPK5rxa7lIDZsGfBuKFDbWejc",
+//   authDomain: "ecofriend-otp-authentication.firebaseapp.com",
+//   projectId: "ecofriend-otp-authentication",
+//   storageBucket: "ecofriend-otp-authentication.appspot.com",
+//   messagingSenderId: "551536661159",
+//   appId: "1:551536661159:web:7ead4ac8b703eb8748c182",
+//   measurementId: "G-28137EZMNV",
+// };
+
+// // Initialize Firebase
+// const app = initializeApp(firebaseConfig);
+// var message=document.querySelector("#messageDiv")
+// var message_value=document.querySelector(".message")
+
+
+// var login_form = document.querySelector("#loginForm");
+
+// import { getAuth, RecaptchaVerifier } from "firebase/auth";
+
+// import { getAuth, signInWithPhoneNumber } from "firebase/auth";
+
+
+// const auth = getAuth();
+// window.recaptchaVerifier = new RecaptchaVerifier(
+//   "sign-in-button",
+//   {
+//     size: "invisible",
+//     callback: (response) => {
+//       // reCAPTCHA solved, allow signInWithPhoneNumber.
+//       console.log("CAPCHA VARYFIED..");
+//       onSignInSubmit();
+//     },
+//   },
+//   auth
+// );
+
+// login_form.addEventListener("submit", function (e) {
+//   e.preventDefault();
+//   let phone_number = "+91" + login_form.phone.value;
+ 
+
+//   // import { getAuth, signInWithPhoneNumber } from "firebase/auth";
+
+//   // const phoneNumber = getPhoneNumberFromUserInput();
+//   const appVerifier = window.recaptchaVerifier;
+
+//   const auth = getAuth();
+//   signInWithPhoneNumber(auth, phone_number, appVerifier)
+//     .then((confirmationResult) => {
+//       // SMS sent. Prompt user to type the code from the message, then sign the
+//       // user in with confirmationResult.confirm(code).
+//       console.log('otp send..')
+//       window.confirmationResult = confirmationResult;
+//       // ...
+//     })
+//     .catch((error) => {
+//       // Error; SMS not sent
+//       // ...
+//         message.style.display='block'
+//         message_value.innerText=error.message;
+//     });
+// });

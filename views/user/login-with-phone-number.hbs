@@ -1,0 +1,35 @@
+<div class="login-signup-container-cover">
+    <div class="accout-div">
+        <h2 class="login-signup-login">Login</h2>
+        <div class="login-signup-items-div">
+
+            {{!-- ERROR MESSAGE DIV --}}
+            <div class="error-message-div" id="messageDiv">
+                <h6 class="message"></h6>
+            </div>
+
+            <form id="loginForm">
+
+                <label for="">Mobile Number</label><br>
+                
+                <input class="input" type="number" name="phone"><br>
+
+                <div class="button-flex">
+                    <input class="login" type="submit" value="SUBMIT" id="sign-in-button"><br>
+                </div>
+
+            </form>
+
+            <a href="/sign-up"><button class="signup">SIGN UP</button></a>
+
+            <form id="otpForm">
+                <label for="">ENTER OTP</label><br>
+                <input class="input" type="number" name="otp_value"><br>
+                <div class="button-flex">
+                    <input class="login" type="submit" value="VERIFY OTP"><br>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
