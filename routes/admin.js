@@ -6,10 +6,10 @@ const {
   catagory,
   getcatagory,
   deletecatagory,
-  
+
   editcatagory,
   updatetcatagory,
-} = require("../controller/catagory");
+} = require("../controller/admin/catagory");
 const {
   catagorylist,
   product,
@@ -17,7 +17,9 @@ const {
   deleteproduct,
   updateproduct,
   editproduct,
-} = require("../controller/product");
+} = require("../controller/admin/product");
+const { userManagement, unblock ,blockUser} = require("../controller/admin/userManagement");
+
 const shortid = require("shortid");
 const path = require("path");
 
@@ -30,6 +32,7 @@ const storage = multer.diskStorage({
     cb(null, shortid.generate() + "-" + file.originalname);
   },
 });
+
 const upload = multer({ storage });
 
 router.get("/", function (req, res, next) {
@@ -59,5 +62,15 @@ router.get("/delete-product/:id", upload.none(), deleteproduct); //deleting prod
 router.get("/edit-product/:id", upload.none(), editproduct); //deleting product
 
 router.post("/edit-product/:id", upload.array("image"), updateproduct); //Updating product
+
+// USER MANAGEMENT
+
+router.get("/user-management", userManagement);
+
+router.put("/unblock/:id", unblock);
+
+router.put("/blockUser/:id", blockUser);
+
+
 
 module.exports = router;

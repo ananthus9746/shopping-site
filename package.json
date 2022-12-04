@@ -16,6 +16,7 @@
     "express-handlebars": "^6.0.6",
     "express-session": "^1.17.3",
     "firebase": "^9.14.0",
+    "firebase-admin": "^11.3.0",
     "hbs": "^4.2.0",
     "http-errors": "~1.6.3",
     "mongodb": "^4.10.0",
@@ -23,6 +24,8 @@
     "morgan": "~1.9.1",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.20",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "sweetalert": "^2.1.2",
+    "twilio": "^3.83.4"
   }
 }

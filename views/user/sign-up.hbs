@@ -2,6 +2,9 @@
     <div class="login-signup-div">
         <h2 class="login-signup-login">Create Account</h2>
         <div class="login-signup-items-div">
+             {{#if SignUpErr}}
+            <p class="login-err">{{SignUpErr}}</p>
+            {{/if}}
             <form  autocomplete="off" action="/sign-up" method="post" enctype="application/x-www-form-urlencoded">
                 <label for="" name="fname" >FIRST NAME</label><br>
                 <input class="input" type="text" name="fname" id=""><br>

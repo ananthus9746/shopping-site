@@ -1,9 +1,12 @@
-const Product = require("../models/product");
-var express = require("express");
-var fs = require("fs");
-const { route } = require("../routes/admin");
-const Catagory = require("../models/catagory");
+// const Product = require("../models/product");
+// var express = require("express");
+// var fs = require("fs");
+// const { route } = require("../routes/admin");
+// const Catagory = require("../models/catagory");
 
+var Catagory = require("../../models/catagory");
+var Product = require("../../models/product");
+var User = require("../../models/user")
 
 // fs.unlink('sample.txt', function (err) {
 //   if (err) throw err;
@@ -49,6 +52,7 @@ exports.product = (req, res, next) => {
       return { img: file.filename };
     });
   }
+
   const product = new Product({
     name,
     price,
@@ -64,8 +68,21 @@ exports.product = (req, res, next) => {
   product
     .save()
     .then((product) => {
-      console.log(product);
+
+      console. if (req.files.length > 0) 
+
+
+     image = req.files.map((file) => {
+      //file means map function take two argument 1st data 2nd index here used 1st //
+      return { img: file.filename };
+    });log(product);
+    
     })
+
+    
+
+
+
     .catch((err) => {
       console.log(err + "Product database Insertion Error");
     });

@@ -4,23 +4,18 @@
         <div class="login-signup-items-div">
 
             {{!-- ERROR MESSAGE DIV --}}
-            {{#if otpErr}}
-            <p class="login-err">{{otpErr}}</p>
-            {{/if}}
+            <div class="error-message-div" id="messageDiv">
+                <h6 class="message"></h6>
+            </div>
 
-            <form id="loginForm" action="/login-with-phone-number" method="post">
-
-                <label for="">Mobile Number</label><br>
-
-                <input class="input" type="number" name="phone"><br>
-
+            <form id="otpForm" action="/otp-verification" method="post">
+                <label for="">ENTER OTP</label><br>
+                <input class="input" type="number" name="otp"><br>
                 <div class="button-flex">
-                    <input class="login" type="submit" value="SUBMIT" id="sign-in-button" onclick="validation()"><br>
+                    <input class="login" type="submit" value="VERIFY OTP"><br>
                 </div>
-
             </form>
 
-            <a href="/sign-up"><button class="signup">SIGN UP</button></a>
         </div>
     </div>
 </div>

@@ -1,5 +1,9 @@
-const Catagory = require("../models/catagory");
-var express = require("express");
+// const Catagory = require("../../models/catagory");
+// var express = require("express");
+
+var Catagory = require("../../models/catagory");
+var Product = require("../../models/product");
+var User = require("../../models/user")
 
 //Catagory adding
 exports.catagory = (req, res, next) => {

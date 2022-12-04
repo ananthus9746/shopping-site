@@ -10,9 +10,9 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-#otpForm{
+/* #otpForm{
     display: none;
-}
+} */
 
 .login-signup-container-cover{
   

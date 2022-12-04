@@ -11,9 +11,15 @@ const {
   Postlogin,
   account,
   loginWithPhoneNumber,
+  postloginWithPhoneNumber,
+  otpverification,
   logout,
 } = require("../controller/user/user-helper");
+
+
 const { cart } = require("../controller/user/cart-helper");
+
+
 
 //LOGIN AND SIGN UP
 
@@ -45,6 +51,12 @@ router.get("/account",verifyLogin, account);
 router.get("/logout", logout);
 
 router.get("/login-with-phone-number",loginWithPhoneNumber)
+
+router.post("/login-with-phone-number",postloginWithPhoneNumber)
+
+router.post("/otp-verification",otpverification)
+
+
 //==============================//
 
 // CART

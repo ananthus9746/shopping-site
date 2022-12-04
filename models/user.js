@@ -19,14 +19,15 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
   },
   phone:{
-    type: Number,
-    require: true,
-    trim: true,
-   
+    type: String,
   },
   password: {
     type: String,
     require: true,
   },
+  blocked:{
+    type:Boolean,
+    default:false,
+  }
 },{timestamps:true});
 module.exports = mongoose.model("User", userSchema);
