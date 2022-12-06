@@ -1,114 +1,125 @@
-<div id="layoutSidenav_content">
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            User Management
-        </div>
-        <div class="card-body">
-            <table id="datatablesSimple">
-               
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Address</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+<!DOCTYPE html>
+<html lang="en">
 
-                <tbody>
-                    {{#each user}}
-                    <tr>
-                        <td>{{firstName}}</td>
-                        <td>{{email}}</td>
-                        <td>{{phone}}</td>
-                        <td>...{{Address}}</td>
+<head>
+	<title>Home</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="/user/images/icons/favicon.png" />
+	<!--===============================================================================================-->
 
-                        {{#if blocked}}
-                        <td><a class="btn btn-danger" onclick="unblckUser('{{this._id}}' ,'{{this.firstName}}')">unblock</a></td>
-                        {{else}}
 
-                        <td><a class="btn btn-success" onclick="blockUser('{{this._id}}' ,'{{this.firstName}}')" >Block</a></td>
-                        {{/if}}
+	{{#if admin}} {{!-- ADMIN --}}
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-</main>
-</div>
-</div>
+	{{!--
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+	--}}
 
-<script>
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="/admin/css/styles.css" rel="stylesheet" />
+	<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+	{{else}} {{!-- USER --}}
+
+	{{!-- JAVASCRIPT OTP --}}
+	{{!--
+	<script src="/javascripts/user/otpAuthentication.js" type="module"></script> --}}
 
 
 
 
-    function unblckUser(userId, userName) {
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/user-header.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/user-footer.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/body-main.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/login-signup.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/account.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/single-product.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/view-collection.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/cart.css">
+	{{!--
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	--}}
+	<script src="https://kit.fontawesome.com/cfaff7b463.js" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>{{!--this ajax for
+	user-product-zoom --}}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+	{{/if}}
+</head>
 
-        console.log("Unblock user....")
+<body>
 
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Do You Want To Unblock " + userName,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Confirm'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '/admin/unblock/' + userId,
-                    method: 'put',
-                    success: (response) => {
-                        if (response.status) {
-                            location.reload()
-                        }
-                    }
-                })
-                Swal.fire(
-                    'Unblocked',
-                    userName + ' has been Unblocked.',
-                    'success'
-                )
-            }
-        })
-    }
+	{{#if login}}
 
-    function blockUser(userId, userName) {
+	{{else}}
+	{{#if admin}}
+	{{>admin-header}}
+	{{else}}
+	{{>user-header}}
+	{{/if}}
+	{{/if}}
 
-        console.log("Block user....")
 
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "Do You Want To Block " + userName,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Confirm'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: '/admin/blockUser/' + userId,
-                    method: 'put',
-                    success: (response) => {
-                        if (response.status) {
-                            location.reload()
-                        }
-                    }
-                })
-                Swal.fire(
-                    'Blocked!',
-                    userName + ' has been blocked.',
-                    'success'
-                )
-            }
-        })
-    }
-</script>
+
+	{{{body}}}
+
+	{{#if login}}
+
+	{{else}}
+	{{#if admin}}
+	{{>admin-footer}}
+	{{else}}
+	{{>user-footer}}
+	{{/if}}
+	{{/if}}
+
+
+
+	{{!--Admin --}}
+	{{#if login}}
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+		integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+		crossorigin="anonymous"></script>
+	{{else}}
+
+	{{#if admin}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+		integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	{{!-- j query libary for ajax --}}
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+		</script>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+		integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+		crossorigin="anonymous"></script>
+
+	<script src="/admin/js/scripts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+	<script src="/admin/assets/demo/chart-area-demo.js"></script>
+	<script src="/admin/assets/demo/chart-bar-demo.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="/admin/js/datatables-simple-demo.js"></script>
+	{{else}}
+	<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+	{{!--
+	<script src="/javascripts/user/pro-selection.js" type="text/javascript"></script> --}}
+	{{!-- this pro -javascript is linked in singleProduct page --}}
+	{{/if}}
+	{{/if}}
+
+</body>
+
+</html>

@@ -22,9 +22,8 @@ const client = require("twilio")(
 exports.homePage = async (req, res) => {
   let user = req.session.user;
 
-  // if(req.session.userBlockedErr ){
-  //   let user = req.session.null;
-  // }
+
+
 
   console.log("USER DATA......", user);
 
@@ -166,6 +165,8 @@ exports.Postlogin = async (req, res) => {
   if(user.blocked==true){
     
     console.log("You have been blocked..");
+    req.session.loggedIn = false;
+    req.session.user = null;
     req.session.userBlockedErr = "You have been blocked.!";
     res.redirect("/login");
   }

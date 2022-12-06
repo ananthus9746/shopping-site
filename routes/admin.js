@@ -2,11 +2,13 @@ var express = require("express");
 var router = express.Router();
 const multer = require("multer");
 const Catagory = require("../models/catagory");
+const shortid = require("shortid");
+const path = require("path");
+
 const {
   catagory,
   getcatagory,
   deletecatagory,
-
   editcatagory,
   updatetcatagory,
 } = require("../controller/admin/catagory");
@@ -18,10 +20,14 @@ const {
   updateproduct,
   editproduct,
 } = require("../controller/admin/product");
-const { userManagement, unblock ,blockUser} = require("../controller/admin/userManagement");
+const {
+  userManagement,
+  unblock,
+  blockUser,
+} = require("../controller/admin/userManagement");
 
-const shortid = require("shortid");
-const path = require("path");
+const { adminLogin } = require("../controller/admin/adminLogin");
+
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -34,6 +40,21 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
+// ADMIN LOGIN
+const verifyAdmin =(req,res,next)=>{
+  // if(req.session.loggedIn){
+  //   next()
+  // }
+  // else{
+  //   res.redirect('/login')
+  // }
+  }
+
+
+// router.get("/",adminLogin );
+
+router.get("/admin-login", adminLogin);
 
 router.get("/", function (req, res, next) {
   res.render("admin/admin", { admin: true });
@@ -70,7 +91,5 @@ router.get("/user-management", userManagement);
 router.put("/unblock/:id", unblock);
 
 router.put("/blockUser/:id", blockUser);
-
-
 
 module.exports = router;
