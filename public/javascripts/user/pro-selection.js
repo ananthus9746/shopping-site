@@ -1,5 +1,5 @@
 let proId = document.getElementById("proIds");
-console.log("poid for..if.", proId.innerText);
+// console.log("pro id for viewing single product..if in if statement condition.", proId.innerText);
 
 // SINGLE PRODUCT SECTION//
 if (window.location.pathname === `/view-single-product/${proId.innerText}`) {

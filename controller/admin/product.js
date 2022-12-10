@@ -75,7 +75,7 @@ exports.product = (req, res, next) => {
      image = req.files.map((file) => {
       //file means map function take two argument 1st data 2nd index here used 1st //
       return { img: file.filename };
-    });log(product);
+    });console.log(product);
     
     })
 

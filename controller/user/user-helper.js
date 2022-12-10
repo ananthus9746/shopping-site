@@ -22,8 +22,12 @@ const client = require("twilio")(
 exports.homePage = async (req, res) => {
   let user = req.session.user;
 
-
-
+  // let user;
+  // if (req.session.user == null) {
+  //   user = null;
+  // } else {
+  //   let user = req.session.user;
+  // }
 
   console.log("USER DATA......", user);
 
@@ -34,6 +38,7 @@ exports.homePage = async (req, res) => {
     console.log("No product found");
   } else {
     let products = product;
+    console.log("product...", products);
     res.render("user/index", { products, user }); //the user will go to user header partial
     //console.log("product list for home page//USER...", products,user);
   }
@@ -48,7 +53,7 @@ exports.viewSingleProduct = async (req, res) => {
     console.log("No product find on this id");
   } else {
     console.log("FINDED PRODUCT...", singleProduct);
-    res.render("user/singleProduct", { singleProduct });
+    res.render("user/singleProduct", { singleProduct, user: req.session.user });
   }
 };
 
@@ -59,7 +64,7 @@ exports.viewCollection = async (req, res) => {
     console.log("No product found");
   } else {
     let pro = productlist;
-    res.render("user/view-collection", { pro });
+    res.render("user/view-collection", { pro, user: req.session.user });
   }
 };
 
@@ -72,43 +77,48 @@ exports.GetsignUp = (req, res) => {
 //SINGUP
 exports.signUp = async (req, res) => {
   // console.log("user data..", req.body);
-  var userdata = await User.find({ email: req.body.email }).then((user) => {
-    console.log("finded user", user);
-    if (user.length == 0) {
-      console.log("welcome");
-      // console.log(req.body);
+  var userdata = await User.find({
+    $or: [{ email: req.body.email }, { phone: req.body.phone }],
+  })
+    .then((user) => {
+      console.log("finded user", user);
+      if (user.length == 0) {
+        console.log("welcome");
+        // console.log(req.body);
 
-      const user = new User({
-        firstName: req.body.fname,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        phone: req.body.phone,
-        password: bcrypt.hashSync(req.body.password, 10),
-      });
-
-      user
-        .save()
-        .then((user) => {
-          console.log("DATABASE SAVED USER:..", user);
-        })
-        .catch((err) => {
-          console.log("Not able save user to database");
+        const user = new User({
+          firstName: req.body.fname,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          phone: req.body.phone,
+          password: bcrypt.hashSync(req.body.password, 10),
         });
 
-      var response = {};
-      response.user = user;
-      response.status = true;
-      req.session.loggedIn = true;
-      req.session.user = response.user;
-      res.redirect("/");
-    } else {
-      req.session.SignUpErr = "user already exits with this email";
-      console.log("user already exits..");
-      res.redirect("/sign-up");
-    }
-  }).catch((err)=>{
-    console.log("some error in user signup",err)
-  })
+        user
+          .save()
+          .then((user) => {
+            console.log("DATABASE SAVED USER:..", user);
+          })
+          .catch((err) => {
+            console.log("Not able save user to database");
+          });
+
+        var response = {};
+        response.user = user;
+        response.status = true;
+        req.session.loggedIn = true;
+        req.session.user = response.user;
+        res.redirect("/");
+      } else {
+        req.session.SignUpErr =
+          "User already exits with this email and phone number";
+        console.log("user already exits..");
+        res.redirect("/sign-up");
+      }
+    })
+    .catch((err) => {
+      console.log("some error in user signup", err);
+    });
 
   // var userPhone = await User.find({ phone: req.body.phone });
 
@@ -143,10 +153,14 @@ exports.signUp = async (req, res) => {
 exports.Getlogin = (req, res) => {
   if (req.session.loggedIn) {
     res.redirect("/");
+    console.log("loggedin..");
   } else {
-    res.render("user/login", { loginErr: req.session.loginErr ,BlockedErr:req.session.userBlockedErr});
+    res.render("user/login", {
+      loginErr: req.session.loginErr,
+      BlockedErr: req.session.userBlockedErr,
+    });
     req.session.loginErr = false;
-    req.session.userBlockedErr=false
+    req.session.userBlockedErr = false;
   }
 };
 //POSTLOGIN
@@ -158,43 +172,46 @@ exports.Postlogin = async (req, res) => {
 
   const user = await User.findOne({ email: req.body.email });
 
-  console.log("finded user..",user);
-
-  console.log("status...",user.blocked);
-
-  if(user.blocked==true){
-    
-    console.log("You have been blocked..");
-    req.session.loggedIn = false;
-    req.session.user = null;
-    req.session.userBlockedErr = "You have been blocked.!";
-    res.redirect("/login");
-  }
-  else{
-    console.log("welcome");
-
+  console.log("finded user..", user);
   if (!user) {
     response.status = false;
     console.log("No user find in this email...");
+    var userdata = 0;
   }
-  if (user && bcrypt.compareSync(req.body.password, user.password)) {
-    console.log("login Sucess..");
-
-    response.user = user;
-    response.status = true;
-
-    req.session.loggedIn = true;
-    req.session.user = response.user;
-
-    res.redirect("/");
-  } else {
-    console.log("password is wrong...");
-
+  if (userdata == 0) {
     response.status = false;
-
     req.session.loginErr = "Email or password incorrect.!";
     res.redirect("/login");
-  }
+  } else {
+    if (user.blocked) {
+      console.log("You have been blocked..");
+      req.session.loggedIn = false;
+      req.session.user = null;
+      req.session.userBlockedErr = "You have been blocked.!";
+      res.redirect("/login");
+    } else {
+      console.log("welcome");
+
+      if (user && bcrypt.compareSync(req.body.password, user.password)) {
+        console.log("login Sucess..");
+
+        response.user = user;
+        response.status = true;
+
+        req.session.loggedIn = true;
+
+        req.session.user = response.user;
+
+        res.redirect("/");
+      } else {
+        console.log("password is wrong...");
+
+        response.status = false;
+
+        req.session.loginErr = "Email or password incorrect.!";
+        res.redirect("/login");
+      }
+    }
   }
 };
 

@@ -76,10 +76,8 @@ onsubmit="return myFunction()">
                   <script>var quantity = document.getElementById("quantity").value;
                 </script>
 
-                <button class="add-to-cart-button" onclick="hello()">ADD TO CART</button>
-                {{!-- <a href="/add-to-cart/{{singleProduct._id}}">add to cart</a>
-                addToCart()
-                 --}}
+                <button class="add-to-cart-button" onclick="addToCart('{{singleProduct._id}}',quantity)">ADD TO CART</button>
+                {{!-- <a href="/add-to-cart/{{singleProduct._id}}">add to cart</a> --}}
                 <button class="buy-now-button">BUY NOW</button>
                 
             </div>

@@ -16,21 +16,19 @@ const {
   logout,
 } = require("../controller/user/user-helper");
 
-
-const { cart } = require("../controller/user/cart-helper");
-
-
+const { cart, addToCart } = require("../controller/user/cart-helper");
 
 //LOGIN AND SIGN UP
 
-const verifyLogin =(req,res,next)=>{
-  if(req.session.loggedIn){
-    next()
+const verifyLogin = (req, res, next) => {
+  req.user=req.session.user;
+  if (req.session.loggedIn) {
+    next();
+  } else {
+    res.redirect("/login");
+    console.log("login else..");      
   }
-  else{
-    res.redirect('/login')
-  }
-  }
+};
 
 router.get("/", homePage);
 
@@ -46,21 +44,22 @@ router.get("/login", Getlogin);
 
 router.post("/login", Postlogin);
 
-router.get("/account",verifyLogin, account);
+router.get("/account", verifyLogin, account);
 
 router.get("/logout", logout);
 
-router.get("/login-with-phone-number",loginWithPhoneNumber)
+router.get("/login-with-phone-number", loginWithPhoneNumber);
 
-router.post("/login-with-phone-number",postloginWithPhoneNumber)
+router.post("/login-with-phone-number", postloginWithPhoneNumber);
 
-router.post("/otp-verification",otpverification)
-
+router.post("/otp-verification", otpverification);
 
 //==============================//
 
 // CART
 
-router.get("/cart",verifyLogin,cart)
+router.get("/cart", verifyLogin, cart);
+
+router.post("/add-to-cart", verifyLogin, addToCart);
 
 module.exports = router;

@@ -33,7 +33,7 @@
     </div>
 
     <div class="account-and-cart">
-      
+
       {{#if user}}
       <a class="account a-s-c a-s" href="/account">{{user.firstName}}</a>
       {{else}}
@@ -45,9 +45,16 @@
 
       <a href="/cart">
         <div class="cart-btn a-s-c ">
+
           <i class="fa-solid fa-bag-shopping"></i>
-        </div>
       </a>
+      {{#if user}}
+      (1)
+      {{else}}
+      {{/if}}
+    </div>
+    </a>
+
 
     </div>
 
