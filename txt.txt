@@ -5,57 +5,76 @@ var Catagory = require("../../models/catagory");
 var Product = require("../../models/product");
 var User = require("../../models/user");
 const { findOne } = require("../../models/catagory");
-
 const Cart = require("../../models/cart");
 const { ObjectId } = require("mongodb");
 
+// GET CART PRODUCT DTAILS
 
-exports.cart = (req, res) => {
-  res.render("user/cart", { user: req.session.user });
+exports.cart = async (req, res) => {
+  const usercart = await Cart.findOne({ user: req.session.user._id })
+    .populate("user")
+    .populate("cartitems.product");
+
+  if (usercart) {
+    console.log("User cart....", usercart);
+
+    console.log("cart product lists....", usercart.cartitems);
+
+    // res.send({ status: 200, data: { usercart } });
+
+    res.render("user/cart", { user: req.session.user });
+  } else console.log("no carts found..");
 };
 
-exports.addToCart = (req, res) => {
+// ADD TO CART
 
-  var proidd=req.params.id
-  
-  console.log("proid.params..",proidd);
-
+exports.addToCart =  (req, res) => {
   console.log("userid..", req.session.user);
   let data = req.body;
-  console.log("data..", data);
-  let proid = data.productid;
-  console.log("proid..", proid);
-  let quantity = data.quantity;
-  console.log("quantiy..", quantity);
+  console.log("data.", data);
+  let proObj = {
+    product: data.productid,
+    quantity: data.quantity,
+  };
 
-  var id=ObjectId(proidd)
-  console.log("id..",id);
+  Cart.findOne({ user: req.session.user._id })
+  .exec(
+    (err, usercart) => {
+      if (err) {
+        console.log("err");
+      }
+      if (usercart) {
+        console.log("User cart Exits..", usercart);
 
+        Cart.findOneAndUpdate(
+          { user: req.session.user._id },
+          {
+            "$push": {
+              "cartitems": proObj
+            }
+          }
+        ).then((response) => {
+          console.log("res.",response);
+          
+      })
+      } else {
+        const cart = new Cart({
+          user: req.session.user._id,
+          cartitems: [proObj],
+        });
 
+        cart.save((err, cart) => {
+          if (err) {
+            console.log("A Error in Saving cart..", err);
+          } else {
+            console.log("Saved Cart to database...", cart);
 
-  const cart = new Cart({
-
-      user: req.session.user._id,
-
-      cartitems:[{
-        product:proidd,
-        quantity:quantity
-      }],
-
-      quantity:parseInt(quantity),
-    
-  });
-  console.log("data.proid..",data.productid);
-
-  cart.save((err, cart) => {
-    if (err) {
-      console.log("A Error in Saving cart..", err);
-    } else {
-      console.log("Saved Cart to database...", cart);
+            res.json({ status: true });
+          }
+        });
+      }
     }
-  });
+  );
 };
-//  user: req.session.user._id,
-// product:proidd,
-// cartitems: id,
-// quantity:parseInt(quantity),
+
+

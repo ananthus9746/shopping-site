@@ -28,37 +28,79 @@ exports.cart = async (req, res) => {
 
 // ADD TO CART
 
-exports.addToCart = async (req, res) => {
+exports.addToCart =  (req, res) => {
   console.log("userid..", req.session.user);
   let data = req.body;
+  console.log("data.", data);
+  let proObj = {
+    product: data.productid,
+    quantity: data.quantity,
+  };
 
-  Cart.findOne({ user: req.session.user._id }).exec((err, cart) => {
-    if (err) {
-      console.log("Error cart..");
-    }
-    if (cart) {
-      console.log(
-        "USER CART FINDED NOW UPDATING CART QUANTITY or INSERTING NEW PRODUCT.."
-      );
-    } else {
-      const cart = new Cart({
-        user: req.session.user._id,
-        cartitems: [
+  Cart.findOne({ user: req.session.user._id })
+  .exec(
+    (err, usercart) => {
+      if (err) {
+        console.log("err");
+      }
+      if (usercart) {
+        console.log("User cart Exits..", usercart);
+        console.log("prooo..", usercart.cartitems);
+
+        let proExist =  usercart.cartitems.find(cartitems => cartitems.product == data.productid)
+
+       if(proExist){
+        let oldq= parseInt(proExist.quantity)
+        let newq=parseInt(data.quantity)
+
+        console.log("itemadded...",proExist);
+        Cart.findOneAndUpdate({"user": req.session.user._id,"cartitems.product":data.productid},{
+          "$set":{
+            "cartitems.$":{
+              ...proObj,
+              quantity:oldq+newq ,
+            }
+          }
+        })
+        .then((response) => {
+          console.log("Quantiy Increased.",response);
+          
+      })
+       }
+       
+       else{
+        Cart.findOneAndUpdate(
+          { user: req.session.user._id },
           {
-            product: data.productid,
-            quantity: data.quantity,
-          },
-        ],
-      });
+            "$push": {
+              "cartitems": proObj
+            }
+          }
+        ).then((response) => {
+          console.log("Inserted New Product Cart.",response);
+          
+      })
+       }
 
-      cart.save((err, cart) => {
-        if (err) {
-          console.log("A Error in Saving cart..", err);
-        } else {
-          console.log("Saved Cart to database...", cart);
-          res.json({ status: true });
-        }
-      });
+      
+      } else {
+        const cart = new Cart({
+          user: req.session.user._id,
+          cartitems: [proObj],
+        });
+
+        cart.save((err, cart) => {
+          if (err) {
+            console.log("A Error in Saving cart..", err);
+          } else {
+            console.log("Saved Cart to database...", cart);
+
+            res.json({ status: true });
+          }
+        });
+      }
     }
-  });
+  );
 };
+
+
