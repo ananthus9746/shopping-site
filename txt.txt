@@ -76,5 +76,68 @@ exports.addToCart =  (req, res) => {
     }
   );
 };
+//////////////////////////
+if(user){
+  let totalQuantity = 0;
+  let cart = await Cart.find({ user: req.session.user }).then((cart) => {
+    console.log("cart..", cart);
+    console.log("cart items..", cart[0].cartitems);
+    console.log("cart quantity..", cart[0].cartitems[0].quantity);
+    let TotalProducts=cart[0].cartitems.length;
+    console.log("products length..",TotalProducts);
+
+    for ( let i = 0; i < TotalProducts; i++) {
+
+      totalQuantity = cart[0].cartitems[i].quantity + totalQuantity;
+      console.log("Inside loop",i);
+    }
+    console.log("total quantity..",totalQuantity);
+  })
+}
 
 
+////////////////////////////////////////////
+exports.cart = async (req, res) => {
+
+
+
+  var totalQuantity = 0;
+  let cart = await Cart.find({ user: req.session.user });
+  if (cart) {
+    console.log("cart..");
+    let TotalProducts = cart[0]?.cartitems?.length;
+    for (let i = 0; i < TotalProducts; i++) {
+      totalQuantity = cart[0].cartitems[i].quantity + totalQuantity;
+      console.log("Inside loop", i);
+    }
+    console.log("total quantity..", totalQuantity);
+  }
+
+
+
+
+
+  const usercart = await Cart.findOne({ user: req.session.user._id })
+    .populate("cartitems.product");
+
+  if (usercart) {
+    console.log("User cart....", usercart);
+    console.log("cart id....", usercart._id);
+
+    let cartproducts = usercart.cartitems;
+    console.log("cart product lists....", cartproducts);
+    console.log(
+      "Taking Single product from product list....",
+      cartproducts[0].product
+    );
+    console.log("Taking Sin...", cartproducts[0].product.name);
+
+    // res.send({ status: 200, data: { usercart } });
+
+    res.render("user/cart", { user: req.session.user, cartproducts,totalQuantity});
+  } else {
+    res.render('user/cart-empty')
+  }
+
+
+};

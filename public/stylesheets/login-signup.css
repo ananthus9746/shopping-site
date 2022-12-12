@@ -1,14 +1,17 @@
 /* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
+
+/* THIS ARE FOR INPUT NUMBER FIELD INCREAMENT BUTTON ICON DISABLE */
+
+/* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
+} */
 
 /* Firefox */
-input[type=number] {
+/* input[type=number] {
   -moz-appearance: textfield;
-}
+} */
 
 /* #otpForm{
     display: none;

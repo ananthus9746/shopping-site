@@ -122,10 +122,13 @@ padding-right: 60px;
    
 }
 .total-and-checkout-div{
-
+line-height: 30px;
 }
 .text-area-heading{
     
+}
+.checkout-btn{
+    margin-bottom: 50px;
 }
 .text-area{
   margin: 0px;

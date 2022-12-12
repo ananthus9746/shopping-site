@@ -61,6 +61,42 @@
 
 	{{{body}}}
 
+	  {{!-- <script>
+    function toast() {
+      Swal.fire({
+        toast: true,
+        icon: 'success',
+        title: 'Item Added To Cart',
+        animation: true,
+        position: 'bottom',
+        showConfirmButton: false,
+        timer: 3000,
+        background:"#f5f6f6",
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+    }
+    function toastOutOfStock() {
+      Swal.fire({
+        toast: true,
+        icon: 'error',
+        title: 'Product Out Of Stock!',
+        animation: true,
+        position: 'bottom',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+    }
+  </script> --}}
+
 	{{#if admin}}
 	{{>admin-footer}}
 	{{else}}

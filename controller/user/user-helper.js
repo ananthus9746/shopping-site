@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 var Catagory = require("../../models/catagory");
 var Product = require("../../models/product");
 var User = require("../../models/user");
+var Cart = require("../../models/cart");
 
 const { findOne } = require("../../models/catagory");
 // const firebase = require("../../otpauthentication/firebase");
@@ -22,30 +23,60 @@ const client = require("twilio")(
 exports.homePage = async (req, res) => {
   let user = req.session.user;
 
-  // let user;
-  // if (req.session.user == null) {
-  //   user = null;
-  // } else {
-  //   let user = req.session.user;
-  // }
+  const product = await Product.find({}, null, { limit: 8 });
 
-  console.log("USER DATA......", user);
+  var totalQuantity = 0;
+  let cart = await Cart.find({ user: req.session.user });
+  if (cart) {
+    console.log("cart..");
+    let TotalProducts = cart[0]?.cartitems?.length;
+    for (let i = 0; i < TotalProducts; i++) {
+      totalQuantity = cart[0].cartitems[i].quantity + totalQuantity;
+      console.log("Inside loop", i);
+    }
+    console.log("total quantity..", totalQuantity);
+  }
 
-  const product = await Product.find({}, null, { limit: 8 }).populate(
-    "catagory"
-  );
+
+
+
+
+
+  
   if (!product) {
     console.log("No product found");
   } else {
     let products = product;
-    console.log("product...", products);
-    res.render("user/index", { products, user }); //the user will go to user header partial
-    //console.log("product list for home page//USER...", products,user);
+    res.render("user/index", {
+      products,
+      user,
+      totalQuantity,
+    });
   }
 };
 
 //VIEW SINGLE PRODUCT
 exports.viewSingleProduct = async (req, res) => {
+
+
+
+
+  var totalQuantity = 0;
+  let cart = await Cart.find({ user: req.session.user });
+  if (cart) {
+    console.log("cart..");
+    let TotalProducts = cart[0]?.cartitems?.length;
+    for (let i = 0; i < TotalProducts; i++) {
+      totalQuantity = cart[0].cartitems[i].quantity + totalQuantity;
+      console.log("Inside loop", i);
+    }
+    console.log("total quantity..", totalQuantity);
+  }
+
+
+
+
+
   let proid = req.params.id;
   console.log("Product id view single prodcut...", proid);
   const singleProduct = await Product.findById(proid);
@@ -53,9 +84,14 @@ exports.viewSingleProduct = async (req, res) => {
     console.log("No product find on this id");
   } else {
     console.log("FINDED PRODUCT...", singleProduct);
-    res.render("user/singleProduct", { singleProduct, user: req.session.user });
+    res.render("user/singleProduct", {
+      singleProduct,
+      user: req.session.user,
+      totalQuantity,
+    });
   }
 };
+
 
 // VIEW COLLECTION
 exports.viewCollection = async (req, res) => {
@@ -64,7 +100,10 @@ exports.viewCollection = async (req, res) => {
     console.log("No product found");
   } else {
     let pro = productlist;
-    res.render("user/view-collection", { pro, user: req.session.user });
+    res.render("user/view-collection", {
+      pro,
+      user: req.session.user,
+    });
   }
 };
 
@@ -74,7 +113,7 @@ exports.GetsignUp = (req, res) => {
   req.session.SignUpErr = false;
 };
 
-//SINGUP
+//POST SINGUP
 exports.signUp = async (req, res) => {
   // console.log("user data..", req.body);
   var userdata = await User.find({

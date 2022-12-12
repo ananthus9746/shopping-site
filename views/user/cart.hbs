@@ -10,30 +10,40 @@
                 <P>TOTAL</P>
             </div>
         </div>
-
+        {{#each usercart.cartitems}}
         <div class="cart-product-container-div">
-            <p class="name-mobile-view">Bamboo Toothbrush Charcoal Neem Adult</p>
+            <p class="name-mobile-view">{{product.name}}</p>
             <div class="cat-pro-one-flex">
                 <div class="cart-img">
+
                     <div class="cart-image-div">
-                        <img src="/images/BTSWA01_2_295x.webp" alt="">
+                        <a href="/view-single-product/{{product._id}}"> <img src="/upload/{{product.image.[0].img}}"
+                                alt=""></a>
                     </div>
+
                 </div>
                 <div class="cart-pro-name">
-                    <p>Bamboo Toothbrush Charcoal Neem Adult</p>
+                    <p>{{product.name}}</p>
                 </div>
                 <div class="cart-other">
                     <div class="cart-other-div">
 
-                        <p class="cart-price">price rs.60</p>
-                        
+                        <p class="cart-price">price rs.{{product.price}}</p>
+
                         <div class="buttons-and-remove-flex">
 
                             <div class="quantity-button-flex">
-                                <button class="-and-plusbutton">-</button>
-                                <input class="-and-plusbutton quantity-input-cart" type="text" name="" id="" value="1">
-                                <button class="-and-plusbutton">+</button>
 
+
+                                <button class="-and-plusbutton"
+                                    onclick="changeQuantity('{{product._id}}',-1)">-</button>
+
+                                {{!-- <input class="-and-plusbutton quantity-input-cart" type="text" name=""
+                                    id="inputValue" value="{{quantity}}"> --}}
+
+                                <span id="{{product._id}}">{{quantity}}</span>
+
+                                <button class="-and-plusbutton" onclick="changeQuantity('{{product._id}}',1)">+</button>
                             </div>
 
                             <a class="remove-buttton" href="">REMOVE</a>
@@ -46,41 +56,8 @@
                 </div>
             </div>
         </div>
+        {{/each}}
 
-        <div class="cart-product-container-div">
-            <p class="name-mobile-view">Bamboo Toothbrush Charcoal Neem Adult</p>
-            <div class="cat-pro-one-flex">
-                <div class="cart-img">
-                    <div class="cart-image-div">
-                        <img src="/images/BTSWA01_2_295x.webp" alt="">
-                    </div>
-                </div>
-                <div class="cart-pro-name">
-                    <p>Bamboo Toothbrush Charcoal Neem Adult</p>
-                </div>
-                <div class="cart-other">
-                    <div class="cart-other-div">
-
-                        <p class="cart-price">price rs.60</p>
-                        <div class="buttons-and-remove-flex">
-                            <div class="quantity-button-flex">
-                                <button class="-and-plusbutton">-</button>
-                                <input class="-and-plusbutton quantity-input-cart" type="text" name="" id="" value="1">
-                                <button class="-and-plusbutton">+</button>
-
-                            </div>
-                            <a class="remove-buttton" href="">REMOVE</a>
-                        </div>
-
-                        <div class="">
-                            <p class="cart-total-price">Total rs.120</p>
-                        </div>
-                        
-
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="note-and-checkout-container-flex-div">
             <div class="note-div-flex">
@@ -94,9 +71,69 @@
                 <p>Tax included and shipping calculated at checkout</p>
                 <a href="">COUNTINUE SHOPPING</a>
                 <br class="br-new-line">
-                <button>CHECKOUT</button>
+                <button class="buy-now-button checkout-btn">CHECKOUT</button>
             </div>
         </div>
 
     </div>
-</div>
+
+
+    <script>
+
+        function changeQuantity(proId, count) {
+            console.log("cart id..", proId)
+            console.log("pro id..", count)
+            countnow = parseInt(count)
+
+            let quantity = parseInt(document.getElementById(proId).innerHTML)
+
+            // var quantity =parseInt( document.getElementById("inputValue").value)
+
+            console.log("quantity span..", quantity)
+
+            console.log("quantity from inner html..", quantity)
+
+            $.ajax({
+                url: '/change-product-quantity',
+                data: {
+                    proId: proId,
+                    count: countnow
+                },
+                method: 'post',
+                success: (response) => {
+                    if (response.removeProduct) {
+                        alert("Product Removed")
+                        location.reload()
+                    }
+                    else {
+
+                        console.log("else ..", countnow)
+
+                        if (countnow == -1) {
+                            console.log("count -1")
+
+                            count = $("#cart-count").html();
+                            count = parseInt(count) + -1;
+                            $("#cart-count").html(count)
+                        }
+                        else {
+                            console.log("count +1")
+                            
+                            count = $("#cart-count").html();
+                            count = parseInt(count) + 1;
+                            $("#cart-count").html(count)
+
+                        }
+
+                        document.getElementById(proId).innerHTML = quantity + countnow
+
+
+                        // document.getElementById("inputValue").innerHTML = quantity+count;
+
+
+                    }
+                }
+            })
+        }
+
+    </script>

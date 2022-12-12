@@ -71,6 +71,9 @@ hr{
   cursor: pointer;
   display: none;
 }
+.cart-quatity{
+  text-decoration: none;
+}
 .menu-btn{
   margin-left: 20px;
 }

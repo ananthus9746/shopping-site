@@ -1,7 +1,7 @@
 // quantity = document.getElementById("#quantity").value
 // productId = document.getElementById("#productId").value
 
-function hello() {
+function addToCartMain() {
   console.log("hello");
 
   var quantity = document.getElementById("quantity").value;
@@ -15,21 +15,22 @@ function hello() {
   function addToCart(productId, quantity) {
     console.log("ajax pro id", productId);
     console.log("ajax quantity", quantity);
-    
 
     $.ajax({
       url: "/add-to-cart/",
-      data:{
-        productid:productId,
-        quantity:quantity,
+      data: {
+        productid: productId,
+        quantity: quantity,
       },
-      method:"post",
+      method: "post",
 
       success: (response) => {
-        if(response.status){
-            
+        if (response.status) {
+          window.location.href = "/cart";
+          let count = $("#cart-count").html();
+          count = parseInt(count) + 1;
+          $("#cart-count").html(count);
         }
-        alert(response);
       },
     });
   }

@@ -64,10 +64,13 @@
 
             {{#each products}}
             <a class="a-tag-for-pro-div" href="/view-single-product/{{_id}}">
-                <div class="product-col">
+                <div class="product-col myDIV">
+                    
                     <div class="pro-image-div">
                         <img src="/upload/{{image.[0].img}}" alt="">
                     </div>
+
+
                     <div class="pro-deatail-container">
                         <div class="p-d">
                             <div class="pro-name">
@@ -83,6 +86,7 @@
                     </div>
                 </div>
             </a>
+            
             {{/each}}
         </div>
     </div>
