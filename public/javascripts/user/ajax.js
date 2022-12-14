@@ -26,10 +26,13 @@ function addToCartMain() {
 
       success: (response) => {
         if (response.status) {
-          window.location.href = "/cart";
+
           let count = $("#cart-count").html();
           count = parseInt(count) + 1;
           $("#cart-count").html(count);
+          
+          window.location.href = "/cart";
+         
         }
       },
     });

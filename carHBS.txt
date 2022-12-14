@@ -35,15 +35,13 @@
                             <div class="quantity-button-flex">
 
 
-                                <button class="-and-plusbutton" id="btnShow"
+                                <button class="-and-plusbutton"
                                     onclick="changeQuantity('{{product._id}}',-1)">-</button>
 
                                 {{!-- <input class="-and-plusbutton quantity-input-cart" type="text" name=""
                                     id="inputValue" value="{{quantity}}"> --}}
-                                <div class="-and-plusbutton quantity-input-cart">
-                                    <span id="{{product._id}}">{{quantity}}</span>
-                                </div>
 
+                                <span id="{{product._id}}">{{quantity}}</span>
 
                                 <button class="-and-plusbutton" onclick="changeQuantity('{{product._id}}',1)">+</button>
                             </div>
@@ -51,7 +49,7 @@
                             <a class="remove-buttton" href="">REMOVE</a>
 
                         </div>
-
+                            {{!-- {{product.price }}*{{quantity}}  --}}
                         <p class="cart-total-price">Total rs.120</p>
 
                     </div>
@@ -82,21 +80,12 @@
 
     <script>
 
-
-
         function changeQuantity(proId, count) {
-
-
-
             console.log("cart id..", proId)
             console.log("pro id..", count)
             countnow = parseInt(count)
 
-
-
             let quantity = parseInt(document.getElementById(proId).innerHTML)
-
-
 
             // var quantity =parseInt( document.getElementById("inputValue").value)
 
@@ -108,13 +97,11 @@
                 url: '/change-product-quantity',
                 data: {
                     proId: proId,
-                    count: countnow,
-                    quantity: quantity,
+                    count: countnow
                 },
                 method: 'post',
                 success: (response) => {
-                    if (response==false) {
-                        console.log("respomse false if..")
+                    if (response.removeProduct) {
                         alert("Product Removed")
                         location.reload()
                     }
@@ -148,5 +135,6 @@
                 }
             })
         }
+        
 
     </script>

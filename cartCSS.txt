@@ -30,24 +30,14 @@
 width: 50px;
 height: 40px;
 background-color: rgb(255, 255, 255);
-border:rgb(150, 150, 150)  solid 1px ;
+border:rgb(197, 197, 197)  solid 1px ;
 font-size: 1rem;
 text-align: center;
+
 }
-.-and-plusbutton:active {
-    background-color: rgb(248, 248, 248);
-    transform: translateY(.5px);
-}
-
-
-
 .quantity-input-cart{
 margin-bottom: 5px;
-display: flex;
 text-align: center;
-justify-content: center;
-align-items: center;
-border: 1px solid rgb(150, 150, 150) ;
 }
 .remove-buttton{
 text-align: center;

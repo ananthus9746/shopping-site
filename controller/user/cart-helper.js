@@ -32,23 +32,20 @@ exports.cart = async (req, res) => {
   if (usercart) {
     console.log("User cart....", usercart);
     console.log("cart id....", usercart._id);
-    // let cartid=usercart._id;
 
-    // let cartproducts = usercart.cartitems;
-    // console.log("cart product lists....", cartproducts);
-    // console.log(
-    //   "Taking Single product from product list....",
-    //   cartproducts[0].product
-    // );
-    // console.log("Taking Sin...", cartproducts[0].product.name);
+    let cartproducts = usercart.cartitems;
+    let prolistLength = cartproducts.length;
+    console.log("length....", prolistLength);
 
-    // res.send({ status: 200, data: { usercart } });
-
-    res.render("user/cart", {
-      user: req.session.user,
-      usercart,
-      totalQuantity,
-    });
+    if (prolistLength == 0) {
+      res.render("user/cart-empty", { user: req.session.user, totalQuantity });
+    } else {
+      res.render("user/cart", {
+        user: req.session.user,
+        usercart,
+        totalQuantity,
+      });
+    }
   } else {
     res.render("user/cart-empty");
   }
@@ -82,13 +79,11 @@ exports.addToCart = async (req, res) => {
         {
           $inc: { "cartitems.$.quantity": proquantity },
         }
-      ).then(()=>{
+      ).then(() => {
+        res.json({ status: true }); //this staus got js-public ajax
 
-        res.json({ status: true });//this staus got js-public ajax
-
-        resolve()
-        
-      })
+        resolve();
+      });
     } else {
       Cart.findOneAndUpdate(
         { user: req.session.user._id },
@@ -98,7 +93,11 @@ exports.addToCart = async (req, res) => {
           },
         }
       ).then((response) => {
+        res.json({ status: true });
+
         console.log("Inserted New Product Cart.", response);
+        resolve();
+
       });
     }
   } else {
@@ -116,7 +115,6 @@ exports.addToCart = async (req, res) => {
       }
     });
   }
-
 };
 
 exports.changeProductQuantity = (req, res) => {
@@ -124,22 +122,30 @@ exports.changeProductQuantity = (req, res) => {
 
   let proid = req.body.proId;
   let count = req.body.count;
+  let quantity = req.body.quantity;
 
-
-
-  Cart.findOneAndUpdate(
-    { user: req.session.user._id, "cartitems.product": proid },
-    {
-      $inc: { "cartitems.$.quantity": count },
-    }
-  ).then(()=>{
-
-   let response =true
-
-    res.json(response)
-
-    resolve()
-  })
-
-
+  if (count == -1 && quantity == 1) {
+    Cart.findOneAndUpdate(
+      { user: req.session.user._id },
+      {
+        $pull: { cartitems: { product: ObjectId(proid) } },
+      }
+    ).then((response) => {
+      var response = false;
+      res.json(response);
+      console.log("product removed..");
+      resolve();
+    });
+  } else {
+    Cart.findOneAndUpdate(
+      { user: req.session.user._id, "cartitems.product": proid },
+      {
+        $inc: { "cartitems.$.quantity": count },
+      }
+    ).then(() => {
+      let response = true;
+      res.json(response);
+      resolve();
+    });
+  }
 };
