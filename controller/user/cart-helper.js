@@ -149,3 +149,29 @@ exports.changeProductQuantity = (req, res) => {
     });
   }
 };
+
+exports.removeProduct=(req,res)=>{
+
+console.log("remove product..",req.body)
+
+var proid = req.params.id;
+
+console.log("remove pro id..",proid);
+
+
+
+
+Cart.findOneAndUpdate(
+  { user: req.session.user._id },
+  {
+    $pull: { cartitems: { product: ObjectId(proid) } },
+  }
+).then((response) => {
+  console.log("product removed 1st..");
+
+  var response = 1;
+  res.json(response);
+  resolve();
+});
+
+}

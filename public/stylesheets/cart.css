@@ -50,8 +50,16 @@ align-items: center;
 border: 1px solid rgb(150, 150, 150) ;
 }
 .remove-buttton{
+ all: unset;
+ border-bottom: 1px solid black;
 text-align: center;
+width: 40%;
 }
+.remove-buttton:active {
+    transform: translateY(.5px);
+}
+
+
 .cart-product-container-div{
     border-bottom: rgb(197, 197, 197) solid 1px;
     border-top:rgb(197, 197, 197)  solid 1px ;

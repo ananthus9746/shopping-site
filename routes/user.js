@@ -16,7 +16,7 @@ const {
   logout,
 } = require("../controller/user/user-helper");
 
-const { cart, addToCart,changeProductQuantity } = require("../controller/user/cart-helper");
+const { cart, addToCart,changeProductQuantity,removeProduct } = require("../controller/user/cart-helper");
 
 //LOGIN AND SIGN UP
 
@@ -63,5 +63,8 @@ router.get("/cart", verifyLogin, cart);
 router.post("/add-to-cart", verifyLogin, addToCart);
 
 router.post("/change-product-quantity", verifyLogin, changeProductQuantity);
+
+router.get("/remove-product/:id", verifyLogin,removeProduct);
+
 
 module.exports = router;

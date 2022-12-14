@@ -48,7 +48,8 @@
                                 <button class="-and-plusbutton" onclick="changeQuantity('{{product._id}}',1)">+</button>
                             </div>
 
-                            <a class="remove-buttton" href="">REMOVE</a>
+                            {{!-- <a class="remove-buttton" onclick="removeProduct('{{product._id}}')">REMOVE</a> --}}
+                            <button class="remove-buttton" onclick="removeProduct('{{product._id}}')">REMOVE</button>
 
                         </div>
 
@@ -79,8 +80,11 @@
 
     </div>
 
+</div>
 
     <script>
+
+
 
 
 
@@ -113,7 +117,7 @@
                 },
                 method: 'post',
                 success: (response) => {
-                    if (response==false) {
+                    if (response == false) {
                         console.log("respomse false if..")
                         alert("Product Removed")
                         location.reload()
@@ -149,4 +153,47 @@
             })
         }
 
+        function removeProduct(proid) {
+
+            Swal.fire({
+            title: 'Are you sure?',
+            text: "Do You Want To Remove ",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                url: '/remove-product/' + proid,
+                    method: 'get',
+                    success: (response) => {
+                        if (response == 1) {
+                        console.log("respomse false if..")
+                        location.reload()
+                    }
+                    }
+                })
+                Swal.fire(
+                    'Unblocked',
+                    ' Product havs been removed.',
+                    'success'
+                )
+            }
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+          
+        }
     </script>
