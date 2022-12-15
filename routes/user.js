@@ -16,17 +16,24 @@ const {
   logout,
 } = require("../controller/user/user-helper");
 
-const { cart, addToCart,changeProductQuantity,removeProduct } = require("../controller/user/cart-helper");
+const {
+  cart,
+  addToCart,
+  changeProductQuantity,
+  removeProduct,
+} = require("../controller/user/cart-helper");
+
+const {checkout} =require('../controller/user/checkout')
 
 //LOGIN AND SIGN UP
 
 const verifyLogin = (req, res, next) => {
-  req.user=req.session.user;
+  req.user = req.session.user;
   if (req.session.loggedIn) {
     next();
   } else {
     res.redirect("/login");
-    console.log("login else..");      
+    console.log("login else..");
   }
 };
 
@@ -64,7 +71,8 @@ router.post("/add-to-cart", verifyLogin, addToCart);
 
 router.post("/change-product-quantity", verifyLogin, changeProductQuantity);
 
-router.get("/remove-product/:id", verifyLogin,removeProduct);
+router.get("/remove-product/:id", verifyLogin, removeProduct);
 
+router.get("/checkout", verifyLogin, checkout);
 
 module.exports = router;
