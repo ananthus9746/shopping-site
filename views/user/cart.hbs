@@ -70,7 +70,7 @@
 
             <div class="total-and-checkout-div">
                 <p>Total</p>
-                <p>RS.210.00</p>
+                <h3>RS.<span id="total">{{too}}</span></h3>
                 <p>Tax included and shipping calculated at checkout</p>
                 <a href="">COUNTINUE SHOPPING</a>
                 <br class="br-new-line">
@@ -82,80 +82,85 @@
 
 </div>
 
-    <script>
+<script>
 
 
 
 
 
-        function changeQuantity(proId, count) {
+    function changeQuantity(proId, count) {
 
 
 
-            console.log("cart id..", proId)
-            console.log("pro id..", count)
-            countnow = parseInt(count)
+        console.log("cart id..", proId)
+        console.log("pro id..", count)
+        countnow = parseInt(count)
 
 
 
-            let quantity = parseInt(document.getElementById(proId).innerHTML)
+        let quantity = parseInt(document.getElementById(proId).innerHTML)
 
 
 
-            // var quantity =parseInt( document.getElementById("inputValue").value)
+        // var quantity =parseInt( document.getElementById("inputValue").value)
 
-            console.log("quantity span..", quantity)
+        console.log("quantity span..", quantity)
 
-            console.log("quantity from inner html..", quantity)
+        console.log("quantity from inner html..", quantity)
 
-            $.ajax({
-                url: '/change-product-quantity',
-                data: {
-                    proId: proId,
-                    count: countnow,
-                    quantity: quantity,
-                },
-                method: 'post',
-                success: (response) => {
-                    if (response == false) {
-                        console.log("respomse false if..")
-                        alert("Product Removed")
-                        location.reload()
+        $.ajax({
+            url: '/change-product-quantity',
+            data: {
+                proId: proId,
+                count: countnow,
+                quantity: quantity,
+            },
+            method: 'post',
+            success: (response) => {
+                if (response == false) {
+                    console.log("respomse false if..")
+                    alert("Product Removed")
+                    location.reload()
+                }
+                else {
+
+                    console.log("else ..", countnow)
+
+                    if (countnow == -1) {
+                        console.log("count -1")
+
+                        count = $("#cart-count").html();
+                        count = parseInt(count) + -1;
+                        $("#cart-count").html(count)
                     }
                     else {
+                        console.log("count +1")
 
-                        console.log("else ..", countnow)
-
-                        if (countnow == -1) {
-                            console.log("count -1")
-
-                            count = $("#cart-count").html();
-                            count = parseInt(count) + -1;
-                            $("#cart-count").html(count)
-                        }
-                        else {
-                            console.log("count +1")
-
-                            count = $("#cart-count").html();
-                            count = parseInt(count) + 1;
-                            $("#cart-count").html(count)
-
-                        }
-
-                        document.getElementById(proId).innerHTML = quantity + countnow
-
-
-                        // document.getElementById("inputValue").innerHTML = quantity+count;
-
+                        count = $("#cart-count").html();
+                        count = parseInt(count) + 1;
+                        $("#cart-count").html(count)
 
                     }
+
+
+                    console.log("responsw..",response)
+
+                    document.getElementById(proId).innerHTML = quantity + countnow
+                    document.getElementById('total').innerHTML = response.total
+
+                    
+
+                    // document.getElementById("inputValue").innerHTML = quantity+count;
+
+
                 }
-            })
-        }
+            }
+        })
+    }
 
-        function removeProduct(proid) {
+    function removeProduct(proid) {
 
-            Swal.fire({
+        Swal.fire({
             title: 'Are you sure?',
             text: "Do You Want To Remove ",
             icon: 'warning',
@@ -166,13 +171,13 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                url: '/remove-product/' + proid,
+                    url: '/remove-product/' + proid,
                     method: 'get',
                     success: (response) => {
                         if (response == 1) {
-                        console.log("respomse false if..")
-                        location.reload()
-                    }
+                            console.log("respomse false if..")
+                            location.reload()
+                        }
                     }
                 })
                 Swal.fire(
@@ -194,6 +199,6 @@
 
 
 
-          
-        }
-    </script>
+
+    }
+</script>

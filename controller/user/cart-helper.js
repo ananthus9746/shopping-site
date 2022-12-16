@@ -10,9 +10,14 @@ const { ObjectId } = require("mongodb");
 const { resolve } = require("path");
 const { response } = require("express");
 
+var userHelpers=require('../../helpers/userhelpers')
+
+
 // GET CART PRODUCT DTAILS
 
 exports.cart = async (req, res) => {
+
+
   var totalQuantity = 0;
   let cart = await Cart.find({ user: req.session.user });
   if (cart) {
@@ -24,6 +29,14 @@ exports.cart = async (req, res) => {
     }
     console.log("total quantity..", totalQuantity);
   }
+
+
+
+  let checkoutData = await userHelpers.getTotalAmount(req.session.user._id);
+  console.log("total....", checkoutData);
+  let too = checkoutData.too;
+
+
 
   const usercart = await Cart.findOne({ user: req.session.user._id })
     // .populate("user")
@@ -38,12 +51,13 @@ exports.cart = async (req, res) => {
     console.log("length....", prolistLength);
 
     if (prolistLength == 0) {
-      res.render("user/cart-empty", { user: req.session.user, totalQuantity });
+      res.render("user/cart-empty", { user: req.session.user });
     } else {
       res.render("user/cart", {
         user: req.session.user,
         usercart,
         totalQuantity,
+        too,
       });
     }
   } else {
@@ -97,7 +111,6 @@ exports.addToCart = async (req, res) => {
 
         console.log("Inserted New Product Cart.", response);
         resolve();
-
       });
     }
   } else {
@@ -124,6 +137,9 @@ exports.changeProductQuantity = (req, res) => {
   let count = req.body.count;
   let quantity = req.body.quantity;
 
+
+
+
   if (count == -1 && quantity == 1) {
     Cart.findOneAndUpdate(
       { user: req.session.user._id },
@@ -136,42 +152,75 @@ exports.changeProductQuantity = (req, res) => {
       console.log("product removed..");
       resolve();
     });
-  } else {
+  } 
+
+
+
+
+
+
+  else {
     Cart.findOneAndUpdate(
       { user: req.session.user._id, "cartitems.product": proid },
       {
         $inc: { "cartitems.$.quantity": count },
       }
-    ).then(() => {
-      let response = true;
+    ).then(async() => {
+
+      console.log("then change pro quatity..");
+
+      let checkoutData = await userHelpers.getTotalAmount(req.session.user._id);
+      console.log("from changeproquamtity.total....", checkoutData);
+      let too = checkoutData.too;
+
+
+ 
+    let response={
+       status: true,
+       total:too
+      }
+
+
+
+      console.log("reposnse..",response);
+
       res.json(response);
       resolve();
     });
   }
 };
 
-exports.removeProduct=(req,res)=>{
-
-console.log("remove product..",req.body)
-
-var proid = req.params.id;
-
-console.log("remove pro id..",proid);
 
 
 
 
-Cart.findOneAndUpdate(
-  { user: req.session.user._id },
-  {
-    $pull: { cartitems: { product: ObjectId(proid) } },
-  }
-).then((response) => {
-  console.log("product removed 1st..");
 
-  var response = 1;
-  res.json(response);
-  resolve();
-});
 
-}
+
+
+
+
+
+
+
+
+exports.removeProduct = (req, res) => {
+  console.log("remove product..", req.body);
+
+  var proid = req.params.id;
+
+  console.log("remove pro id..", proid);
+
+  Cart.findOneAndUpdate(
+    { user: req.session.user._id },
+    {
+      $pull: { cartitems: { product: ObjectId(proid) } },
+    }
+  ).then((response) => {
+    console.log("product removed 1st..");
+
+    var response = 1;
+    res.json(response);
+    resolve();
+  });
+};
