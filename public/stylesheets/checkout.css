@@ -1,187 +1,40 @@
-
-
-.mobile-total{
-display: none;
-}
-.ckeckout-cover{
-    margin-top: 100px;
-  
-    /* background-color: aquamarine; */
-}
-.checkout-container-flex{
-    display: flex;
-    height: 850px;
-}
-.address-detaisl{
-    /* background-color: rgb(129, 159, 69); */
+.contact-and-shipp-to-div{
     width: 100%;
-    padding: 50px;
-    padding-top: 10px;
-}
-.orderinput{
-    width: 100%;
-    margin-bottom: 10px;
-    height: 50px;
-    border: 1px solid gray;
-    border-radius: 6px;
-    padding-left: 10px;
-
-}
-.continueShipping{
-    width: 100%;
-    height: 50px;
-    color: white;
-    background-color: rgb(24, 24, 24);
-    border-radius: 6px;
-    border: 1px solid black;
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-.return-tocart{
-    color: blue;
-    text-decoration: none;
-}
-.discount-and-products-total{
-    background-color: rgb(250, 250, 250);
-    width: 70%;
-    padding: 40px;
-    border-left:1px solid rgb(192, 192, 192) ;
-
-}
-
-
-.scroll {
-    margin:4px, 4px;
-    padding:4px;
-    width: 500px;
-    height: 250px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    text-align:justify;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-.circle {
-    display: inline-table;
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    float: right;
-    background-color: rgb(142, 142, 142);
-    border-radius: 50%;
-  }
-  
-  .circle__content {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-   color: white;
-  }
-
-  .proimage-div{
-    /* background-color: red; */
-    width: 15%;
-    border: solid 1px rgb(185, 185, 185);
-    border-radius: 9px;
-}
-
-.proimage-div img{
+    border:  solid 1px rgb(208, 207, 207);
     border-radius: 10px;
-    width: 100%;
-    display: block;
-
-}
-
-
-
-
-
-
-
-.proimage-and-details-div{
-    display: flex;
-    margin-top: 10px;
-}
-
-.prodetails{
-    /* background-color: blue; */
-    width: 70%;
-    padding: 10px;
-
-}
-.prodetails-price{
-    /* background-color: rgb(42, 165, 163); */
-    width: 15%;
     padding: 10px;
 }
-.discount-div{
-    margin-top: 30px;
+.contact{
+    border-bottom:1px solid rgb(208, 207, 207) ;
+    padding: 10px;
 }
-.discount-input{
-    width: 70%;
-    margin-bottom: 40px;
-    height: 50px;
-    border: 1px solid gray;
-    border-radius: 6px;
-    padding-left: 10px;
-
+.shipp-to{
+    padding: 10px;
 }
-.appay-button{
-    width: 28%;
-    height: 50px;
-    padding-left: 10px;
-    border-radius: 6px;
-    background-color: black;
-    color: white;
+.c-s{
+    color: gray;
 }
-.sub-and-ship{
-    border-top : 1px solid gray;
-    border-bottom:1px solid gray ;
-}
-.total-flex{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+.select-payment-method
+{
     margin-top: 20px;
+    margin-bottom: 20px;
 }
-@media (max-width: 943px) {
-    .mobile-total{
-        background-color: rgb(211, 211, 211);
-        height: 60px;
-        display: block;
-        padding: 50px;
-        padding-top: 10px;
-        }
-        .total-mob-view{
-            float: right;
-        }
-    .address-detaisl{
-        display: flex;
-        flex-direction: column-reverse;
-        justify-content: center;
-        align-items: center;
-    }
-    .address-details-form-div{
-        width: 100%;
-        height: 100vh;
+.payment-method-div{
+    width: 100%;
+    height: 100px;
+    border-radius: 10px;
+ 
+    border: solid 1px  rgb(208, 207, 207);
+}
+.cod-div{
+    border-bottom:1px solid rgb(208, 207, 207) ;
+    padding: 10px;
 
-        /* background-color: rgb(125, 125, 175); */
-    }
-    .checkout-container-flex{
-        display: flex;
-        flex-direction: column;
-    }
-    .discount-and-products-total{
-        display: none;
-    }
+}
+.online-payment-div{
+    padding: 10px;
+}
+.online-label
+{
+    margin-left: 50px;
 }

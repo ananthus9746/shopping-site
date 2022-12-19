@@ -1,15 +1,143 @@
 <div class="account-cover">
     <h3 class="account-heading"> My Account</h3>
     <div class="account-text-container">
-        Name:<h4>{{userdata.firstName}}</h4>
-        Email:<p>{{userdata.email}}</p>
-        Phone:<p>{{userdata.phone}}</p>
-        <br>
-        <p>VIEW ADDRESSES</p>
+        <div class="account-and-order-container-flex">
 
-        <h4>Orders</h4>
-        <p>you haven't placed any orders yet.</p>
+
+            <div class="account-and-address">
+                <p>Name: {{userdata.firstName}}</p>
+                <p><span>Email: {{userdata.email}}</span></p>
+                <p>Phone: {{userdata.phone}}</p>
+                <br>
+                <p>LATEST ADDRESSES:</p>
+                <p>
+                    {{latestAddress.country}}
+                    {{latestAddress.fname}} {{latestAddress.lname}}
+                    {{latestAddress.address}}
+                    {{latestAddress.appartment}}
+                    {{latestAddress.city}}
+                    {{latestAddress.state}}
+                    {{latestAddress.pincode}}
+                    {{latestAddress.phone}}
+
+
+                </p>
+
+
+
+            </div>
+
+
+
+            <div class="order-details-div ">
+
+                {{#if NoOrder}}
+                <p>you haven't placed any orders yet.</p>
+                {{else}}
+
+                <h4>Orders</h4>
+                {{#each order}}
+                <div class="order-details">
+
+
+
+
+
+
+                    <div class="">
+                        {{#each cartitems}}
+                        <div class="product-details-and-image">
+                            <div class="proimage-and-details-div">
+                                <div class="proimage-div">
+                                    <img class="proimage" src="/upload/{{product.image.[0].img}}" alt="">
+                                </div>
+
+                                <div class="circle">
+                                    <span class="circle__content">{{quantity}}</span>
+                                </div>
+
+                                <div class="prodetails">
+                                    <p>{{product.name}}</p>
+                                </div>
+                                <div class="prodetails-price">
+                                    <p>${{product.price}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+
+                    <div class="total-div">
+
+                        <div class="total-flex toal-account">
+                            <p>Total:</p>
+                            <h2>INR: ${{totalPrice}}</h2>
+
+                        </div>
+
+                        <div class="sub-and-ship">
+                            <div class="total-flex">
+                                <p>Order status:</p>
+                                <p>{{status}}</p>
+                            </div>
+                            <div class="total-flex">
+                                <p>Ordered date:</p>
+                                <p>{{dateCreated}}</p>
+                            </div>
+                            <div class="total-flex">
+                                <p>Payment type:</p>
+                                <p>{{address.payment}}</p>
+                            </div>
+                            <div class="total-flex ">
+                                <p>Send order cancel request:</p>
+                                <a href="">CANCEL ORDER</a>
+                            </div>
+                            <div class="total-flex ">
+                                <p class="" id="viewmore">View more..</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {{/each}}
+
+                {{/if}}
+            </div>
+
+        </div>
         <a class="logout-button" href="/logout">Logout</a>
-        <hr>
+
     </div>
 </div>
+<hr>
+</div>
+
+
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("viewmore");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

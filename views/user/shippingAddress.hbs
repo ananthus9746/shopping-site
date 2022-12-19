@@ -1,0 +1,147 @@
+<div class="ckeckout-cover">
+    <div class="checkout-container-flex">
+        <div class="mobile-total">
+            <p class="total-mob-view">Total Rs: {{total}}</p>
+
+        </div>
+
+
+
+        <div class="address-detaisl">
+            <div class="address-details-form-div">
+
+                <p>Contact information</p>
+                <input class="orderinput" type="email" id="email" name="email" placeholder="email"><br>
+                <p>Shipping address</p>
+
+
+                {{!-- onclick="nextPage(event)" --}}
+                <form id="form">
+
+                    <select class="orderinput" id="country">
+                        <option>India</option>
+                        <option>Usa</option>
+                        <option>Austria</option>
+                        <option>Canada</option>
+                    </select>
+
+                    <input class="orderinput" type="text" id="fname" name="fname" placeholder="First name">
+                    <input class="orderinput" type="text" id="lname" name="lname" placeholder="Last name">
+                    <input class="orderinput" type="text" id="address" name="address" placeholder="Address">
+                    <input class="orderinput" type="text" id="appartment" name="appartment"
+                        placeholder="Appartment suit.etc(optional)">
+                    <input class="orderinput" type="text" id="city" name="city" placeholder="City">
+                    <input class="orderinput" type="text" id="state" name="state" placeholder="State">
+                    <input class="orderinput" type="number" id="pincode" name="pincode" placeholder="Pincode">
+                    <input class="orderinput" type="number" id="phone" name="phone" placeholder="Phone">
+
+                    <button type="submit" class="continueShipping">Continue to shipping</button>
+
+                </form>
+
+
+
+
+
+                <p><a class="return-tocart" href="/cart">
+                        < Return to cart</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="discount-and-products-total">
+
+
+
+            <div class="scroll">
+                {{#each usercart.cartitems}}
+                <div class="product-details-and-image">
+                    <div class="proimage-and-details-div">
+                        <div class="proimage-div">
+                            <img class="proimage" src="/upload/{{product.image.[0].img}}" alt="">
+                        </div>
+
+                        <div class="circle">
+                            <span class="circle__content">{{quantity}}</span>
+                        </div>
+
+                        <div class="prodetails">
+                            <p>{{product.name}}</p>
+                        </div>
+                        <div class="prodetails-price">
+                            <p>${{product.price}}</p>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+
+
+            <div class="discount-div">
+                <input class="discount-input" type="text" id="discount" name="discount" placeholder="Discount code">
+                <button class="appay-button">Apply</button>
+            </div>
+
+            <div class="total-div">
+                <div class="sub-and-ship">
+                    <div class="total-flex">
+                        <p>Subtotal</p>
+                        <p>$299.00</p>
+
+                    </div>
+                    <div class="total-flex ">
+                        <p>Shipping</p>
+                        <p>$49</p>
+                    </div>
+                </div>
+                <div class="total-flex">
+                    <p>Total</p>
+                    <h2>INR ${{total}}</h2>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+
+    console.log("nexpage..")
+    var form = document.getElementById('form')
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+
+        var email = document.getElementById("email").value;
+        var country = document.getElementById("country").value;
+        var fname = document.getElementById("fname").value;
+        var lname = document.getElementById("lname").value;
+        var address = document.getElementById("address").value;
+        var appartment = document.getElementById("appartment").value;
+        var city = document.getElementById("city").value;
+        var state = document.getElementById("state").value;
+        var pincode = document.getElementById("pincode").value;
+        var phone = document.getElementById("phone").value;
+
+        console.log("Adress..", country, email, fname, lname, address, appartment, city, state, pincode, phone);
+
+        localStorage.setItem('email', email)
+
+        localStorage.setItem('addressDetails', JSON.stringify(
+        { email: email, country: country, fname: fname, lname: lname, address: address,appartment:appartment, city: city,state: state, pincode: pincode, phone: phone }))
+
+
+        window.location.href = '/checkout'
+
+    })
+
+
+
+
+
+
+
+</script>

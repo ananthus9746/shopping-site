@@ -5,6 +5,8 @@ var Catagory = require("../../models/catagory");
 var Product = require("../../models/product");
 var User = require("../../models/user");
 var Cart = require("../../models/cart");
+var Order=require('../../models/order')
+
 
 const { findOne } = require("../../models/catagory");
 // const firebase = require("../../otpauthentication/firebase");
@@ -204,7 +206,7 @@ exports.Getlogin = (req, res) => {
 };
 //POSTLOGIN
 exports.Postlogin = async (req, res) => {
-  console.log(req.body);
+  console.log("post login data...",req.body);
 
   let loginStatus = false;
   let response = {};
@@ -323,11 +325,48 @@ exports.otpverification = (req, res) => {
 };
 
 //ACCOUNT
-exports.account = (req, res) => {
+exports.account = async (req, res) => {
   let userdata = req.session.user;
-  console.log("user data for account page...", userdata);
-  res.render("user/account", { userdata });
+  let NoOrder=false;
+
+  let latestAddress
+
+
+
+  let order=await Order.find({user:req.session.user._id}).populate("cartitems.product").sort({ dateCreated: -1 })
+  if(order.length!=0){
+
+    console.log("Order...",order)
+
+
+    console.log("Cart items for account...",order[0].cartitems)
+
+    console.log("latest address..",order[0].address)
+
+    latestAddress=order[0].address
+
+  //  res.send({ status: 200, data: { order } });
+
+
+  }
+
+
+  else{
+    console.log("NO order founded..")
+    NoOrder=true;
+  }
+  res.render("user/account", { userdata,NoOrder,order,latestAddress });
 };
+
+
+
+
+
+
+
+
+
+
 //lOGOUT
 exports.logout = (req, res) => {
   req.session.loggedIn = false;

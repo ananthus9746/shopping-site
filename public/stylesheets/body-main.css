@@ -3,6 +3,11 @@
     height: 700px;
     display: flex;
 }
+.home-1-product-mobile{
+    display:none;
+}
+
+
 .same-size{
     width: 33.33%;
     text-align: center;
@@ -74,6 +79,7 @@ margin-bottom: 50px;
 .why-bambo-flex{
     display: flex;
     height: 500px;
+    background-color: rgb(245, 245, 245);
 }
 .right-image-div{
     width: 60%;
@@ -261,6 +267,45 @@ cursor: pointer;
 
 /*================= MOBILE-VIEW============================================*/
 @media (max-width: 930px) {
+    .home-3-products{
+        display:none;
+    }
+    .home-1-product-mobile{
+        margin-top: 100px;
+        display:block;
+        width:100%;
+        height: 500px;
+        background-color: rgb(169, 169, 169);
+        background-image: url("/images/micheile-dot-com-BTMxNIwVBvU-unsplash\ \(1\).jpg");
+        background-repeat: no-repeat, repeat;
+        background-position: center;
+        background-size: cover;
+        background-blend-mode: multiply;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .heading-3-mobile-view{
+        font-size: 4rem;
+        color: white;
+        line-height: 1em;
+    }
+    .heading-paragraph-mobile-view{
+        font-size: .8rem;
+        color: white;
+        margin-bottom: 20px;
+    }
+    .shop-now-mobile-view{
+        color: white;
+    }
+    .shop-now-mobile-view:hover {
+        color:#ffffff; 
+        cursor:pointer;  
+    }
+
+
 .pro-deatail-container{
     display: flex;
     flex-direction: column;
@@ -286,7 +331,7 @@ background-color: green;
     /* WHY BAMBOO */
     .why-container-cover{
         padding: 15px;
-        background-color: rgb(196, 196, 196);
+        background-color: rgb(237, 232, 232);
     }
     .why-bambo-flex{
         display: flex;

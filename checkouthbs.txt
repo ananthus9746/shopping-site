@@ -52,7 +52,7 @@
 
                 </div>
 
-                <button onclick="checkout()" class="continueShipping">Continue checkout</button>
+                <button onclick="checkout()" class="continueShipping">Compete order</button>
 
 
                 <p><a class="return-tocart" href="/shippingAddress">
@@ -171,13 +171,10 @@
                 payment: payment,
             },
             success: (response) => {
-                
 
-                //localStorage.clear()
-               alert(response)
-                
-               window.location.href = '/account'
+                localStorage.clear()
 
+                alert(response)
             }
         })
     }

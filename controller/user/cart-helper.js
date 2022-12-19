@@ -34,7 +34,7 @@ exports.cart = async (req, res) => {
 
   let checkoutData = await userHelpers.getTotalAmount(req.session.user._id);
   console.log("total....", checkoutData);
-  let too = checkoutData.too;
+  let total = checkoutData.too;
 
 
 
@@ -57,7 +57,7 @@ exports.cart = async (req, res) => {
         user: req.session.user,
         usercart,
         totalQuantity,
-        too,
+        total,
       });
     }
   } else {
@@ -171,13 +171,13 @@ exports.changeProductQuantity = (req, res) => {
 
       let checkoutData = await userHelpers.getTotalAmount(req.session.user._id);
       console.log("from changeproquamtity.total....", checkoutData);
-      let too = checkoutData.too;
+      let total = checkoutData.too;
 
 
  
     let response={
        status: true,
-       total:too
+       total:total
       }
 
 
