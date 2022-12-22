@@ -32,10 +32,8 @@
                 </div>
 
                 <p class="select-payment-method">Select Payment Method</p>
+
                 <div class="payment-method-div">
-
-
-
 
                     <div class="container">
                         <div class="cod-div">
@@ -43,16 +41,14 @@
                             <label>Cod(Cash on delivery)</label>
                         </div>
                         <div class="online-payment-div">
-                            <input type="radio" name="username" value="OnlinePayment" checked>
-                            <label>Online payment</label>
+                            <input type="radio" name="username" value="razorpay">
+                            <label>Razorpay</label>
                         </div>
                         <div class="paypal-payment-div">
-                            <input type="radio" name="username" value="paypal">
+                            <input type="radio" name="username" value="paypal" checked>
                             <label>Paypal</label>
                         </div>
                     </div>
-
-
 
                 </div>
 
@@ -143,9 +139,15 @@
 
 
     function checkout() {
+
+
+
+
         let selected = document.querySelector('input[type="radio"]:checked');
         var payment = selected.value;
+
         console.log("hello 2..", payment)
+
         $.ajax({
             url: '/place-order',
             method: 'post',
@@ -164,24 +166,21 @@
             },
             success: (response) => {
 
-                if (response == 'cod') {
+                if (response == 'code') {
                     alert("Sucess from cod")
                 }
-                else if (response == 'paypal') {
-                    alert("Sucess from paypal")
-                }
-                else {
-
-                    console.log("online payment online response.. ", response)
+                else if (response == "razorpay") {
+                    console.log("response razorpay.. ", response)
 
                     razorpayPayment(response)
                     //alert(response)
 
+                }
+                else {
 
+                    console.log("responde paypal.. ", response)
 
-                    //  window.location.href = '/account'
-
-
+                    paypalPayment(response)
                 }
 
                 //localStorage.clear()
@@ -194,6 +193,8 @@
     }
 
     function razorpayPayment(order) {
+
+
         var options = {
             "key": "rzp_test_xE9ViN7qNPez7M", // Enter the Key ID generated from the Dashboard
             "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -206,9 +207,7 @@
                 alert(response.razorpay_payment_id);
                 alert(response.razorpay_order_id);
                 alert(response.razorpay_signature)
-
                 alert("Alart from payment Sucess..")
-
                 verifyPayment(response, order)
             },
             "prefill": {
@@ -236,8 +235,6 @@
 
             alert("Alart from payment fail..")
 
-            removeProFromOrder()
-
         });
         rzp1.open();
 
@@ -260,20 +257,9 @@
     }
 
 
-    function removeProFromOrder() {
 
-        $.ajax({
-            url: '/remove-product-from-orderHis',
-            //data:{
-            //payment,
-            // order
-            //},
-            method: 'post'
-        })
-
+    function paypalPayment(order) {
+        console.log("payapl function called..", order)
     }
-
-
-
 
 </script>

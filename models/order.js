@@ -8,6 +8,10 @@ const orderSchema = new mongoose.Schema({
     ref: "User",
     require: true,
   },
+  cartid: {
+    type: Schema.Types.ObjectId,
+    ref: "Cart",
+  },
   cartitems: [
     {
       product: {

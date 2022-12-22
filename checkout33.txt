@@ -179,8 +179,6 @@
 
 
 
-                    //  window.location.href = '/account'
-
 
                 }
 
@@ -203,11 +201,11 @@
             "image": "https://example.com/your_logo",
             "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             "handler": function (response) {
-                alert(response.razorpay_payment_id);
-                alert(response.razorpay_order_id);
-                alert(response.razorpay_signature)
+              //alert(response.razorpay_payment_id);
+                //alert(response.razorpay_order_id);
+                //alert(response.razorpay_signature)
 
-                alert("Alart from payment Sucess..")
+                //alert("Alart from payment Sucess..")
 
                 verifyPayment(response, order)
             },
@@ -226,15 +224,15 @@
 
         var rzp1 = new Razorpay(options);
         rzp1.on('payment.failed', function (response) {
-            alert(response.error.code);
-            alert(response.error.description);
-            alert(response.error.source);
-            alert(response.error.step);
-            alert(response.error.reason);
-            alert(response.error.metadata.order_id);
-            alert(response.error.metadata.payment_id);
+            //alert(response.error.code);
+            //alert(response.error.description);
+            //alert(response.error.source);
+            //alert(response.error.step);
+            //alert(response.error.reason);
+            //alert(response.error.metadata.order_id);
+            //alert(response.error.metadata.payment_id);
 
-            alert("Alart from payment fail..")
+            //alert("Alart from payment fail..")
 
             removeProFromOrder()
 
@@ -257,6 +255,18 @@
             },
             method: 'post'
         })
+
+
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Order placed Sucessfuly',
+            showConfirmButton: false,
+            timer: 1500
+        }) 
+
+        window.location.href = '/account'
+
     }
 
 
@@ -264,12 +274,10 @@
 
         $.ajax({
             url: '/remove-product-from-orderHis',
-            //data:{
-            //payment,
-            // order
-            //},
             method: 'post'
+            
         })
+        
 
     }
 

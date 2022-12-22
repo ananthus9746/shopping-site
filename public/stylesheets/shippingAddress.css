@@ -156,7 +156,7 @@ display: none;
 }
 @media (max-width: 943px) {
     .mobile-total{
-        background-color: rgb(211, 211, 211);
+        background-color: rgb(250, 250, 250);
         height: 60px;
         display: block;
         padding: 50px;

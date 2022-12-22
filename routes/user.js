@@ -23,7 +23,7 @@ const {
   removeProduct,
 } = require("../controller/user/cart-helper");
 
-const {shippingAddress,checkout,placeorder} =require('../controller/user/checkout')
+const {shippingAddress,checkout,placeorder,verifyPayment,removeProFromHis} =require('../controller/user/checkout')
 
 //LOGIN AND SIGN UP
 
@@ -78,6 +78,14 @@ router.get("/shippingAddress", verifyLogin, shippingAddress);
 router.get("/checkout", verifyLogin, checkout);
 
 router.post("/place-order", verifyLogin,placeorder);
+
+router.post("/verify-payment",verifyPayment);
+
+router.post("/remove-product-from-orderHis",removeProFromHis);
+
+
+
+
 
 
 

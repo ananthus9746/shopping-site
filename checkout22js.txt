@@ -50,13 +50,13 @@ exports.placeorder = async (req, res) => {
   let checkoutData = await userHelpers.getTotalAmount(req.session.user._id);
 
   // console.log("place Order data....",checkoutData);
-  let total = checkoutData.too;
+  let total = parseInt(checkoutData.too);
   let products = checkoutData.usercart.cartitems;
-  let cartid = usercart[0]._id;
-
-  console.log("user cart id..", usercart[0]._id);
+  // console.log("user cart id..",usercart[0]._id)
   // console.log("cart products..",products)
   // console.log("total..",total)
+
+  let cartid = usercart[0]._id;
 
   // console.log("cart id..",cartid)
 
@@ -69,7 +69,6 @@ exports.placeorder = async (req, res) => {
 
   const order = new Order({
     user: req.session.user._id,
-    cartid: cartid,
     cartitems: products,
     address: address,
     totalPrice: total,
@@ -87,23 +86,23 @@ exports.placeorder = async (req, res) => {
       console.log("payment type from saved order..", paymentType);
 
       if (paymentType === "Cod") {
-        await Cart.findOneAndRemove({ user: req.session.user });
-
-        res.json((response = "cod"));
-      } else if (paymentType === "paypal") {
-        res.json((response = "paypal"));
-
-        console.log("payment type is paypal");
-      } else {
+        res.json((response = "code"));
+      } else if (paymentType === "razorpay") {
         userHelpers.generateRazorpay(orderid, total).then((response) => {
           console.log("checkout raxopay back...", response);
 
-         res.json(response);
-          
+          res.json(response = "razorpay");
         });
+      } else {
+
+        //res.json(response = "paypal");
+
+        console.log("paypal checkout..");
       }
 
       // console.log("saved order products..",order.products)
+
+      await Cart.findOneAndRemove({ user: req.session.user });
     })
     .catch((err) => {
       console.log("order err..", err);
@@ -127,41 +126,8 @@ exports.verifyPayment = async (req, res) => {
   hmac = hmac.digest("hex");
 
   if (hmac === razorpay_signature) {
-    await Cart.findOneAndRemove({ user: req.session.user });
-
     console.log("hexa payment sucessfull");
-
-
   } else {
     console.log("payment NOT sucess");
   }
-};
-
-exports.removeProFromHis = async (req, res) => {
-  const usercart = await Cart.findOne({ user: req.session.user._id });
-
-  let cartid
-
-  if (usercart) {
-    console.log(
-      "Cart verify payment for removing inserted order. user cart...",
-      usercart
-    );
-    cartid=usercart._id;
-    console.log("cart id..",cartid)
-  } else {
-    console.log(
-      "Cart no user rejected order founded for removing orderfrom order history"
-    );
-  }
-
-  let order = await Order.findOneAndRemove({ cartid: cartid });
-
-  if (order) {
-    console.log("Order finded order..",order);
-  }
-  else{
-    console.log("Order no order founded")
-  }
-
 };

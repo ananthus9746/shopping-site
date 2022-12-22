@@ -1,4 +1,12 @@
 const Cart = require("../models/cart");
+const Razorpay=require('razorpay');
+
+
+var instance = new Razorpay({
+  key_id: 'rzp_test_xE9ViN7qNPez7M',
+   key_secret: 'Q8Np8zqRmJ1GxDArdSfCPu1a'
+})
+
 
 module.exports = {
   getTotalAmount: async (userid) => {
@@ -45,6 +53,36 @@ module.exports = {
       } 
     });
   },
+
+  generateRazorpay:(orderid,total)=>{
+    console.log("from generateRazorpay ..",orderid,total)
+    
+
+    // key_id: 'rzp_test_xE9ViN7qNPez7M',
+    // key_secret: 'Q8Np8zqRmJ1GxDArdSfCPu1a',
+
+    return new Promise((resolve,reject)=>{
+
+
+      
+      instance.orders.create({
+        amount: total,
+        currency: "INR",
+        receipt:""+orderid,
+        notes: {
+          key1: "value3",
+          key2: "value2"
+        }
+      },function(err,order){
+        console.log("from generateRazorupay helpeers..",order)
+
+        resolve(order)
+      })
+
+
+    })
+
+  }
 
 
 
