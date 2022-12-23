@@ -62,9 +62,9 @@ exports.placeorder = async (req, res) => {
 
   let status;
   if (paymentMethod === "Cod") {
-    status = "placed";
+    status = "Pending";
   } else {
-    status = "pending";
+    status = "Online Procesing";
   }
 
   const order = new Order({
@@ -95,11 +95,19 @@ exports.placeorder = async (req, res) => {
 
         console.log("payment type is paypal");
       } else {
-        userHelpers.generateRazorpay(orderid, total).then((response) => {
+        userHelpers.generateRazorpay(orderid, total).then(async (response) => {
           console.log("checkout raxopay back...", response);
 
-         res.json(response);
-          
+          var orderlist = await Order.findByIdAndUpdate(
+            { _id: ObjectId(order) },
+            {
+              status: "payment-failed",
+            }
+          ).then((order) => {
+            console.log("status upadated order...", order);
+          });
+
+          res.json(response);
         });
       }
 
@@ -115,6 +123,7 @@ exports.placeorder = async (req, res) => {
 exports.verifyPayment = async (req, res) => {
   console.log("from post verifypayment..", req.body);
   let details = req.body;
+  let orderid = details["order[receipt]"];
   let order_id = details["payment[razorpay_order_id]"];
   let razorpay_payment_id = details["payment[razorpay_payment_id]"];
   let razorpay_signature = details["payment[razorpay_signature]"];
@@ -131,7 +140,14 @@ exports.verifyPayment = async (req, res) => {
 
     console.log("hexa payment sucessfull");
 
-
+    var orderlist = await Order.findByIdAndUpdate(
+      { _id: ObjectId(orderid) },
+      {
+        status: "placed",
+      }
+    ).then((order) => {
+      console.log("status upadated order...", order);
+    });
   } else {
     console.log("payment NOT sucess");
   }
@@ -140,15 +156,15 @@ exports.verifyPayment = async (req, res) => {
 exports.removeProFromHis = async (req, res) => {
   const usercart = await Cart.findOne({ user: req.session.user._id });
 
-  let cartid
+  let cartid;
 
   if (usercart) {
     console.log(
       "Cart verify payment for removing inserted order. user cart...",
       usercart
     );
-    cartid=usercart._id;
-    console.log("cart id..",cartid)
+    cartid = usercart._id;
+    console.log("cart id..", cartid);
   } else {
     console.log(
       "Cart no user rejected order founded for removing orderfrom order history"
@@ -158,10 +174,8 @@ exports.removeProFromHis = async (req, res) => {
   let order = await Order.findOneAndRemove({ cartid: cartid });
 
   if (order) {
-    console.log("Order finded order..",order);
+    console.log("Order finded order..", order);
+  } else {
+    console.log("Order no order founded");
   }
-  else{
-    console.log("Order no order founded")
-  }
-
 };

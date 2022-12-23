@@ -5,10 +5,12 @@ var Catagory = require("../../models/catagory");
 var Product = require("../../models/product");
 var User = require("../../models/user");
 var Cart = require("../../models/cart");
-var Order=require('../../models/order')
-
+var Order = require("../../models/order");
 
 const { findOne } = require("../../models/catagory");
+const {
+  VariableList,
+} = require("twilio/lib/rest/serverless/v1/service/environment/variable");
 // const firebase = require("../../otpauthentication/firebase");
 // require("firebase/auth");
 // require("firebase/firestore");
@@ -39,12 +41,6 @@ exports.homePage = async (req, res) => {
     console.log("total quantity..", totalQuantity);
   }
 
-
-
-
-
-
-  
   if (!product) {
     console.log("No product found");
   } else {
@@ -59,10 +55,6 @@ exports.homePage = async (req, res) => {
 
 //VIEW SINGLE PRODUCT
 exports.viewSingleProduct = async (req, res) => {
-
-
-
-
   var totalQuantity = 0;
   let cart = await Cart.find({ user: req.session.user });
   if (cart) {
@@ -74,10 +66,6 @@ exports.viewSingleProduct = async (req, res) => {
     }
     console.log("total quantity..", totalQuantity);
   }
-
-
-
-
 
   let proid = req.params.id;
   console.log("Product id view single prodcut...", proid);
@@ -93,7 +81,6 @@ exports.viewSingleProduct = async (req, res) => {
     });
   }
 };
-
 
 // VIEW COLLECTION
 exports.viewCollection = async (req, res) => {
@@ -206,7 +193,7 @@ exports.Getlogin = (req, res) => {
 };
 //POSTLOGIN
 exports.Postlogin = async (req, res) => {
-  console.log("post login data...",req.body);
+  console.log("post login data...", req.body);
 
   let loginStatus = false;
   let response = {};
@@ -327,45 +314,32 @@ exports.otpverification = (req, res) => {
 //ACCOUNT
 exports.account = async (req, res) => {
   let userdata = req.session.user;
-  let NoOrder=false;
+  let NoOrder = false;
 
-  let latestAddress
-
-
-
-  let order=await Order.find({user:req.session.user._id}).populate("cartitems.product").sort({ dateCreated: -1 })
-  if(order.length!=0){
-
-    console.log("Order...",order)
+  var orderlist=await Order.findOneAndRemove({status:"payment-failed"})
 
 
-    console.log("Cart items for account...",order[0].cartitems)
 
-    console.log("latest address..",order[0].address)
-
-    latestAddress=order[0].address
-
-  //  res.send({ status: 200, data: { order } });
+  //   status:"payment-failed"
+  // }).then((order)=>{
+  //   console.log("status upadated order...",order)
+  // })
 
 
+
+  var latestAddress;
+  var order = await Order.find({ user: req.session.user._id })
+    .populate("cartitems.product")
+    .sort({ dateCreated: -1 });
+  if (order.length != 0) {
+    latestAddress = order[0].address;
+  } else {
+    console.log("NO order founded..");
+    NoOrder = true;
   }
-
-
-  else{
-    console.log("NO order founded..")
-    NoOrder=true;
-  }
-  res.render("user/account", { userdata,NoOrder,order,latestAddress });
+  console.log("latestAddress", latestAddress);
+  res.render("user/account", { userdata, NoOrder, order, latestAddress });
 };
-
-
-
-
-
-
-
-
-
 
 //lOGOUT
 exports.logout = (req, res) => {
@@ -373,3 +347,66 @@ exports.logout = (req, res) => {
   req.session.user = null;
   res.redirect("/");
 };
+
+
+
+
+
+
+
+
+
+
+
+
+  // let cart = await Cart.find({ user: req.session.user._id })
+  // if (cart.length != 0) {
+  //   var cartid = cart[0]._id.toString();
+  //   for (var i = 0; i < order.length; i++) {
+  //     var orderid = order[0].cartid.toString();
+  //     // console.log("order each..");
+  //     if (cartid === orderid) {
+  //       console.log("cart equal to order id..");
+  //       order = await Order.findOneAndRemove({ cartid: cartid });
+  //     } else {
+  //       console.log("not equal..");
+  //     }
+  //   }
+  // }
+
+
+  // console.log("Cart items for account...",order[0].cartitems)
+    // console.log("latest address..",order[0].address)
+    // console.log("Order...",order)
+    // console.log('order cartids..',order[0].cartid)
+
+
+
+
+
+
+//  // console.log("cart from accont..",cart)
+//   // console.log("cart id..",cart[0]._id)
+//   let cartid=cart[0]._id
+
+//   if(cart){
+//     order.forEach(order => {
+//      // console.log('order each..',order.cartid)
+//       if(cartid===order.cartid){
+//         console.log("cart equal to order id..")
+//       }
+//     });
+//    }
+
+// if (cart) {
+//   order.forEach((order) => {
+//     console.log("var..cartid",cartid)
+//     if (cartid === order.cartid) {
+//       console.log("cart equal to order id..");
+//     }
+//     else{
+//       console.log("not equal..")
+//     }
+//     console.log("order each..", order.cartid);
+//   });
+// }

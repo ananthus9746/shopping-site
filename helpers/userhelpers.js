@@ -1,5 +1,7 @@
 const Cart = require("../models/cart");
 const Razorpay=require('razorpay');
+const Order=require("../models/order");
+const { ObjectId } = require("mongodb");
 
 
 var instance = new Razorpay({
@@ -54,14 +56,14 @@ module.exports = {
     });
   },
 
-  generateRazorpay:(orderid,total)=>{
+  generateRazorpay:async(orderid,total)=>{
     console.log("from generateRazorpay ..",orderid,total)
     
 
     // key_id: 'rzp_test_xE9ViN7qNPez7M',
     // key_secret: 'Q8Np8zqRmJ1GxDArdSfCPu1a',
 
-    return new Promise((resolve,reject)=>{
+    return new Promise(async(resolve,reject)=>{
 
 
       
@@ -73,8 +75,14 @@ module.exports = {
           key1: "value3",
           key2: "value2"
         }
-      },function(err,order){
+      },
+      
+      function  (err,order){
         console.log("from generateRazorupay helpeers..",order)
+
+        // var orderlist=Order.findByIdAndUpdate({_id:ObjectId(order)},{
+        //   status:"pending"
+        // })
 
         resolve(order)
       })
