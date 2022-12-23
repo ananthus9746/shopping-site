@@ -98,16 +98,16 @@ exports.placeorder = async (req, res) => {
         userHelpers.generateRazorpay(orderid, total).then(async (response) => {
           console.log("checkout raxopay back...", response);
 
-          var orderlist = await Order.findByIdAndUpdate(
-            { _id: ObjectId(order) },
-            {
-              status: "payment-failed",
-            }
-          ).then((order) => {
-            console.log("status upadated order...", order);
-          });
+          var orderlist=await Order.findByIdAndUpdate({_id:ObjectId(order)},{
+          status:"payment-failed"
+          
+        }).then((order)=>{
+          console.log("status upadated order...",order)
+        })
 
-          res.json(response);
+
+         res.json(response);
+          
         });
       }
 
@@ -123,7 +123,7 @@ exports.placeorder = async (req, res) => {
 exports.verifyPayment = async (req, res) => {
   console.log("from post verifypayment..", req.body);
   let details = req.body;
-  let orderid = details["order[receipt]"];
+  let orderid=details['order[receipt]']
   let order_id = details["payment[razorpay_order_id]"];
   let razorpay_payment_id = details["payment[razorpay_payment_id]"];
   let razorpay_signature = details["payment[razorpay_signature]"];
@@ -140,42 +140,43 @@ exports.verifyPayment = async (req, res) => {
 
     console.log("hexa payment sucessfull");
 
-    var orderlist = await Order.findByIdAndUpdate(
-      { _id: ObjectId(orderid) },
-      {
-        status: "placed",
-      }
-    ).then((order) => {
-      console.log("status upadated order...", order);
-    });
+    var orderlist=await Order.findByIdAndUpdate({_id:ObjectId(orderid)},{
+      status:"placed"
+    }).then((order)=>{
+      console.log("status upadated order...",order)
+    })
+
+
   } else {
     console.log("payment NOT sucess");
   }
 };
 
 exports.removeProFromHis = async (req, res) => {
-  const usercart = await Cart.findOne({ user: req.session.user._id });
+  // const usercart = await Cart.findOne({ user: req.session.user._id });
 
-  let cartid;
+  // let cartid
 
-  if (usercart) {
-    console.log(
-      "Cart verify payment for removing inserted order. user cart...",
-      usercart
-    );
-    cartid = usercart._id;
-    console.log("cart id..", cartid);
-  } else {
-    console.log(
-      "Cart no user rejected order founded for removing orderfrom order history"
-    );
-  }
+  // if (usercart) {
+  //   console.log(
+  //     "Cart verify payment for removing inserted order. user cart...",
+  //     usercart
+  //   );
+  //   cartid=usercart._id;
+  //   console.log("cart id..",cartid)
+  // } else {
+  //   console.log(
+  //     "Cart no user rejected order founded for removing orderfrom order history"
+  //   );
+  // }
 
-  let order = await Order.findOneAndRemove({ cartid: cartid });
+  // let order = await Order.findOneAndRemove({ cartid: cartid });
 
-  if (order) {
-    console.log("Order finded order..", order);
-  } else {
-    console.log("Order no order founded");
-  }
+  // if (order) {
+  //   console.log("Order finded order..",order);
+  // }
+  // else{
+  //   console.log("Order no order founded")
+  // }
+
 };

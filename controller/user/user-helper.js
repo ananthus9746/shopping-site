@@ -316,16 +316,7 @@ exports.account = async (req, res) => {
   let userdata = req.session.user;
   let NoOrder = false;
 
-  var orderlist=await Order.findOneAndRemove({status:"payment-failed"})
-
-
-
-  //   status:"payment-failed"
-  // }).then((order)=>{
-  //   console.log("status upadated order...",order)
-  // })
-
-
+  var orderlist=await Order.deleteMany({status:"payment-failed"})
 
   var latestAddress;
   var order = await Order.find({ user: req.session.user._id })
