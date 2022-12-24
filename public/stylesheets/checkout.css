@@ -14,6 +14,9 @@
 .c-s{
     color: gray;
 }
+.payment-container{
+    margin-bottom: 10px
+}
 .select-payment-method
 {
     margin-top: 20px;
@@ -30,6 +33,10 @@
     border-bottom:1px solid rgb(208, 207, 207) ;
     padding: 10px;
 
+}
+.oninePaymentMethod{
+    padding: 10px; 
+    border-bottom: solid 1px rgb(176, 176, 176);
 }
 .online-payment-div{
     padding: 10px;

@@ -125,8 +125,6 @@
     var addressDetails = JSON.parse(localStorage.getItem('addressDetails'))
     console.log("addressDetails..", addressDetails)
     console.log("email...", addressDetails.email)
-
-
     document.getElementById('email').textContent = addressDetails.email
     document.getElementById('fname').textContent = addressDetails.fname
     document.getElementById('lname').textContent = addressDetails.lname
@@ -136,11 +134,6 @@
     document.getElementById('state').textContent = addressDetails.state
     document.getElementById('pincode').textContent = addressDetails.pincode
     document.getElementById('phone').textContent = addressDetails.phone
-
-
-
-
-
 
     function checkout() {
         let selected = document.querySelector('input[type="radio"]:checked');
@@ -163,30 +156,21 @@
                 payment: payment,
             },
             success: (response) => {
-
                 if (response == 'cod') {
+                    //cod
                     alert("Sucess from cod")
+                    window.location.href = '/account'
                 }
                 else if (response == 'paypal') {
+                    //Paypal
                     alert("Sucess from paypal")
+                    paypalPayment()
                 }
                 else {
-
+                    //Razorpay
                     console.log("online payment online response.. ", response)
-
                     razorpayPayment(response)
-                    //alert(response)
-
-
-
-
                 }
-
-                //localStorage.clear()
-
-
-                // window.location.href = '/account'
-
             }
         })
     }
@@ -201,12 +185,6 @@
             "image": "https://example.com/your_logo",
             "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
             "handler": function (response) {
-              //alert(response.razorpay_payment_id);
-                //alert(response.razorpay_order_id);
-                //alert(response.razorpay_signature)
-
-                //alert("Alart from payment Sucess..")
-
                 verifyPayment(response, order)
             },
             "prefill": {
@@ -221,29 +199,12 @@
                 "color": "#3399cc"
             }
         };
-
         var rzp1 = new Razorpay(options);
         rzp1.on('payment.failed', function (response) {
-            //alert(response.error.code);
-            //alert(response.error.description);
-            //alert(response.error.source);
-            //alert(response.error.step);
-            //alert(response.error.reason);
-            //alert(response.error.metadata.order_id);
-            //alert(response.error.metadata.payment_id);
-
-            //alert("Alart from payment fail..")
-
-            removeProFromOrder()
+            alert("Alart from payment fail..")
 
         });
         rzp1.open();
-
-        // document.getElementById('rzp-button1').onclick = function (e) {
-        //  rzp1.open();
-        //   e.preventDefault();
-
-        // }
     }
 
     function verifyPayment(payment, order) {
@@ -253,35 +214,18 @@
                 payment,
                 order
             },
-            method: 'post'
+            method: 'post',
+
         })
+        console.log("from verifypayment ajax outside...")
 
 
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Order placed Sucessfuly',
-            showConfirmButton: false,
-            timer: 1500
-        }) 
+        window.location.href = '/'
+    }
+    function paypalPayment() {
+        console.log("From payapal function")
 
-        window.location.href = '/account'
 
     }
-
-
-    function removeProFromOrder() {
-
-        $.ajax({
-            url: '/remove-product-from-orderHis',
-            method: 'post'
-            
-        })
-        
-
-    }
-
-
-
 
 </script>

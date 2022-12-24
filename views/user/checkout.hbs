@@ -37,18 +37,23 @@
 
 
 
-                    <div class="container">
+                    <div class="payment-container">
                         <div class="cod-div">
                             <input type="radio" name="username" value="Cod">
                             <label>Cod(Cash on delivery)</label>
                         </div>
+                    </div>
+
+                     <div class="payment-container">
+                        <P class="oninePaymentMethod">ONLINE PAYMENT METHODS</P>
                         <div class="online-payment-div">
-                            <input type="radio" name="username" value="OnlinePayment" checked>
-                            <label>Online payment</label>
+                            <input type="radio" name="username" value="Razorpay" checked>
+                            <label>Razorpay</label>
                         </div>
                         <div class="paypal-payment-div">
                             <input type="radio" name="username" value="paypal">
                             <label>Paypal</label>
+                            <div id="paypal"></div>
                         </div>
                     </div>
 
@@ -110,7 +115,7 @@
                 </div>
                 <div class="total-flex">
                     <p>Total</p>
-                    <h2>INR ${{total}}</h2>
+                    <span id="total"><h2>INR ${{total}}</h2></span>
                 </div>
             </div>
 
@@ -135,6 +140,8 @@
     document.getElementById('pincode').textContent = addressDetails.pincode
     document.getElementById('phone').textContent = addressDetails.phone
 
+    
+
     function checkout() {
         let selected = document.querySelector('input[type="radio"]:checked');
         var payment = selected.value;
@@ -157,22 +164,21 @@
             },
             success: (response) => {
                 if (response == 'cod') {
+                    //cod
                     alert("Sucess from cod")
+                    window.location.href = '/account'
                 }
-                else if (response == 'paypal') {
+                else if (response == total) {
+                    //Paypal
                     alert("Sucess from paypal")
+                    alert(total)
+                    paypalPayment(total)
                 }
                 else {
+                    //Razorpay
                     console.log("online payment online response.. ", response)
                     razorpayPayment(response)
-                    //alert(response)
                 }
-
-                //localStorage.clear()
-
-
-                // window.location.href = '/account'
-
             }
         })
     }
@@ -204,11 +210,11 @@
         var rzp1 = new Razorpay(options);
         rzp1.on('payment.failed', function (response) {
             alert("Alart from payment fail..")
-          
+
         });
         rzp1.open();
     }
-    
+
     function verifyPayment(payment, order) {
         $.ajax({
             url: '/verify-payment',
@@ -217,17 +223,15 @@
                 order
             },
             method: 'post',
-
         })
-          console.log("from verifypayment ajax outside...")
+        console.log("from verifypayment ajax outside...")
 
-            window.location.href = '/'
 
+        window.location.href = '/'
     }
-    //function removeProFromOrder() {
-    //    $.ajax({
-    //      url: '/remove-product-from-orderHis',
-    //    method: 'post'
-    //})
-    //}
+
+    function paypalPayment() {
+        console.log("From payapal function")
+    }
+
 </script>
