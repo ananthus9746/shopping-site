@@ -130,7 +130,7 @@ exports.placeorder = async (req, res) => {
           status:"payment-failed"
           
         }).then((order)=>{
-          console.log("status upadated order from place...",order)
+          console.log("status upadated order...",order)
         })
 
         // data = response;
@@ -165,9 +165,8 @@ exports.placeorder = async (req, res) => {
 
 exports.verifyPayment = async (req, res) => {
 
-  console.log("entered verifypayment.....")
-
   console.log("from post verifypayment..", req.body);
+  
   let details = req.body;
   let orderid=details['order[receipt]']
   let order_id = details["payment[razorpay_order_id]"];

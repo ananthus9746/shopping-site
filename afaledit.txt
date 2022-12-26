@@ -91,35 +91,21 @@ exports.placeorder = async (req, res) => {
         
         await Cart.findOneAndRemove({ user: req.session.user });
 
-
-        var response={
-          id:"cod",
-         }
-
         console.log("response cod id..,",response.id)
 
-        res.json((response));
+        res.json((response.id = "cod"));
 
       } else if (paymentType === "paypal") {
 
-      
-
-
-        var response={
-          id:"paypal",
-          data:order
-         }
-
-
-
+        response.id="paypal";
+        response.data=order;
         console.log("response payal id..,",response.id)
 
 
         res.json((response));
 
         console.log("payment type is paypal");
-      } 
-      else if(paymentType === "razorpay") {
+      } else {
 
         userHelpers.generateRazorpay(orderid, total).then(async (response) => {
           console.log("checkout raxopay back...", response);
@@ -130,28 +116,16 @@ exports.placeorder = async (req, res) => {
           status:"payment-failed"
           
         }).then((order)=>{
-          console.log("status upadated order from place...",order)
+          console.log("status upadated order...",order)
         })
 
-        // data = response;
-        //response.data=data;
-
-       
-
-         var response={
-          id:"razorpay",
-          data:response
-         }
-
-
-         console.log("ff",response)
-
+         data = response;
+         response.data=data;
+         response.id="razorpay";
+         
          res.json(response);
           
         });
-      }
-      else{
-        console.log("errorr...")
       }
 
       // console.log("saved order products..",order.products)
@@ -164,9 +138,6 @@ exports.placeorder = async (req, res) => {
 };
 
 exports.verifyPayment = async (req, res) => {
-
-  console.log("entered verifypayment.....")
-
   console.log("from post verifypayment..", req.body);
   let details = req.body;
   let orderid=details['order[receipt]']

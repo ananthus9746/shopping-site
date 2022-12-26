@@ -3,21 +3,7 @@
 .mobile-total{
 display: none;
 }
-.ckeckout-cover{
-    margin-top: 100px;
-  
-    /* background-color: aquamarine; */
-}
-.checkout-container-flex{
-    display: flex;
-    height: 850px;
-}
-.address-detaisl{
-    /* background-color: rgb(129, 159, 69); */
-    width: 100%;
-    padding: 50px;
-    padding-top: 10px;
-}
+
 .orderinput{
     width: 100%;
     margin-bottom: 10px;

@@ -1,3 +1,19 @@
+.ckeckout-cover{
+    margin-top: 100px;
+  
+    /* background-color: aquamarine; */
+}
+.checkout-container-flex{
+    display: flex;
+    height: 1000px;
+}
+.address-detaisl{
+    /* background-color: rgb(129, 159, 69); */
+    width: 100%;
+    padding: 50px;
+    padding-top: 10px;
+    height: 100vh;
+}
 .contact-and-shipp-to-div{
     width: 100%;
     border:  solid 1px rgb(208, 207, 207);
