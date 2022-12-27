@@ -23,7 +23,15 @@ const {
   removeProduct,
 } = require("../controller/user/cart-helper");
 
-const {shippingAddress,checkout,placeorder,verifyPayment,removeProFromHis,createOrder} =require('../controller/user/checkout')
+const {
+  shippingAddress,
+  checkout,
+  placeorder,
+  verifyPayment,
+  removeProFromHis,
+  createOrder,
+  paypalOnApprove,
+} = require("../controller/user/checkout");
 
 //LOGIN AND SIGN UP
 
@@ -61,7 +69,7 @@ router.post("/login-with-phone-number", postloginWithPhoneNumber);
 
 router.post("/otp-verification", otpverification);
 
-//==============================//
+//----------------------------------------------------------------------------------------//
 
 // CART
 
@@ -77,19 +85,16 @@ router.get("/shippingAddress", verifyLogin, shippingAddress);
 
 router.get("/checkout", verifyLogin, checkout);
 
-router.post("/place-order", verifyLogin,placeorder);
+router.post("/place-order", verifyLogin, placeorder);
 
-router.post("/verify-payment",verifyPayment);
+router.post("/verify-payment", verifyPayment);
 
-router.post("/remove-product-from-orderHis",removeProFromHis);
+router.post("/remove-product-from-orderHis", removeProFromHis);
 
 // PAYPAL//
 
-router.post("/create-order",createOrder)
+router.post("/create-order", createOrder);
 
-
-
-
-
+router.post("/paypal-on-approve", paypalOnApprove);
 
 module.exports = router;

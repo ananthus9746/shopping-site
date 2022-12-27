@@ -321,6 +321,9 @@ exports.account = async (req, res) => {
   let NoOrder = false;
 
   var orderlist=await Order.deleteMany({status:"payment-failed"})
+  await Order.deleteMany({status:"OnlineProcesing"})
+
+  
 
   var latestAddress;
   var order = await Order.find({ user: req.session.user._id })

@@ -83,7 +83,7 @@ exports.placeorder = async (req, res) => {
   if (paymentMethod === "Cod") {
     status = "Pending";
   } else {
-    status = "Online Procesing";
+    status = "OnlineProcesing";
   }
 
   const order = new Order({
@@ -234,37 +234,35 @@ exports.createOrder = async (req, res) => {
 
   try {
     const order = await paypalClient.execute(request);
-    console.log("try order..",order)
+    console.log("try order..", order);
 
-    console.log("id..",order.result.id)
+    console.log("id..", order.result.id);
 
-    res.json({id:order.result.id})
-
+    res.json({ id: order.result.id });
   } catch (err) {
     console.log("paypal try catch error..", err);
   }
 };
 
-exports.removeProFromHis = async (req, res) => {
-  // const usercart = await Cart.findOne({ user: req.session.user._id });
-  // let cartid
-  // if (usercart) {
-  //   console.log(
-  //     "Cart verify payment for removing inserted order. user cart...",
-  //     usercart
-  //   );
-  //   cartid=usercart._id;
-  //   console.log("cart id..",cartid)
-  // } else {
-  //   console.log(
-  //     "Cart no user rejected order founded for removing orderfrom order history"
-  //   );
-  // }
-  // let order = await Order.findOneAndRemove({ cartid: cartid });
-  // if (order) {
-  //   console.log("Order finded order..",order);
-  // }
-  // else{
-  //   console.log("Order no order founded")
-  // }
+exports.paypalOnApprove = async (req, res) => {
+  console.log("from paypal on approve..", req.body);
+  var orderid = req.body.orderid;
+
+  console.log("orderid..", orderid);
+
+  await Cart.findOneAndRemove({ user: req.session.user });
+
+  var orderlist = await Order.findByIdAndUpdate(
+    { _id: ObjectId(orderid) },
+    {
+      status: "placed",
+    }
+  ).then((order) => {
+    console.log("status upadated order from paypal ...", order);
+  });
+
+  res.json(approved=true)
+
 };
+
+exports.removeProFromHis = async (req, res) => {};
