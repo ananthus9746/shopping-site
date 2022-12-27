@@ -23,7 +23,7 @@ const {
   removeProduct,
 } = require("../controller/user/cart-helper");
 
-const {shippingAddress,checkout,placeorder,verifyPayment,removeProFromHis} =require('../controller/user/checkout')
+const {shippingAddress,checkout,placeorder,verifyPayment,removeProFromHis,createOrder} =require('../controller/user/checkout')
 
 //LOGIN AND SIGN UP
 
@@ -83,6 +83,9 @@ router.post("/verify-payment",verifyPayment);
 
 router.post("/remove-product-from-orderHis",removeProFromHis);
 
+// PAYPAL//
+
+router.post("/create-order",createOrder)
 
 
 

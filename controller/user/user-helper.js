@@ -8,9 +8,9 @@ var Cart = require("../../models/cart");
 var Order = require("../../models/order");
 
 const { findOne } = require("../../models/catagory");
-const {
-  VariableList,
-} = require("twilio/lib/rest/serverless/v1/service/environment/variable");
+// const {
+//   VariableList,
+// } = require("twilio/lib/rest/serverless/v1/service/environment/variable");
 // const firebase = require("../../otpauthentication/firebase");
 // require("firebase/auth");
 // require("firebase/firestore");
@@ -22,6 +22,8 @@ const client = require("twilio")(
     lazyLoading: true,
   }
 );
+
+
 
 //Getting product
 exports.homePage = async (req, res) => {
@@ -45,6 +47,7 @@ exports.homePage = async (req, res) => {
     console.log("No product found");
   } else {
     let products = product;
+    ///let paypalClientId='ARzWBARu7kDaaznrXbugp7ygvIdiSdsa6yulhIlUM8c6BEI0AZPAVDc8lusssEcIlipC_eAJLX-bL32G'
     res.render("user/index", {
       products,
       user,
@@ -78,6 +81,7 @@ exports.viewSingleProduct = async (req, res) => {
       singleProduct,
       user: req.session.user,
       totalQuantity,
+      clientId:'ARzWBARu7kDaaznrXbugp7ygvIdiSdsa6yulhIlUM8c6BEI0AZPAVDc8lusssEcIlipC_eAJLX-bL32G'
     });
   }
 };

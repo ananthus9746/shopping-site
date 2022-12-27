@@ -14,7 +14,25 @@ const crypto = require("crypto");
 var userHelpers = require("../../helpers/userhelpers");
 const { AsyncLocalStorage } = require("async_hooks");
 const { response } = require("express");
+const paypal = require("@paypal/checkout-server-sdk");
+const { Convert } = require("easy-currencies");
+const {
+  PayPalHttpClient,
+} = require("@paypal/checkout-server-sdk/lib/core/lib");
 
+const Enviornment =
+  process.env.NODE_ENV === "production"
+    ? paypal.core.LiveEnvironment
+    : paypal.core.SandboxEnvironment;
+
+const paypalClient = new paypal.core.PayPalHttpClient(
+  new Enviornment(
+    process.env.PAYPAL_CLIENT_ID,
+    process.env.PAYPAL_CLIENT_SECRET
+  )
+);
+
+//Razorpay
 // key_id: 'rzp_test_xE9ViN7qNPez7M',
 // key_secret: 'Q8Np8zqRmJ1GxDArdSfCPu1a',
 
@@ -88,70 +106,55 @@ exports.placeorder = async (req, res) => {
       console.log("payment type from saved order..", paymentType);
 
       if (paymentType === "Cod") {
-        
         await Cart.findOneAndRemove({ user: req.session.user });
 
+        var response = {
+          id: "cod",
+        };
 
-        var response={
-          id:"cod",
-         }
+        console.log("response cod id..,", response.id);
 
-        console.log("response cod id..,",response.id)
-
-        res.json((response));
-
+        res.json(response);
       } else if (paymentType === "paypal") {
+        var response = {
+          id: "paypal",
+          data: order,
+        };
 
-      
+        console.log("response payal id..,", response.id);
 
-
-        var response={
-          id:"paypal",
-          data:order
-         }
-
-
-
-        console.log("response payal id..,",response.id)
-
-
-        res.json((response));
+        res.json(response);
 
         console.log("payment type is paypal");
-      } 
-      else if(paymentType === "razorpay") {
-
+      } else if (paymentType === "razorpay") {
         userHelpers.generateRazorpay(orderid, total).then(async (response) => {
           console.log("checkout raxopay back...", response);
 
-          console.log("response razorpay..id.",response)
+          console.log("response razorpay..id.", response);
 
-          var orderlist=await Order.findByIdAndUpdate({_id:ObjectId(order)},{
-          status:"payment-failed"
-          
-        }).then((order)=>{
-          console.log("status upadated order from place...",order)
-        })
+          var orderlist = await Order.findByIdAndUpdate(
+            { _id: ObjectId(order) },
+            {
+              status: "payment-failed",
+            }
+          ).then((order) => {
+            console.log("status upadated order from place...", order);
+          });
 
-        // data = response;
-        //response.data=data;
+          // data = response;
+          //response.data=data;
 
-       
+          var response = {
+            id: "razorpay",
+            data: response,
+          };
 
-         var response={
-          id:"razorpay",
-          data:response
-         }
+          console.log("ff", response);
 
-
-         console.log("ff",response)
-
-         res.json(response);
-          
+          res.json(response);
         });
-      }
-      else{
-        console.log("errorr...")
+      } else {
+        console.log("errorr...");
       }
 
       // console.log("saved order products..",order.products)
@@ -164,12 +167,11 @@ exports.placeorder = async (req, res) => {
 };
 
 exports.verifyPayment = async (req, res) => {
-
-  console.log("entered verifypayment.....")
+  console.log("entered verifypayment.....");
 
   console.log("from post verifypayment..", req.body);
   let details = req.body;
-  let orderid=details['order[receipt]']
+  let orderid = details["order[receipt]"];
   let order_id = details["payment[razorpay_order_id]"];
   let razorpay_payment_id = details["payment[razorpay_payment_id]"];
   let razorpay_signature = details["payment[razorpay_signature]"];
@@ -186,23 +188,66 @@ exports.verifyPayment = async (req, res) => {
 
     console.log("hexa payment sucessfull");
 
-    var orderlist=await Order.findByIdAndUpdate({_id:ObjectId(orderid)},{
-      status:"placed"
-    }).then((order)=>{
-      console.log("status upadated order...",order)
-    })
-
-
+    var orderlist = await Order.findByIdAndUpdate(
+      { _id: ObjectId(orderid) },
+      {
+        status: "placed",
+      }
+    ).then((order) => {
+      console.log("status upadated order...", order);
+    });
   } else {
     console.log("payment NOT sucess");
   }
 };
 
+exports.createOrder = async (req, res) => {
+  console.log("from create order for paypal..", req.body);
+
+  const request = new paypal.orders.OrdersCreateRequest();
+  let total = req.body.total;
+  console.log("total.", total);
+
+  const value = await Convert(total).from("INR").to("USD");
+  let price = Math.round(value);
+
+  console.log("price..", price);
+
+  request.prefer("return=representation");
+  request.requestBody({
+    intent: "CAPTURE",
+    purchase_units: [
+      {
+        amount: {
+          currency_code: "USD",
+          value: price,
+          breakdown: {
+            item_total: {
+              currency_code: "USD",
+              value: price,
+            },
+          },
+        },
+      },
+    ],
+  });
+
+  try {
+    const order = await paypalClient.execute(request);
+    console.log("try order..",order)
+
+    console.log("id..",order.result.id)
+
+    res.json({id:order.result.id})
+
+  } catch (err) {
+    console.log("paypal try catch error..", err);
+  }
+};
+
 exports.removeProFromHis = async (req, res) => {
   // const usercart = await Cart.findOne({ user: req.session.user._id });
-
   // let cartid
-
   // if (usercart) {
   //   console.log(
   //     "Cart verify payment for removing inserted order. user cart...",
@@ -215,14 +260,11 @@ exports.removeProFromHis = async (req, res) => {
   //     "Cart no user rejected order founded for removing orderfrom order history"
   //   );
   // }
-
   // let order = await Order.findOneAndRemove({ cartid: cartid });
-
   // if (order) {
   //   console.log("Order finded order..",order);
   // }
   // else{
   //   console.log("Order no order founded")
   // }
-
 };

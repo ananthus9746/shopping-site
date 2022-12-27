@@ -54,7 +54,7 @@
                             <input type="radio" name="username" value="paypal">
                             <label>Paypal</label>
                         </div>
-                         <div id="paypal"></div>
+                        <div id="paypal"></div>
 
                     </div>
                 </div>
@@ -175,7 +175,10 @@
                     alert(response.data)
                     console.log("paypal data..", response.data)
                     console.log("paypal total price ", response.data.totalPrice)
-                    paypalPayment(response.data.totalPrice)
+                   // paypalPayment(response.data.totalPrice)
+                    paypalPayment(response.data)
+
+
                 }
                 else if (response.id === "razorpay") {
                     console.log("online payment online response.. ", response.id)
@@ -235,39 +238,64 @@
 
 
         window.location.href = '/'
-    }
-
-    function paypalPayment(totalPrice) {
-        console.log("From payapal function ", totalPrice)
-
-
-        paypal.Buttons({
-            // Sets up the transaction when a payment button is clicked
-            createOrder: (data, actions) => {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '10' ,// Can also reference a variable or function
-                        }
-                    }]
-                });
-            },
-            // Finalize the transaction after payer approval
-            onApprove: (data, actions) => {
-                return actions.order.capture().then(function (orderData) {
-                    // Successful capture! For dev/demo purposes:
-                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                    const transaction = orderData.purchase_units[0].payments.captures[0];
-                    alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-                    // When ready to go live, remove the alert and show a success message within this page. For example:
-                    const element = document.getElementById('paypal');
-                    element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                    // Or go to another URL:  actions.redirect('thank_you.html');
-                });
-            }
-        }).render('#paypal');
-
 
     }
+
+    function paypalPayment(response) {
+
+        console.log("inside paypalPaymnt..",response)
+        var totalprice= response.totalPrice;
+        console.log("inside totalprice..",totalprice)
+
+        paypal
+            .Buttons({
+                createOrder: function () {
+                    return fetch("/create-order", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            total: totalprice,
+                            data:response,
+                            items: [{
+                                id: 1,
+                            }]
+                        }),
+                    })
+                        .then(res => {
+                            if (res.ok) return res.json()
+                            return res.json().then(json => Promise.reject(json))
+                        })
+                        .then(({
+                            id
+                        }) => {
+                            return id
+                        })
+                        .catch(e => {
+                            console.error(e.error)
+                        })
+                },
+
+
+                onApprove: (data, actions) => {
+                    return actions.order.capture().then(function (orderData) {
+                        // Successful capture! For dev/demo purposes:
+                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                        const transaction = orderData.purchase_units[0].payments.captures[0];
+                        alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+                        // When ready to go live, remove the alert and show a success message within this page. For example:
+                        const element = document.getElementById('paypal');
+                        element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                        // Or go to another URL: actions.redirect('thank_you.html');
+                    });
+                }
+            })
+            .render("#paypal")
+    }
+
+
+
+
 
 </script>
