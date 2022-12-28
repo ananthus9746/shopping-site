@@ -8,6 +8,11 @@
 	<link rel="icon" type="image/png" href="/user/images/icons/favicon.png" />
 	<!--===============================================================================================-->
 
+	{{#if login}}{{!-- login true if --}}
+
+	<link rel="stylesheet" type="text/css" href="/stylesheets/adminLogin.css">
+
+	{{else}}{{!-- login true esle --}}
 
 	{{#if admin}} {{!-- ADMIN --}}
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -24,7 +29,8 @@
 
 	{{!--PAYPAL --}}
 
-	<script src="https://www.paypal.com/sdk/js?client-id=ARzWBARu7kDaaznrXbugp7ygvIdiSdsa6yulhIlUM8c6BEI0AZPAVDc8lusssEcIlipC_eAJLX-bL32G"></script>
+	<script
+		src="https://www.paypal.com/sdk/js?client-id=ARzWBARu7kDaaznrXbugp7ygvIdiSdsa6yulhIlUM8c6BEI0AZPAVDc8lusssEcIlipC_eAJLX-bL32G"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
@@ -36,7 +42,7 @@
 
 
 
-
+	<link rel="stylesheet" type="text/css" href="/stylesheets/product.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/user-header.css">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/user-footer.css">
@@ -62,53 +68,31 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	{{/if}}
+	{{/if}}{{!-- login true if --}}
+
 </head>
 
 <body>
+
+	{{#if login}}{{!-- login true if --}}
+
+
+	{{else}}{{!-- login true esle --}}
+
+
 	{{#if admin}}
 	{{>admin-header}}
 	{{else}}
 	{{>user-header}}
 	{{/if}}
 
+	{{/if}}{{!-- login true if --}}
+
 	{{{body}}}
 
-	{{!--
-	<script>
-		function toast() {
-			Swal.fire({
-				toast: true,
-				icon: 'success',
-				title: 'Item Added To Cart',
-				animation: true,
-				position: 'bottom',
-				showConfirmButton: false,
-				timer: 3000,
-				background: "#f5f6f6",
-				timerProgressBar: true,
-				didOpen: (toast) => {
-					toast.addEventListener('mouseenter', Swal.stopTimer)
-					toast.addEventListener('mouseleave', Swal.resumeTimer)
-				}
-			})
-		}
-		function toastOutOfStock() {
-			Swal.fire({
-				toast: true,
-				icon: 'error',
-				title: 'Product Out Of Stock!',
-				animation: true,
-				position: 'bottom',
-				showConfirmButton: false,
-				timer: 3000,
-				timerProgressBar: true,
-				didOpen: (toast) => {
-					toast.addEventListener('mouseenter', Swal.stopTimer)
-					toast.addEventListener('mouseleave', Swal.resumeTimer)
-				}
-			})
-		}
-	</script> --}}
+	{{#if login}}{{!-- login true if --}}
+
+	{{else}}{{!-- login true esle --}}
 
 	{{#if admin}}
 	{{>admin-footer}}
@@ -116,8 +100,12 @@
 	{{>user-footer}}
 	{{/if}}
 
+	{{/if}}{{!-- login true if --}}
 
 	{{!--Admin --}}
+	{{#if login}}{{!-- login true if --}}
+
+	{{else}}{{!-- login true esle --}}
 	{{#if admin}}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
 		integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
@@ -153,6 +141,9 @@
 
 	{{!-- this pro -javascript is linked in singleProduct page --}}
 	{{/if}}
+
+	{{/if}}{{!-- login true if --}}
+
 </body>
 
 </html>

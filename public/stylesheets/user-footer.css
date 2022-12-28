@@ -26,10 +26,10 @@
     width: 37.5%;
     }
     .made-with-love{
-        margin-top: 50px;
+        margin-top: 30px;
     }
     .social-media{
-        margin-top: 50px;
+        margin-top: 30px;
     }
     .news-letter{
      width: 37.5%;
@@ -41,3 +41,24 @@
         color: #ffffff;
     }
 
+    .news-letter{
+    }
+    .email-subscribe-flex{
+      display: flex;
+      margin-top: 20px;
+
+    }
+    .subribe-email-input{
+      
+      width: 100%;
+      margin-right: 10px;
+      height: 40px;
+      padding-left: 10px;
+      border: solid 1px white;
+    }
+    .email-ok-button{
+      width: 50px;
+      margin-right: 10px;
+      height: 40px;
+      border: solid 1px white;
+    }

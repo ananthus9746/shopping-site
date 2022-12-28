@@ -199,6 +199,9 @@ exports.verifyPayment = async (req, res) => {
   } else {
     console.log("payment NOT sucess");
   }
+
+  res.json(approved=true)
+
 };
 
 exports.createOrder = async (req, res) => {

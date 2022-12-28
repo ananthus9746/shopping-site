@@ -230,14 +230,29 @@
             url: '/verify-payment',
             data: {
                 payment,
-                order
+                order,
             },
             method: 'post',
+            success: (approved) => {
+
+                if (approved) {
+
+                    window.location.href = '/account'
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        footer: '<a href="/">Goto home page</a>'
+                    })
+                }
+            }
         })
         console.log("from verifypayment ajax outside...")
 
 
-        window.location.href = '/'
+      
 
     }
 

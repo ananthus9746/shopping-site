@@ -29,81 +29,83 @@
 
 
 
-            <div class="order-details-div ">
+            <div class="orders-his">
+                <p class="order-history">ORDERS HISTORY AND STATUS</p>
+                <div class="order-details-div ">
 
-                {{#if NoOrder}}
-                <p>you haven't placed any orders yet.</p>
-                {{else}}
-
-                <h4>Orders</h4>
-                {{#each order}}
-                <div class="order-details">
+                    {{#if NoOrder}}
+                    <p>you haven't placed any orders yet.</p>
+                    {{else}}
 
 
+                    {{#each order}}
+                    <div class="order-details">
 
 
 
 
-                    <div class="">
-                        {{#each cartitems}}
-                        <div class="product-details-and-image">
-                            <div class="proimage-and-details-div">
-                                <div class="proimage-div">
-                                    <img class="proimage" src="/upload/{{product.image.[0].img}}" alt="">
+
+
+                        <div class="">
+                            {{#each cartitems}}
+                            <div class="product-details-and-image">
+                                <div class="proimage-and-details-div">
+                                    <div class="proimage-div">
+                                        <img class="proimage" src="/upload/{{product.image.[0].img}}" alt="">
+                                    </div>
+
+                                    <div class="circle">
+                                        <span class="circle__content">{{quantity}}</span>
+                                    </div>
+
+                                    <div class="prodetails">
+                                        <p>{{product.name}}</p>
+                                    </div>
+                                    <div class="prodetails-price">
+                                        <p>${{product.price}}</p>
+                                    </div>
                                 </div>
+                            </div>
+                            {{/each}}
+                        </div>
 
-                                <div class="circle">
-                                    <span class="circle__content">{{quantity}}</span>
-                                </div>
+                        <div class="total-div">
 
-                                <div class="prodetails">
-                                    <p>{{product.name}}</p>
+                            <div class="total-flex toal-account">
+                                <p>Total:</p>
+                                <h2>INR: ${{totalPrice}}</h2>
+
+                            </div>
+
+                            <div class="sub-and-ship">
+                                <div class="total-flex">
+                                    <p>Order status:</p>
+                                    <p>{{status}}</p>
                                 </div>
-                                <div class="prodetails-price">
-                                    <p>${{product.price}}</p>
+                                <div class="total-flex-none">
+                                    <p>Ordered date:</p>
+                                    <p>{{dateCreated}}</p>
+                                </div>
+                                <div class="total-flex">
+                                    <p>Payment type:</p>
+                                    <p>{{address.payment}}</p>
+                                </div>
+                                <div class="total-flex-none">
+                                    <p>Send order cancel request:</p>
+                                    <a href="">CANCEL ORDER</a>
+                                </div>
+                                <div class="total-flex ">
+                                    <p class="" id="viewmore">View more..</p>
                                 </div>
                             </div>
                         </div>
-                        {{/each}}
+
                     </div>
+                    {{/each}}
 
-                    <div class="total-div">
-
-                        <div class="total-flex toal-account">
-                            <p>Total:</p>
-                            <h2>INR: ${{totalPrice}}</h2>
-
-                        </div>
-
-                        <div class="sub-and-ship">
-                            <div class="total-flex">
-                                <p>Order status:</p>
-                                <p>{{status}}</p>
-                            </div>
-                            <div class="total-flex">
-                                <p>Ordered date:</p>
-                                <p>{{dateCreated}}</p>
-                            </div>
-                            <div class="total-flex">
-                                <p>Payment type:</p>
-                                <p>{{address.payment}}</p>
-                            </div>
-                            <div class="total-flex ">
-                                <p>Send order cancel request:</p>
-                                <a href="">CANCEL ORDER</a>
-                            </div>
-                            <div class="total-flex ">
-                                <p class="" id="viewmore">View more..</p>
-                            </div>
-                        </div>
-                    </div>
-
+                    {{/if}}
                 </div>
-                {{/each}}
-
-                {{/if}}
             </div>
-
         </div>
         <a class="logout-button" href="/logout">Logout</a>
 

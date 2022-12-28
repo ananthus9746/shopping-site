@@ -16,12 +16,21 @@
 .account-and-address{
     /* background-color: rgb(12, 116, 81); */
     width: 100%;
-    line-height: 35px;
+    /* line-height: 35px; */
 }
 
 
 
 /* ======================ORDER HISTORY=================================== */
+.total-flex-none{
+display: flex;
+justify-content: space-between;
+}
+.order-history{
+    font-weight: 600;
+    border-bottom:1px solid rgb(147, 147, 147) ;
+}
+
 
 .order-details-div{
        width: 40%;
@@ -162,6 +171,7 @@
 
 
 @media (max-width: 943px) {
+  
     .account-and-order-container-flex{
         display: flex;
         flex-direction: column;
@@ -170,11 +180,18 @@
     .account-and-address{
         /* background-color: rgb(12, 116, 81); */
         width: 100%;
-        line-height: 35px;
+        /* line-height: 35px; */
     }
     .order-details{
         border: solid 1px gray;
         border-radius: 10px;
         width: 100%;
     }
+}
+
+@media (max-width: 750px) {
+    .total-flex-none{
+        display: flex;
+        flex-direction: column;
+        }
 }

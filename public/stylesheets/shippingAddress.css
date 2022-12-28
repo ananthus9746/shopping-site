@@ -77,7 +77,6 @@ display: none;
   .proimage-div{
     /* background-color: red; */
     width: 15%;
-    border: solid 1px rgb(185, 185, 185);
     border-radius: 9px;
 }
 
@@ -85,6 +84,7 @@ display: none;
     border-radius: 10px;
     width: 100%;
     display: block;
+    border: solid 1px rgb(185, 185, 185);
 
 }
 

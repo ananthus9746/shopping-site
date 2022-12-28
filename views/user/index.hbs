@@ -78,28 +78,24 @@
         <div class="product-grid">
 
             {{#each products}}
-            <a class="a-tag-for-pro-div" href="/view-single-product/{{_id}}">
-                <div class="product-col myDIV">
 
-                    <div class="pro-image-div">
+            <a class="a-tag-for-pro-div" href="/view-single-product/{{_id}}">
+
+               <div class="collection-col">
+                    <div class="collection-img-div">
                         <img src="/upload/{{image.[0].img}}" alt="">
                     </div>
-
-
-                    <div class="pro-deatail-container">
-                        <div class="p-d">
-                            <div class="pro-name">
-                                <p>{{name}}</p>
-                                <div class="pro-rating">
-                                    <p>***(21)</p>
-                                </div>
-                            </div>
+                    <div class="collecton-pro-details-flex">
+                        <div class="collection.details.div">
+                            <p>{{name}}</p>
+                            {{!-- <p class="collection-rating">***(1)</p> --}}
                         </div>
-                        <div class="pro-price-div">
-                            <p>Rs.{{price}}</p>
+                        <div class="collecton-price-div">
+                            <p>Rs:{{price}}</p>
                         </div>
                     </div>
                 </div>
+
             </a>
 
             {{/each}}

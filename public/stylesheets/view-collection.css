@@ -26,12 +26,11 @@
     grid-template-columns:repeat(4,1fr) ;
 
 }
-.collection-col{
+/* ------------------------------------------------ */
+/* .collection-col{
     display: flex;
     flex-direction: column;
-   
     cursor: pointer;
-    /* background-color: aqua; */
     font-size: 1rem;
 }
 .collection-img-div {
@@ -39,16 +38,11 @@
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    
-   
 }
-
 .collection-img-div img{
-    
     width: 100%;
     display: block;
 }
-
 .collection-rating{
     margin-top: 5px;
 }
@@ -56,8 +50,8 @@
     display: flex;
     justify-content: space-between;
     gap: 10px;
-}
-
+} */
+/* -------------------------------------------------------------- */
 
 
 

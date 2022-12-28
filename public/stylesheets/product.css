@@ -1,0 +1,30 @@
+
+/* FOR COMMON PRODUCT // COLLECTION AND HOME PAGE */
+
+/* ------------------------------------------------ */
+.collection-col{
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.collection-img-div {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+.collection-img-div img{
+    width: 100%;
+    display: block;
+}
+.collection-rating{
+    /* margin-top: 5px; */
+}
+.collecton-pro-details-flex{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+/* -------------------------------------------------------------- */
