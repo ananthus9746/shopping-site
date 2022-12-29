@@ -62,19 +62,25 @@
 
             <div class="pro-add-to-cart-and-buy-qty">
                 <label for="">QUNTITY</label>
-                
+
                 <input class="quantity-input" type="number" id="quantity" name="quantity" value="1">
                 <input type="hidden" id="productId" name="productId" value="{{singleProduct._id}}">
 
-                  <script>var quantity = document.getElementById("quantity").value;
+                <script>var quantity = document.getElementById("quantity").value;
                 </script>
 
+                {{!-- if user login render this button else top one --}}
+                {{#if user}}
                 <button class="add-to-cart-button" onclick="addToCartMain()">ADD TO CART</button>
-                {{!-- <a href="/add-to-cart/{{singleProduct._id}}">add to cart</a>
-                addToCart()
-                 --}}
-                <button class="buy-now-button">BUY NOW</button>
+
+                {{else}}
+
+                <button class="add-to-cart-button" onclick="getlogin()">ADD TO CART</button>
                 
+                {{/if}}
+
+                <button onclick="addToCartMain()" class=" buy-now-button">BUY NOW</button>
+
             </div>
 
             <p class="pro-discription">
@@ -122,4 +128,10 @@
     </div>
 </div>
 
+<script>
 
+    function getlogin() {
+        window.location.href = '/login'
+    }
+
+</script>

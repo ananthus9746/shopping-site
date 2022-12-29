@@ -21,16 +21,7 @@ const cartSchema = new mongoose.Schema({
       },
     },
   ],
-  // coupen:[
-  //   {
-  //     coupen{
-  //       id
-  //     },
-  //     total{
 
-  //     }
-  //   }
-  // ]
 
   dateCreated: {
     type: Date,

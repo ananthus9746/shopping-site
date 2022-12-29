@@ -68,7 +68,7 @@ module.exports = {
 
       
       instance.orders.create({
-        amount: total,
+        amount: total*100,
         currency: "INR",
         receipt:""+orderid,
         notes: {

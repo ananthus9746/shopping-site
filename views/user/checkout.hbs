@@ -167,12 +167,12 @@
                 console.log("sucess response...", response)
 
                 if (response.id === "cod") {
-                    alert("Sucess from cod")
+                    //alert("Sucess from cod")
                     window.location.href = '/account'
                 }
                 else if (response.id === "paypal") {
-                    alert("Sucess from paypal")
-                    alert(response.data)
+                    //alert("Sucess from paypal")
+                    //alert(response.data)
                     console.log("paypal data..", response.data)
                     console.log("paypal total price ", response.data.totalPrice)
                     // paypalPayment(response.data.totalPrice)
