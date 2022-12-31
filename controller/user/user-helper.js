@@ -7,6 +7,15 @@ var User = require("../../models/user");
 var Cart = require("../../models/cart");
 var Order = require("../../models/order");
 
+// const twilio = require('twilio');
+
+// const client = new twilio(accountSid, authToken);
+
+
+const accountSid = process.env.ACCOUNT_SID;
+const authToken = process.env.AUTH_TOKEN;
+// var client = require('twilio')(accountSid, authToken);
+
 const { findOne } = require("../../models/catagory");
 // const {
 //   VariableList,

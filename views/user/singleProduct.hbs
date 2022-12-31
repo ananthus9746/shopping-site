@@ -69,17 +69,18 @@
                 <script>var quantity = document.getElementById("quantity").value;
                 </script>
 
-                {{!-- if user login render this button else top one --}}
+                {{!-- if user login render this button else top one //this beacuse ajax response does not redirectng to login page--}}
                 {{#if user}}
+
                 <button class="add-to-cart-button" onclick="addToCartMain()">ADD TO CART</button>
+                <button onclick="addToCartMain()" class=" buy-now-button">BUY NOW</button>
 
                 {{else}}
-
                 <button class="add-to-cart-button" onclick="getlogin()">ADD TO CART</button>
-                
+                <button onclick="getlogin()" class=" buy-now-button">BUY NOW</button>
                 {{/if}}
 
-                <button onclick="addToCartMain()" class=" buy-now-button">BUY NOW</button>
+
 
             </div>
 
@@ -88,7 +89,7 @@
             </p>
 
             <div class="share-icons-links-container-flex">
-                icons
+                {{!-- icons --}}
             </div>
 
         </div>
