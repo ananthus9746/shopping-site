@@ -1,11 +1,11 @@
+
+
 {
   "name": "shopping-site",
   "version": "0.0.0",
   "private": true,
-  
   "scripts": {
-    "start": "nodemon app.js"
-
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.5",
@@ -37,3 +37,4 @@
     "twilio": "^4.0.0-rc.4"
   }
 }
+
